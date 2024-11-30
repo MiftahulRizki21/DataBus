@@ -22,10 +22,6 @@ Route::get('/', function () {
     return view('layouts.app');
 });
 
-Route::get('/beranda', function () {
-    return view('layouts.app');
-});
-
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::get('/logout', function () {
