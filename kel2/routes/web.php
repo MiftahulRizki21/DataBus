@@ -22,6 +22,11 @@ Route::get('/', function () {
     return view('layouts.app');
 });
 
+Route::get('/beranda', function () {
+    return view('general.beranda');
+});
+
+
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::get('/logout', function () {
