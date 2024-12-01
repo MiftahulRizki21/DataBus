@@ -31,7 +31,7 @@
                     </ul>
                 </li>
             </ul>
-        </nav>
+        
         <div class="container-fluid" style="margin-top: 550px">
             <main class="py-4">
                 {{-- @include('flash::message') --}}
@@ -39,19 +39,8 @@
                     @yield('content')
                 </div>
             </main>
-            <div class="objek-lp">
-            </div>
-
-            <div class="rekomendasi" style="margin-top: 50px">
-                </div>
-            </div>
-
-            <div class="contact" style="margin-top: 70px">
-                
-                </div>
-            </div>
         </div>
-
+    </nav>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
         <script src="js/scripts.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
