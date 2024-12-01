@@ -11,8 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('anggotas', function (Blueprint $table) {
-            $table->string('foto')->nullable();
+        Schema::create('riwayat_editors', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('id_editor');
+            $table->foreignId('id_naskah');
+            $table->timestamps();
         });
     }
 
@@ -21,8 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('anggotas', function (Blueprint $table) {
-            $table->dropColumn('foto');
-        });
+        Schema::dropIfExists('riwayat_editors');
     }
 };

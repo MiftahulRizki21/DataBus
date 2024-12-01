@@ -3,27 +3,25 @@
 namespace App\Policies;
 
 use App\Models\User;
-use App\Models\anggota;
+use App\Models\riwayat_naskah;
 use Illuminate\Auth\Access\Response;
 
-class AnggotaPolicy
+class RiwayatNaskahPolicy
 {
     /**
      * Determine whether the user can view any models.
      */
-    public function viewAny(User $user)
+    public function viewAny(User $user): bool
     {
-        return true; 
+        //
     }
-
 
     /**
      * Determine whether the user can view the model.
      */
-    public function view(User $user, anggota $anggota): bool
+    public function view(User $user, riwayat_naskah $riwayatNaskah): bool
     {
-        return true; 
-
+        //
     }
 
     /**
@@ -31,38 +29,38 @@ class AnggotaPolicy
      */
     public function create(User $user): bool
     {
-        return true; 
+        //
     }
 
     /**
      * Determine whether the user can update the model.
      */
-    public function update(User $user, anggota $anggota): bool
+    public function update(User $user, riwayat_naskah $riwayatNaskah): bool
     {
-        return true; 
+        //
     }
 
     /**
      * Determine whether the user can delete the model.
      */
-    public function delete(User $user, anggota $anggota): bool
+    public function delete(User $user, riwayat_naskah $riwayatNaskah): bool
     {
-        return true; 
+        //
     }
 
     /**
      * Determine whether the user can restore the model.
      */
-    public function restore(User $user, anggota $anggota): bool
+    public function restore(User $user, riwayat_naskah $riwayatNaskah): bool
     {
-        return true; 
+        //
     }
 
     /**
      * Determine whether the user can permanently delete the model.
      */
-    public function forceDelete(User $user, anggota $anggota): bool
+    public function forceDelete(User $user, riwayat_naskah $riwayatNaskah): bool
     {
-        return true; 
+        //
     }
 }

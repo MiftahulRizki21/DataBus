@@ -51,7 +51,7 @@
                 justify-content: center;
                 width: 100%;
                 margin: 0 auto;
-                padding: 20px;
+                padding: 0px;
                 position: relative; /* Make the div a containing block for the overlay */
                 background-image: url('../startbootstrap-sb-admin-master/dist/assets/img/pcr.jpg'); /* Path to your image */
                 background-size: cover; /* Ensure the image covers the full div */
@@ -181,13 +181,12 @@
                 <div class="main-container">
                     @yield('content')
                 </div>
-
-                <div class="objek-lp">
-                    <h1 class="selamat">Selamat Datang</h1>
-                    <button class="btn-login">LOGIN</button>
-                    <u><a href="" class="link-regis">Register</a></u>
-                </div>
             </main>
+            <div class="objek-lp">
+                <h1 class="selamat">Selamat Datang</h1>
+                <button class="btn-login">LOGIN</button>
+                <u><a href="" class="link-regis">Register</a></u>
+            </div>
 
             <div class="rekomendasi" style="margin-top: 50px">
                 <h2>Rekomendasi</h2>
@@ -228,7 +227,6 @@
                             </td>
                         </tr>
                     </table></center>
-
                 </div>
             </div>
         </div>

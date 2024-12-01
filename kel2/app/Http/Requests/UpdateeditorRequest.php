@@ -4,14 +4,14 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateanggotaRequest extends FormRequest
+class UpdateeditorRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      */
     public function authorize(): bool
     {
-        return true;
+        return false;
     }
 
     /**
@@ -22,11 +22,7 @@ class UpdateanggotaRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'nama' => 'required|string|max:255',
-            'foto' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'kelas' => 'required|string|max:14',
-            'nim' => 'required|string|max:30',
-            'jenis_kelamin' => 'required|string|max:14',
+            //
         ];
     }
 }
