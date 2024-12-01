@@ -8,6 +8,7 @@
             <u><a href="" class="link-regis">Register</a></u>
         </div>
 
+        <div class="isi" style="padding: 30px">
         <div class="rekomendasi" style="margin-top: 50px">
             <h2>Rekomendasi</h2>
             <hr class="garis-horizontal">
@@ -18,6 +19,7 @@
                 <center>
                     <table class="rekom">
                         <tr>
+                            <td><a href="#" class="previous round"><h2>&#8249;</h2></a></td>
                             <td>
                                 <div class="rekom"> </div>
                             </td>
@@ -27,8 +29,9 @@
                             <td>
                                 <div class="rekom"> </div>
                             </td>
+                            <td><a href="#" class="next round"><h2>&#8250;</h2></a></td>
                         </tr>
-                    </table>
+                    </table>                   
                 </center>
             </div>
         </div>
@@ -64,3 +67,12 @@
             </div>
         </div>
     </div>
+    </div>
+
+    <script>
+        var pagination = $(".pagination");
+        pagination.on("click", function(){
+        console.log(pagination);
+        $(this).find(".circle").toggleClass("active");
+        })
+    </script>
