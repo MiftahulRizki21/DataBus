@@ -39,7 +39,7 @@
                 margin: 0 auto;
                 padding: 0px;
                 position: relative; /* Make the div a containing block for the overlay */
-                background-image: url('..\assets\img\pcr.jpg'); /* Path to your image */
+                background-image: url('../assets/img/pcr.jpg'); /* Path to your image */
                 background-size: cover; /* Ensure the image covers the full div */
                 background-position: center; /* Keep the image centered */
                 height: 450px; /* Adjust height as needed */
