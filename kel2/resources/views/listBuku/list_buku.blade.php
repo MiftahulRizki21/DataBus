@@ -70,7 +70,7 @@
         border: 3px solid black;
         border-radius: 2px;
         width: 300px;
-        margin: 15px;
+        margin: 10px;
     }
 </style>
 
