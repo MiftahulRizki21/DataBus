@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('email_editor');
             $table->string('username_editor');
             $table->string('password_editor');
-            $table->int('total_editor');
+            $table->integer('total_editor');
             $table->text('pembataln');
             $table->timestamps();
         });

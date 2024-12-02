@@ -18,7 +18,7 @@ return new class extends Migration
             $table->date('tanggal_review_naskah');
             $table->foreignId('id_penulis');
             $table->foreignId('id_editor');
-            $table->file('file');
+            $table->text('file');
             $table->integer('total_naskah');
             $table->text('kekurangan_naskah');
             $table->timestamps();

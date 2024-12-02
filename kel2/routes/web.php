@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AnggotaController;
+use App\Http\Controllers\DetailBukuController;
 use App\Http\Controllers\ListBukuController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
@@ -8,12 +9,12 @@ use Illuminate\Support\Facades\Auth;
 // Tambahkan route autentikasi
 Auth::routes();
 // Middleware auth untuk proteksi route anggota
-Route::middleware(['auth'])->group(function () {
-    Route::resource('anggota', AnggotaController::class);
-    Route::get('/anggota/{name}', [AnggotaController::class, 'show']);
-    Route::get('/list_buku', [ListBukuController::class, 'index'])->name('user.list_buku');
+// Route::middleware(['auth'])->group(function () {
 
-});
+
+// });
+Route::get('/list_buku', [ListBukuController::class, 'index'])->name('user.list_buku');
+Route::get('/detail_buku', [DetailBukuController::class, 'index'])->name('listBuku.detail_buku');
 
 Auth::routes();
 
