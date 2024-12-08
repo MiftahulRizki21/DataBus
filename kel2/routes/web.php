@@ -27,6 +27,10 @@ Route::get('/beranda', function () {
     return view('general.beranda');
 });
 
+Route::get('/user', function () {
+    return view('general.user');
+});
+
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
