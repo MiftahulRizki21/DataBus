@@ -31,24 +31,7 @@ class ListBukuController extends Controller
      */
     public function store(StoreListBukuRequest $request)
     {
-        $requestData = $request->validate([
-            'judul_buku' => 'required|string|max:255',
-            'sipnosis' => 'required|string|max:255',
-            'nama_penulis' => 'required|string|max:255',
-            'nama_penerbit' => 'required|string|max:255',
-            'tgl_rilis' => 'required|string|max:255',
-            'halaman' => 'required|string|max:255',
-            'foto' => 'required|image|mimes:png,jpg,jpeg',
-        ]);
-
-        // Simpan data ke database
-        $listBuku = new ListBuku();
-        $listBuku->fill($requestData);
-        $listBuku->foto = $request->file('foto')->store('images', 'public');
-        $listBuku->save();
-
-        // Redirect ke halaman List Buku dengan pesan sukses
-        return back();
+        //
     }
 
     /**
