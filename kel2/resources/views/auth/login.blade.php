@@ -8,13 +8,13 @@
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
-<body class="bg-[#89a8b2] flex justify-center items-center h-screen">
+<body class="bg-[#191919] flex justify-center items-center h-screen">
     <div class="bg-[#f1f0e8] w-96 rounded-lg shadow-lg p-8">
         <!-- Sign in with social media -->
-        <h2 class="text-center text-[#4b5563] font-semibold text-lg mb-4">Masuk dengan</h2>
+        <h2 class="text-center text-gray-500 font-semibold text-lg mb-4">Masuk dengan</h2>
         <div class="flex justify-between mb-6">
             <button type="button"
-                class="w-1/2 mr-2 bg-[#b3c8cf] text-[#4b5563] border border-gray-300 rounded-lg px-4 py-2 flex items-center justify-center hover:bg-[#e5e1da] transition">
+                class="w-1/2 mr-2 bg-[#493628] text-[#FFF5D7] border border-gray-300 rounded-lg px-4 py-2 flex items-center justify-center hover:bg-[#AF8F6F] transition">
                 <svg class="w-5 h-5 mr-2" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24"
                     aria-label="GitHub">
                     <path
@@ -23,7 +23,7 @@
                 GitHub
             </button>
             <button type="button"
-                class="w-1/2 ml-2 bg-[#b3c8cf] text-[#4b5563] border border-gray-300 rounded-lg px-4 py-2 flex items-center justify-center hover:bg-[#e5e1da] transition">
+                class="w-1/2 ml-2 bg-[#493628] text-[#FFF5D7] border border-gray-300 rounded-lg px-4 py-2 flex items-center justify-center hover:bg-[#AF8F6F] transition">
                 <svg class="w-5 h-5 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-label="Google">
                     <path fill="#EA4335"
                         d="M12 10.2v3.84h5.45c-.24 1.25-.98 2.31-2.09 3.02l3.36 2.61c1.96-1.8 3.28-4.44 3.28-7.63 0-.95-.1-1.87-.27-2.76H12z" />
@@ -76,7 +76,7 @@
             </div>
 
             <button
-                class="w-full bg-[#89a8b2] text-white py-2 rounded-lg font-semibold hover:bg-[#718993] transition-all">
+                class="w-full bg-[#493628] text-white py-2 rounded-lg font-semibold hover:bg-[#AF8F6F] transition-all">
                 Login
             </button>
         </form>
