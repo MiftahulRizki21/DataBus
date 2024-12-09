@@ -53,7 +53,9 @@ class DetailBukuController extends Controller
     public function show(DetailBuku $id)
     {
         $detailBuku = DetailBuku::findOrFail($id);
-        return view('detail_buku');
+
+        // Kirim data detail buku ke view
+        return view('detail_buku.show', compact('detailBuku'));
     }
 
     /**
