@@ -47,7 +47,7 @@
         </div>
 
         <!-- Sign in with credentials -->
-        <form>
+        <form method="POST" action="{{ route('beranda') }}">
             <div class="mb-4">
                 <div class="relative">
                     <input type="email" placeholder="Email" required
@@ -77,7 +77,7 @@
 
             <button
                 class="w-full bg-[#493628] text-white py-2 rounded-lg font-semibold hover:bg-[#AF8F6F] transition-all">
-                Login
+                {{ __('Login') }}
             </button>
         </form>
 
