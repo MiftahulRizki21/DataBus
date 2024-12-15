@@ -69,9 +69,24 @@ class DetailBukuController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateDetailBukuRequest $request, DetailBuku $detailBuku)
+    public function update(UpdateDetailBukuRequest $request, DetailBuku $id)
     {
-        //
+        $requestData = $request->validate([
+            'judul_buku' => 'required|string|max:255',
+            'sinopsis' => 'required|string|max:255',
+            'nama_penulis' => 'required|string|max:255',
+            'nama_penerbit' => 'required|string|max:255',
+            'tgl_rilis' => 'required|date',
+            'halaman' => 'required|string|max:255',
+            'foto' => 'image|mimes:jpeg,png,jpg|max:5000',
+            'editor' => 'required|string|max:255',
+            'media' => 'required|string|max:255',
+            'isbn' => 'required|string|max:255'
+        ]);
+        $detailBuku = \App\Models\ListBuku::findOrFail($id);
+        $detailBuku->fill($requestData);
+        $detailBuku->foto = $request->file('foto')->store('images', 'public');
+        $detailBuku->save();
     }
 
     /**

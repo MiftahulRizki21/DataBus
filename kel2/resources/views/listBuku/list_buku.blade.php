@@ -48,9 +48,11 @@
             height: auto;
             border-radius: 5px;
         }
+
         .col-md-6 {
             margin-bottom: 30px;
         }
+
         .book-info {
             padding-left: 20px;
             flex: 1;
@@ -82,13 +84,38 @@
 </head>
 
 <body>
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark w-100 mb-4">
+        <div class="container">
+            <a class="navbar-brand" href="#">Library</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Books</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Contact</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
     <h1>List Buku</h1>
     <div class="container">
         <div class="row">
             <div class="col-md-6">
                 <div class="card">
-                    <img src="https://isbn.lib.pcr.ac.id/storage/8klUDqCN2ajXuYzyLHrL7hBR7pM3W1-metaQ292ZXIgWW9hbmRhIEVtYmVkZGVkLmpwZw==-.jpg"
-                        alt="Panduan Implementasi Dasar">
+                    <img src="https://isbn.lib.pcr.ac.id/storage/8klUDqCN2ajXuYzyLHrL7hBR7pM3W1-metaQ292ZXIgWW9hbmRhIEVtYmVkZGVkLmpwZw==-.jpg" alt="Panduan Implementasi Dasar">
                     <div class="book-info">
                         <h4>Panduan Implementasi Dasar Sistem Embedded Berbasis ATMega8535 dan Arduino Uno</h4>
                         <table>
@@ -105,14 +132,13 @@
                                 <td>Hal: 47</td>
                             </tr>
                         </table>
-                        <a href="/detail_buku">Detail</a>
+                        <a href="/detail_buku/1">Detail</a>
                     </div>
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="card">
-                    <img src="https://isbn.lib.pcr.ac.id/storage/kKCTOnx2UkFr52kyykupup2jTkZsFD-metaQ292ZXIgQW5nZ2kgV29ya3MgV0VCIExhbmp1dC5wbmc=-.png"
-                        alt="Workshop Web Lanjut">
+                    <img src="https://isbn.lib.pcr.ac.id/storage/kKCTOnx2UkFr52kyykupup2jTkZsFD-metaQ292ZXIgQW5nZ2kgV29ya3MgV0VCIExhbmp1dC5wbmc=-.png" alt="Workshop Web Lanjut">
                     <div class="book-info">
                         <h4>Workshop Pengembangan Web Lanjut</h4>
                         <table>
@@ -135,8 +161,7 @@
             </div>
             <div class="col-md-6">
                 <div class="card">
-                    <img src="https://isbn.lib.pcr.ac.id/storage/VFdrhLDRAPfL99N1fi517YO2aM3iS6-metaQ292ZXIgTUROIFBCTC5qcGc=-.jpg"
-                        alt="Pengukuran Besaran Listrik">
+                    <img src="https://isbn.lib.pcr.ac.id/storage/VFdrhLDRAPfL99N1fi517YO2aM3iS6-metaQ292ZXIgTUROIFBCTC5qcGc=-.jpg" alt="Pengukuran Besaran Listrik">
                     <div class="book-info">
                         <h4>Pengukuran Besaran Listrik</h4>
                         <table>
@@ -159,8 +184,7 @@
             </div>
             <div class="col-md-6">
                 <div class="card">
-                    <img src="https://isbn.lib.pcr.ac.id/storage/Yllq8kwQW3VHThwDLwmTL0NdavFxhP-metaQ292ZXIgUk1UIEFKSy5wbmc=-.png"
-                        alt="Praktikum Administrasi Jaringan Komputer">
+                    <img src="https://isbn.lib.pcr.ac.id/storage/Yllq8kwQW3VHThwDLwmTL0NdavFxhP-metaQ292ZXIgUk1UIEFKSy5wbmc=-.png" alt="Praktikum Administrasi Jaringan Komputer">
                     <div class="book-info">
                         <h4>Praktikum Administrasi Jaringan Komputer</h4>
                         <table>
