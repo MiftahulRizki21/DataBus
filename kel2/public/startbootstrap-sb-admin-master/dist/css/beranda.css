@@ -171,6 +171,13 @@
 
     a.navlink{
         margin: 0 20 0;
+        padding: 20px;
+    }
+    a.navlink:hover{
+        margin: 0 20 0;
+        padding: 20px;
+        color: #f0f0f0;
+        
     }
 
     .fade-in {
@@ -260,4 +267,42 @@
         opacity: 1; /* Tampil penuh */
         transform: translateY(0); /* Geser ke posisi semula */
     }
+
+    .container-fluid{
+        position: relative;
+        top: 300px;
+    }
+
+    .footer{
+        position: relative;
+        top: 600px;
+    }
+
+
+    /*animasi scroll*/
+    .fade-in {
+        opacity: 0;
+        transform: translateY(20px); /* Slightly offset the element for the effect */
+        transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+    }
+
+    .fade-in.show {
+        opacity: 1;
+        transform: translateY(0); /* Bring element back to normal position */
+    }
+
+    .nav-link {
+        position: relative;
+        padding-top: 28px;
+    }
+    .container-navlink{
+        margin-top: 8px;
+    }
+
+    
+
+    
+
+    
+    
     

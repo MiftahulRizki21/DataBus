@@ -38,7 +38,18 @@
     <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
         <!-- Navbar Brand -->
         <a class="navbar-brand ps-3" href="index.html">Start Bootstrap</a>
-        <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
+
+        <!-- Navbar Right -->
+        <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4" style="position: absolute; right: 0;">
+            <div class="container-navlink">
+                <p><a href="#" class="navlink">Ajukkan</a></p>
+            </div>
+            <div class="container-navlink">
+                <p><a href="#" class="navlink">Beranda</a></p>
+            </div>
+            <div class="container-navlink">
+                <p><a href="#" class="navlink">List Buku</a></p>
+            </div>
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                     <i class="fas fa-user fa-fw"></i>
@@ -59,7 +70,10 @@
     </main>
 
     <!-- Footer -->
-    @include('layouts.footer')
+    <div class="footer">
+        @include('layouts.footer')
+    </div>
+    
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
     <script src="js/scripts.js"></script>

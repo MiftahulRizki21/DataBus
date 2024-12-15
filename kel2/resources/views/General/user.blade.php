@@ -1,10 +1,10 @@
 @extends('layouts.UserApp')
 @section('content')
 
-<div class="container-fluid fade-in" style="margin-top: 1200px">
+<div class="container-fluid fade-in">
     <div class="objek-lp fade-in">
         <h1 class="selamat">Selamat Datang</h1>
-        <h2>Nama Pengguna</h2>
+        <h2>Pengguna</h2>
     </div>
 
     <div class="isi fade-in" style="padding: 30px">
@@ -52,20 +52,31 @@
                     </div>
                 </div>
             </div>
-            
         </div>
     </div>
 </div>
+
 <script>
     document.addEventListener("DOMContentLoaded", function () {
-        // Ambil semua elemen dengan kelas fade-in
-        const elements = document.querySelectorAll('.fade-in');
+        // Add fade-in effect for elements already in view
+        const fadeElements = document.querySelectorAll('.fade-in');
 
-        // Tambahkan kelas "show" dengan delay untuk efek bertahap
-        elements.forEach((el, index) => {
-            setTimeout(() => {
-                el.classList.add('show');
-            }, index * 200); // Setiap elemen memiliki delay 200ms
-        });
+        function handleScroll() {
+            fadeElements.forEach((el) => {
+                const rect = el.getBoundingClientRect();
+                const isVisible = rect.top <= window.innerHeight && rect.bottom >= 0;
+
+                // When the element is in view, add the "show" class
+                if (isVisible) {
+                    el.classList.add('show');
+                }
+            });
+        }
+
+        // Apply fade-in when the page is loaded and on scroll
+        handleScroll();
+        window.addEventListener("scroll", handleScroll);
     });
 </script>
+
+@endsection

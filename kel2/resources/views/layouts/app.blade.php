@@ -50,17 +50,15 @@
             <!-- Navbar Right -->
             <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4" style="position: absolute; right: 0;">
                 <div class="container-navlink">
-                    <h3><a href="#" class="navlink">Masuk</a></h3>
+                    <p><a href="#" class="navlink">Beranda</a></p>
                 </div>
                 <div class="container-navlink">
-                    <h3><a href="#" class="navlink">Masuk</a></h3>
+                    <p><a href="#" class="navlink">List Buku</a></p>
                 </div>
-                <div class="container-button">
-                    <a href="#" class="pengunjung">Masuk</a>
+                <div class="container-navlink">
+                    <p><a href="#" class="navlink">Login</a></p>
                 </div>
-                <div class="container-button">
-                    <a href="#" class="pengunjung">Registrasi</a>
-                </div>
+                
             </ul>
         </nav>
 
@@ -73,7 +71,11 @@
         </div>
 
         <!-- Footer -->
-        @include('layouts.footer')
+        <div class="footer">
+            @include('layouts.footer')
+        </div>
+        
+        
 
         <!-- Scripts -->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
