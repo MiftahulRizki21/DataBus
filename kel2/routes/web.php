@@ -27,6 +27,11 @@ Route::get('/beranda', function () {
     return view('general.beranda');
 });
 
+Route::get('/beranda1', function () {
+    return view('general.beranda1');
+});
+
+
 Route::get('/user', function () {
     return view('general.user');
 });

@@ -1,11 +1,10 @@
-@extends('layouts.app')
+@extends('layouts.UserApp')
 @section('content')
 
 <div class="container-fluid fade-in" style="margin-top: 1200px">
     <div class="objek-lp fade-in">
         <h1 class="selamat">Selamat Datang</h1>
-        <button class="btn-login zoom-in">LOGIN</button>
-        <u><a href="" class="link-regis slide-in-left">Register</a></u>
+        <h2>Nama Pengguna</h2>
     </div>
 
     <div class="isi fade-in" style="padding: 30px">
@@ -68,23 +67,5 @@
                 el.classList.add('show');
             }, index * 200); // Setiap elemen memiliki delay 200ms
         });
-    });
-
-    document.addEventListener("DOMContentLoaded", function () {
-        const fadeElements = document.querySelectorAll('.fade-in');
-
-        function handleScroll() {
-            fadeElements.forEach((el) => {
-                const rect = el.getBoundingClientRect();
-                const isVisible = rect.top <= window.innerHeight - 50 && rect.bottom >= 0;
-
-                if (isVisible) {
-                    el.classList.add('show');
-                }
-            });
-        }
-
-        window.addEventListener("scroll", handleScroll);
-        handleScroll(); // Panggil saat halaman pertama kali dimuat
     });
 </script>
