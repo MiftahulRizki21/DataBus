@@ -24,15 +24,7 @@
         <h2 class="text-center text-gray-500 font-semibold text-lg mb-4">Daftar dengan</h2>
 
         <!-- Sosial Media Login -->
-        <div class="flex justify-between mb-6">
-            <button type="button"
-                class="w-1/2 mr-2 bg-[#493628] text-[#FFF5D7] border border-gray-300 rounded-lg px-4 py-2 flex items-center justify-center hover:bg-[#AF8F6F] transition">
-                <svg class="w-5 h-5 mr-2" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
-                    <path
-                        d="M12 0C5.372 0 0 5.372 0 12c0 5.302 3.438 9.8 8.207 11.387.6.111.793-.261.793-.577 0-.285-.01-1.04-.016-2.042-3.338.726-4.042-1.416-4.042-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.09-.745.083-.73.083-.73 1.205.085 1.838 1.236 1.838 1.236 1.07 1.835 2.807 1.304 3.492.997.107-.774.418-1.305.761-1.605-2.665-.305-5.467-1.334-5.467-5.934 0-1.311.469-2.382 1.236-3.222-.123-.305-.536-1.527.117-3.176 0 0 1.008-.323 3.3 1.23a11.51 11.51 0 013-.404c1.02.004 2.042.137 3 .404 2.292-1.553 3.3-1.23 3.3-1.23.653 1.649.24 2.871.118 3.176.77.84 1.236 1.911 1.236 3.222 0 4.61-2.806 5.625-5.478 5.92.43.372.815 1.102.815 2.222 0 1.606-.015 2.897-.015 3.293 0 .319.192.694.801.576C20.565 21.796 24 17.302 24 12c0-6.628-5.372-12-12-12z" />
-                </svg>
-                GitHub
-            </button>
+        <div class="flex justify-center mb-6">
             <button type="button"
                 class="w-1/2 ml-2 bg-[#493628] text-[#FFF5D7] border border-gray-300 rounded-lg px-4 py-2 flex items-center justify-center hover:bg-[#AF8F6F] transition">
                 <svg class="w-5 h-5 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
