@@ -50,9 +50,12 @@ class DetailBukuController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(DetailBuku $detailBuku)
+    public function show(DetailBuku $id)
     {
-        //
+        $detailBuku = DetailBuku::findOrFail($id);
+
+        // Kirim data detail buku ke view
+        return view('detail_buku.show', compact('detailBuku'));
     }
 
     /**

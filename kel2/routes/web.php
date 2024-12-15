@@ -15,6 +15,7 @@ Auth::routes();
 // });
 Route::get('/list_buku', [ListBukuController::class, 'index'])->name('user.list_buku');
 Route::get('/detail_buku', [DetailBukuController::class, 'index'])->name('listBuku.detail_buku');
+Route::get('/detail_buku/{id}', [DetailBukuController::class, 'show'])->name('listBuku.detail_buku');
 
 Auth::routes();
 
