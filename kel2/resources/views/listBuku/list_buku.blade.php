@@ -37,9 +37,14 @@
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.18);
             transition: 0.3s;
             height: 100%;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.6s forwards;
+            animation-delay: calc(var(--index) * 0.1s);
         }
 
         .card:hover {
+            transform: translateY(-5px);
             box-shadow: 0 8px 16px rgba(0, 0, 0, 0.33);
         }
 
@@ -47,6 +52,11 @@
             max-width: 150px;
             height: auto;
             border-radius: 5px;
+            transition: transform 0.3s;
+        }
+
+        .card:hover img {
+            transform: scale(1.05);
         }
 
         .col-md-6 {
@@ -80,6 +90,18 @@
         .book-info a:hover {
             text-decoration: underline;
         }
+
+         /* Fade-in and Slide-up animation */
+         @keyframes fadeInUp {
+            0% {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
     </style>
 </head>
 
@@ -94,16 +116,13 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Home</a>
+                        <a class="nav-link" href="/beranda">Beranda</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Books</a>
+                        <a class="nav-link" href="#">List Buku</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">About</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Contact</a>
+                        <a class="nav-link" href="#">Pengajuan</a>
                     </li>
                 </ul>
             </div>

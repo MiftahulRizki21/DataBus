@@ -29,12 +29,18 @@
             align-items: center;
             gap: 20px;
             margin-top: 20px;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeIn 1s forwards;
         }
 
         .book-detail img {
             max-width: 280px;
             height: auto;
             border-radius: 5px;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeIn 1s forwards 0.3s;
         }
 
         .book-title {
@@ -42,16 +48,22 @@
             font-size: 1.3rem;
             font-weight: bold;
             margin-bottom: 10px;
+            opacity: 0;
+            animation: fadeIn 1s forwards 0.6s;
         }
 
         .synopsis {
             text-align: center;
             margin-bottom: 20px;
+            opacity: 0;
+            animation: fadeIn 1s forwards 0.9s;
         }
 
         .book-info {
             width: 550px;
             margin-top: 20px;
+            opacity: 0;
+            animation: fadeIn 1s forwards 1.2s;
         }
 
         .book-info table {
@@ -67,6 +79,17 @@
         .text-success {
             font-size: 1.2rem;
         }
+
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
     </style>
 </head>
 
@@ -74,14 +97,14 @@
     <!-- Navigation Bar -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark w-100">
         <div class="container">
-            <a class="navbar-brand" href="#">Library</a>
+            <a class="navbar-brand" href="#">Detail Book</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="/list_buku">List Buku</a>
+                        <a class="nav-link" href="/list_buku">List Books</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">Books</a>
@@ -90,7 +113,7 @@
                         <a class="nav-link" href="#">About</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Contact</a>
+                        <a class="nav-link" href="/beranda">Contact</a>
                     </li>
                 </ul>
             </div>
