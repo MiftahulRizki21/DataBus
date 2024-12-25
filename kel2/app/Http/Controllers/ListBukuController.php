@@ -44,7 +44,7 @@ class ListBukuController extends Controller
     
         $listBuku = new \App\Models\ListBuku;
         $listBuku->fill($requestData);
-        $listBuku->foto = $request->file('foto')->store('');
+        $listBuku->foto = $request->file('foto')->store('cover');
 
         $listBuku->save();
         if ($request->wantsJson()) {
