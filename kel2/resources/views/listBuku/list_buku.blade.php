@@ -132,101 +132,32 @@
     <h1>List Buku</h1>
     <div class="container">
         <div class="row">
+            @foreach ($listBuku as $listbuku )
             <div class="col-md-6">
                 <div class="card">
-                    <img src="https://isbn.lib.pcr.ac.id/storage/8klUDqCN2ajXuYzyLHrL7hBR7pM3W1-metaQ292ZXIgWW9hbmRhIEVtYmVkZGVkLmpwZw==-.jpg" alt="Panduan Implementasi Dasar">
+                    <img src="{{ Storage::url($listbuku->foto) }}" alt="{{ $listbuku->judul_buku }}">
+                    
                     <div class="book-info">
-                        <h4>Panduan Implementasi Dasar Sistem Embedded Berbasis ATMega8535 dan Arduino Uno</h4>
+                        <h4>{{ $listbuku->judul_buku }}</h4>
                         <table>
                             <tr>
-                                <td>Penulis: Yoanda Alim Syahbana, Egal Hendriyanto</td>
+                                <td>Penulis: {{ $listbuku->nama_penulis }}</td>
                             </tr>
                             <tr>
-                                <td>Penerbit: PCR</td>
+                                <td>Penerbit: {{ $listbuku->nama_Penerbit }}</td>
                             </tr>
                             <tr>
-                                <td>Release: 2023-05-02</td>
+                                <td>Release:{{ $listbuku->tgl_rilis }}</td>
                             </tr>
                             <tr>
-                                <td>Hal: 47</td>
+                                <td>Hal: {{ $listbuku->halaman }}</td>
                             </tr>
                         </table>
-                        <a href="/detail_buku/1">Detail</a>
+                        <a href="/detail_buku/{{ $listbuku->id }}">Detail</a>
                     </div>
                 </div>
             </div>
-            <div class="col-md-6">
-                <div class="card">
-                    <img src="https://isbn.lib.pcr.ac.id/storage/kKCTOnx2UkFr52kyykupup2jTkZsFD-metaQ292ZXIgQW5nZ2kgV29ya3MgV0VCIExhbmp1dC5wbmc=-.png" alt="Workshop Web Lanjut">
-                    <div class="book-info">
-                        <h4>Workshop Pengembangan Web Lanjut</h4>
-                        <table>
-                            <tr>
-                                <td>Penulis: Anggy Trisnadoli, Muhammad Ihsan Zul</td>
-                            </tr>
-                            <tr>
-                                <td>Penerbit: PCR</td>
-                            </tr>
-                            <tr>
-                                <td>Release: 2023-05-02</td>
-                            </tr>
-                            <tr>
-                                <td>Hal: 56</td>
-                            </tr>
-                        </table>
-                        <a href="/detail_buku">Detail</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="card">
-                    <img src="https://isbn.lib.pcr.ac.id/storage/VFdrhLDRAPfL99N1fi517YO2aM3iS6-metaQ292ZXIgTUROIFBCTC5qcGc=-.jpg" alt="Pengukuran Besaran Listrik">
-                    <div class="book-info">
-                        <h4>Pengukuran Besaran Listrik</h4>
-                        <table>
-                            <tr>
-                                <td>Penulis: Putri Madona, Retno Tri Wahyuni</td>
-                            </tr>
-                            <tr>
-                                <td>Penerbit: PCR</td>
-                            </tr>
-                            <tr>
-                                <td>Release: 2023-05-02</td>
-                            </tr>
-                            <tr>
-                                <td>Hal: 103</td>
-                            </tr>
-                        </table>
-                        <a href="/detail_buku">Detail</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="card">
-                    <img src="https://isbn.lib.pcr.ac.id/storage/Yllq8kwQW3VHThwDLwmTL0NdavFxhP-metaQ292ZXIgUk1UIEFKSy5wbmc=-.png" alt="Praktikum Administrasi Jaringan Komputer">
-                    <div class="book-info">
-                        <h4>Praktikum Administrasi Jaringan Komputer</h4>
-                        <table>
-                            <tr>
-                                <td>Penulis: Rahmat Suhatman, Muhammad Arif Fadhly Ridha</td>
-                            </tr>
-                            <tr>
-                                <td>Penerbit: PCR</td>
-                            </tr>
-                            <tr>
-                                <td>Release: 2023-05-02</td>
-                            </tr>
-                            <tr>
-                                <td>Hal: 217</td>
-                            </tr>
-                        </table>
-                        <a href="/detail_buku">Detail</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
+            @endforeach
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 

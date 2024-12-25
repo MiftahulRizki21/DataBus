@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('nama_penerbit');
             $table->date('tgl_rilis');
             $table->string('halaman');
+            $table->string('foto');
             $table->timestamps();
         });
     }

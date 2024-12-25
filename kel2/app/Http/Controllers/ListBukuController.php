@@ -9,6 +9,7 @@ use App\Support\Facedes\Storage;
 
 class ListBukuController extends Controller
 {
+
     /**
      * Display a listing of the resource.
      */
@@ -23,7 +24,7 @@ class ListBukuController extends Controller
      */
     public function create()
     {
-        //
+        return view('listBuku.create');
     }
 
     /**
@@ -31,8 +32,28 @@ class ListBukuController extends Controller
      */
     public function store(StoreListBukuRequest $request)
     {
-        //
+        $requestData = $request->validate([
+            'judul_buku' => 'required',
+            'sipnosis' => 'required',
+            'nama_penulis' => 'required|string',
+            'nama_penerbit' => 'required',
+            'tgl_rilis' => 'nullable|date',
+            'halaman' => 'required|integer',
+            'foto' => 'required|image|mimes:jpeg,png,jpg|max:5000',
+        ]);
+    
+        $listBuku = new \App\Models\ListBuku;
+        $listBuku->fill($requestData);
+        $listBuku->foto = $request->file('foto')->store('');
+
+        $listBuku->save();
+        if ($request->wantsJson()) {
+            return response()->json($listBuku);
+        }
+    
+        return back()->with('success', 'Buku berhasil ditambahkan!');
     }
+    
 
     /**
      * Display the specified resource.

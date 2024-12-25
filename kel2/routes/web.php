@@ -3,6 +3,7 @@
 use App\Http\Controllers\AnggotaController;
 use App\Http\Controllers\DetailBukuController;
 use App\Http\Controllers\ListBukuController;
+use App\Models\ListBuku;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -11,7 +12,8 @@ Auth::routes();
 // Middleware auth untuk proteksi route anggota
 // Route::middleware(['auth'])->group(function () {
 
-
+route::get('/test', [ListBukuController::class,'create']);
+route::post('/test/create', [ListBukuController::class,'store']);
 // });
 Route::get('/list_buku', [ListBukuController::class, 'index'])->name('user.list_buku');
 Route::get('/detail_buku/{id}', [DetailBukuController::class, 'index'])->name('listBuku.detailBuku_show');
