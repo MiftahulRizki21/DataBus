@@ -26,16 +26,19 @@ Route::get('/', function () {
 });
 
 Route::get('/beranda', function () {
-    return view('general.beranda');
+    return view('General.beranda');
 });
 
-Route::get('/beranda1', function () {
-    return view('general.beranda1');
+Route::get('/editor', function () {
+    return view('General.editor');
 });
 
+Route::get('/staf', function () {
+    return view('General.staf');
+});
 
 Route::get('/user', function () {
-    return view('general.user');
+    return view('General.user');
 });
 
 
