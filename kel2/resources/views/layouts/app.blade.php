@@ -71,7 +71,7 @@
         </div>
 
         <!-- Footer -->
-        <div class="footer">
+        <div class="footer" style="width: 100%; height: 100%;">
             @include('layouts.footer')
         </div>
         

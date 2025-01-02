@@ -58,6 +58,10 @@
                     class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500">
             </div>
             <div class="mb-4">
+                <input type="text" name="role" placeholder="Role" value="{{ old('role') }}" required
+                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500">
+            </div>
+            <div class="mb-4">
                 <input type="email" name="email" placeholder="Email" value="{{ old('email') }}" required
                     class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500">
             </div>

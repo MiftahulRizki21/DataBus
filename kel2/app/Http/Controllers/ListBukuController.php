@@ -15,8 +15,8 @@ class ListBukuController extends Controller
      */
     public function index()
     {
-        $listBuku = ListBuku::latest()->paginate(10);
-        return view('listBuku.list_buku', compact('listBuku'));
+        $listBuku = ListBuku::inRandomOrder()->take(9)->get();        
+        return view('general.beranda', compact('listBuku'));
     }
 
     /**
@@ -60,7 +60,8 @@ class ListBukuController extends Controller
      */
     public function show(ListBuku $listBuku)
     {
-        //
+        $listBuku = ListBuku::latest()->paginate(10);
+        return view('listBuku.list_buku', compact('listBuku'));
     }
 
     /**
