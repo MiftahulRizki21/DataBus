@@ -9,47 +9,64 @@ use App\Models\ListBuku;
 use Illuminate\Auth\Events\Login;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
-
-// Tambahkan route autentikasi
-Auth::routes();
-// Middleware auth untuk proteksi route anggota
-// Route::middleware(['auth'])->group(function () {
-
-route::get('/test', [ListBukuController::class,'create']);
-route::post('/test/create', [ListBukuController::class,'store']);
-// });
-Route::get('/list_buku', [ListBukuController::class, 'index'])->name('user.list_buku');
-Route::get('/detail_buku/{id}', [DetailBukuController::class, 'index'])->name('listBuku.detailBuku_show');
+use App\Http\Middleware\RoleBasedAccess;
+use App\Http\Controllers\StaffPustakaController;
+use App\Http\Controllers\EditorController;
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\RegisterController;
 
 Auth::routes();
+
 
 // Route default
 Route::get('/', function () {
     return view('layouts.app');
 });
 
-Route::get('/beranda', function () {
-    return view('general.beranda');
+Route::get('/beranda', [ListBukuController::class, 'index'])->name('listBuku.detailBuku_show');
+
+Route::get('/detail_buku/{id}', [ListBukuController::class, 'show'])->name('detailBuku_show');
+
+
+Route::get('/editor', function () {
+    return view('General.editor');
 });
 
-Route::get('/beranda1', function () {
-    return view('general.beranda1');
+Route::get('/staf', function () {
+    return view('General.staf');
 });
-
 
 Route::get('/user', function () {
-    return view('general.user');
+    return view('General.user');
 });
+
+Route::get('/pengajuan', function () {
+    return view('listBuku.create');
+});
+Route::resource('listBuku', ListBukuController::class);
+Route::post('/tambah', [ListBukuController::class, 'store']);
+
 
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
+Route::get('/register', [RegisterController::class, 'showRegistrationForm'])->name('register');
+Route::post('register', [RegisterController::class, 'register']);
+
 
 Route::get('/logout', function () {
     Auth::logout();
     return redirect('login');
 });
 
+<<<<<<< HEAD
 Route::controller(SocialiteController::class)->group(function(){
     Route::get('auth/google', 'googlelogin')->name('auth.google');
     Route::get('auth/google-callback','googleAuthentication')->name('auth.google-callback');
 });
+=======
+Route::middleware([RoleBasedAccess::class . ':staff'])->get('/staff/dashboard', [StaffPustakaController::class, 'index'])->name('staff.dashboard');
+Route::middleware([RoleBasedAccess::class . ':user'])->get('/', [ListBukuController::class, 'show'])->name('listBuku');
+Route::middleware([RoleBasedAccess::class . ':editor'])->get('/editor/dashboard', [EditorController::class, 'index'])->name('editor.dashboard');
+>>>>>>> 14df0e0278260e9dd92c2cb7c6b5c22123dfb299

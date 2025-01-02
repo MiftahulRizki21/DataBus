@@ -134,7 +134,7 @@
         border-radius: 8px;
         box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
         text-transform: uppercase; /* Huruf kapital semua untuk efek profesional */
-        margin-top: 290px;
+        margin-top: 200px;
     }
 
     h5 {
@@ -178,7 +178,7 @@
 </style>
 
 <!-- Judul Halaman Editor -->
-<h1>Halaman Editor</h1>
+<h1>Halaman Staf</h1>
 
 <div class="container-fluid">
     <h5>Table Pengajuan</h5>
@@ -199,7 +199,7 @@
                     <td>Contoh Buku 1</td>
                     <td><button class="btn btn-primary">Detail Buku</button></td>
                     <td>
-                        <textarea placeholder="Masukkan alasan..." rows="3"></textarea>
+                        <p>...</p>
                     </td>
                     <td>
                         <button class="btn btn-success">Terima</button>
@@ -211,7 +211,7 @@
                     <td>Contoh Buku 2</td>
                     <td><button class="btn btn-primary">Detail Buku</button></td>
                     <td>
-                        <textarea placeholder="Masukkan alasan..." rows="3"></textarea>
+                        <p>...</p>
                     </td>
                     <td>
                         <button class="btn btn-success">Terima</button>

@@ -35,7 +35,7 @@
     </head>
 <body class="sb-nav-fixed">
 
-    <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
+    <nav class="sb-topnav navbar navbar-expand navbar-dark" style="background-color: #002855;">
         <!-- Navbar Brand -->
         <a class="navbar-brand ps-3" href="index.html">Start Bootstrap</a>
 

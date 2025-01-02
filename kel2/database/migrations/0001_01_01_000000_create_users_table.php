@@ -17,7 +17,11 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+<<<<<<< HEAD
             $table->string('google_id')->nullable();
+=======
+            $table->string('role');
+>>>>>>> 14df0e0278260e9dd92c2cb7c6b5c22123dfb299
             $table->rememberToken();
             $table->timestamps();
         });

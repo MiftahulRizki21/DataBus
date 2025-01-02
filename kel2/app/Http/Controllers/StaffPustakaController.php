@@ -13,7 +13,7 @@ class StaffPustakaController extends Controller
      */
     public function index()
     {
-        //
+        return view('general.staff');
     }
 
     /**
