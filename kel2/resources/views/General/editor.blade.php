@@ -136,6 +136,45 @@
         margin-bottom: 30px;
         text-transform: uppercase; /* Huruf kapital semua untuk efek profesional */
     }
+
+    h5 {
+        color: #002855;
+        margin-left: 60px;
+    }
+
+    /* Gaya khusus untuk tabel history */
+    .history-table-container {
+        margin-top: 30px;
+        max-width: 90%;
+        height: 200px; /* Lebih pendek dari tabel pengajuan */
+        overflow-y: scroll; /* Mengaktifkan scroll vertikal */
+        border-radius: 10px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .history-table {
+        width: 100%;
+        border-collapse: collapse;
+        background-color: #fff;
+    }
+
+    .history-table thead {
+        background-color: #002855;
+        color: white;
+        text-align: left;
+    }
+
+    .history-table thead th {
+        padding: 12px 15px;
+        font-size: 16px;
+        font-weight: bold;
+    }
+
+    .history-table tbody td {
+        padding: 12px 15px;
+        text-align: left;
+    }
+
 </style>
 
 <!-- Judul Halaman Editor -->
@@ -184,7 +223,7 @@
     </div>
 
     <!-- Pagination -->
-    <div class="pagination">
+    <div class="pagination" style="margin-bottom: 100px">
         <ul class="pagination">
             <li class="page-item">
                 <a class="page-link" href="#" aria-label="Previous">
@@ -207,6 +246,36 @@
             </li>
         </ul>
     </div>
+
+    <!-- Tabel History -->
+    <h5>Table History</h5>
+    <center><div class="history-table-container">
+        <table class="history-table">
+            <thead>
+                <tr>
+                    <th>No</th>
+                    <th>Nama</th>
+                    <th>Status</th>
+                    <th>Tanggal</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>Contoh Buku 1</td>
+                    <td>Disetujui</td>
+                    <td>2025-01-02</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>Contoh Buku 2</td>
+                    <td>Ditolak</td>
+                    <td>2025-01-02</td>
+                </tr>
+                <!-- Tambahkan baris lainnya sesuai kebutuhan -->
+            </tbody>
+        </table>
+    </div></center>
 </div>
 
 @endsection

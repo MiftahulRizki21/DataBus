@@ -36,6 +36,10 @@ Route::get('/user', function () {
     return view('General.user');
 });
 
+Route::get('/pengajuan', function () {
+    return view('listBuku.create');
+});
+
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
