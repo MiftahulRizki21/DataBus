@@ -1,9 +1,12 @@
 <?php
 
 use App\Http\Controllers\AnggotaController;
+use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\DetailBukuController;
 use App\Http\Controllers\ListBukuController;
+use App\Http\Controllers\SocialiteController;
 use App\Models\ListBuku;
+use Illuminate\Auth\Events\Login;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -44,4 +47,9 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::get('/logout', function () {
     Auth::logout();
     return redirect('login');
+});
+
+Route::controller(SocialiteController::class)->group(function(){
+    Route::get('auth/google', 'googlelogin')->name('auth.google');
+    Route::get('auth/google-callback','googleAuthentication')->name('auth.google-callback');
 });

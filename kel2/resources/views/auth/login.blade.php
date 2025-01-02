@@ -12,40 +12,42 @@
     <div class="bg-[#f1f0e8] w-96 rounded-lg shadow-lg p-8">
         <!-- Tampilkan pesan error jika ada -->
         @if ($errors->any())
-        <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-4">
-            <ul>
-                @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
+            <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-4">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
         @endif
 
         <!-- Tampilkan pesan status jika ada -->
         @if (session('status'))
-        <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative mb-4">
-            {{ session('status') }}
-        </div>
+            <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative mb-4">
+                {{ session('status') }}
+            </div>
         @endif
 
         <!-- Sign in with social media -->
         <h2 class="text-center text-gray-500 font-semibold text-lg mb-4">Masuk dengan</h2>
         <div class="flex justify-center mb-6">
-            <button type="button"
-                class="w-1/2 ml-2 bg-[#493628] text-[#FFF5D7] border border-gray-300 rounded-lg px-4 py-2 flex items-center justify-center hover:bg-[#AF8F6F] transition">
-                <svg class="w-5 h-5 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                    <path fill="#EA4335"
-                        d="M12 10.2v3.84h5.45c-.24 1.25-.98 2.31-2.09 3.02l3.36 2.61c1.96-1.8 3.28-4.44 3.28-7.63 0-.95-.1-1.87-.27-2.76H12z" />
-                    <path fill="#4285F4"
-                        d="M12 22c2.76 0 5.09-.92 6.79-2.49l-3.36-2.61c-.9.61-2.04.97-3.43.97-2.64 0-4.86-1.78-5.65-4.19H3.31v2.64C4.88 19.84 8.19 22 12 22z" />
-                    <path fill="#FBBC04"
-                        d="M6.35 13.68a5.86 5.86 0 010-3.39V7.65H3.31a9.96 9.96 0 000 8.7l3.04-2.67z" />
-                    <path fill="#34A853"
-                        d="M12 4.85c1.52 0 2.89.52 3.97 1.53l2.98-2.98C16.93 2.04 14.63 1 12 1 8.19 1 4.88 3.16 3.31 6.48l3.04 2.64C7.14 6.63 9.36 4.85 12 4.85z" />
-                    <path fill="none" d="M0 0h24v24H0z" />
-                </svg>
-                Google
-            </button>
+            <a href="{{ route('auth.google') }}" class="w-1/2">
+                <button type="button"
+                    class="w-full bg-[#493628] text-[#FFF5D7] border border-gray-300 rounded-lg px-4 py-2 flex items-center justify-center hover:bg-[#AF8F6F] transition">
+                    <svg class="w-5 h-5 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path fill="#EA4335"
+                            d="M12 10.2v3.84h5.45c-.24 1.25-.98 2.31-2.09 3.02l3.36 2.61c1.96-1.8 3.28-4.44 3.28-7.63 0-.95-.1-1.87-.27-2.76H12z" />
+                        <path fill="#4285F4"
+                            d="M12 22c2.76 0 5.09-.92 6.79-2.49l-3.36-2.61c-.9.61-2.04.97-3.43.97-2.64 0-4.86-1.78-5.65-4.19H3.31v2.64C4.88 19.84 8.19 22 12 22z" />
+                        <path fill="#FBBC04"
+                            d="M6.35 13.68a5.86 5.86 0 010-3.39V7.65H3.31a9.96 9.96 0 000 8.7l3.04-2.67z" />
+                        <path fill="#34A853"
+                            d="M12 4.85c1.52 0 2.89.52 3.97 1.53l2.98-2.98C16.93 2.04 14.63 1 12 1 8.19 1 4.88 3.16 3.31 6.48l3.04 2.64C7.14 6.63 9.36 4.85 12 4.85z" />
+                        <path fill="none" d="M0 0h24v24H0z" />
+                    </svg>
+                    Google
+                </button>
+            </a>
         </div>
 
         <!-- Divider -->
