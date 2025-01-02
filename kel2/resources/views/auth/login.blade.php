@@ -27,7 +27,11 @@
             {{ session('status') }}
         </div>
         @endif
-
+        @if (session('error'))
+            <div class="alert alert-danger bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative mb-4">
+                {{ session('error') }}
+            </div>
+        @endif
         <!-- Sign in with social media -->
         <h2 class="text-center text-gray-500 font-semibold text-lg mb-4">Masuk dengan</h2>
         <div class="flex justify-center mb-6">
@@ -58,7 +62,6 @@
         <!-- Sign in with credentials -->
         <form method="POST" action="{{ route('login') }}">
             @csrf
-
             <div class="mb-4">
                 <div class="relative">
                     <input type="email" name="email" placeholder="Email" value="{{ old('email') }}" required
