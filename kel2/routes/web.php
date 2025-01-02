@@ -20,9 +20,10 @@ Route::get('/', function () {
     return view('layouts.app');
 });
 
-Route::get('/beranda', function () {
-    return view('General.beranda');
-});
+Route::get('/beranda', [ListBukuController::class, 'index'])->name('listBuku.detailBuku_show');
+
+Route::get('/detail_buku/{id}', [ListBukuController::class, 'show'])->name('detailBuku_show');
+
 
 Route::get('/editor', function () {
     return view('General.editor');
@@ -39,6 +40,9 @@ Route::get('/user', function () {
 Route::get('/pengajuan', function () {
     return view('listBuku.create');
 });
+Route::resource('listBuku', ListBukuController::class);
+Route::post('/tambah', [ListBukuController::class, 'store']);
+
 
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

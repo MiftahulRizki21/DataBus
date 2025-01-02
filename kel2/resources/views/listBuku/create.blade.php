@@ -87,7 +87,7 @@
     }
 </style>
 
-<form action="/test/create" method="POST" enctype="multipart/form-data" class="form-container">
+<form action="{{ route('listBuku.store') }}" method="POST" enctype="multipart/form-data" class="form-container">
     @csrf
     <h2>Form Pengajuan Buku</h2>
     <br>

@@ -120,7 +120,7 @@
 
     .container-fluid {
         position: relative;
-        top: 60px;
+        top:140px;
     }
 
     /* Gaya untuk judul h1 */
@@ -133,8 +133,8 @@
         padding: 20px;
         border-radius: 8px;
         box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-        margin-bottom: 30px;
         text-transform: uppercase; /* Huruf kapital semua untuk efek profesional */
+        margin-top: 200px;
     }
 
     h5 {

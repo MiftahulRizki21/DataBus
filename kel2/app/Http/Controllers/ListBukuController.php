@@ -58,10 +58,10 @@ class ListBukuController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(ListBuku $listBuku)
-    {
-        $listBuku = ListBuku::latest()->paginate(10);
-        return view('listBuku.list_buku', compact('listBuku'));
+    public function show($id)
+    { 
+        $buku = ListBuku::findOrFail($id); // Ambil data buku berdasarkan ID
+        return view('listBuku.detail_buku', compact('buku'));
     }
 
     /**

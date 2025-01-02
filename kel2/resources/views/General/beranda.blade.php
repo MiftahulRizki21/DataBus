@@ -27,7 +27,7 @@
                                     @foreach ($listBuku as $listbuku)
                                     <td>
                                         <div class="rekom fade-in">
-                                            <a href="{{ route('listBuku.detailBuku_show', $listbuku->id) }}" style="width: 100%; height: 100%;">
+                                            <a href="{{ route('detailBuku_show', $listbuku->id) }}" style="width: 100%; height: 100%;">
                                                 <img src="{{ Storage::url($listbuku->foto) }}"
                                                      alt="{{ $listbuku->judul_buku }}"
                                                      style="width: 100%; height: 100%;">
