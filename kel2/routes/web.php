@@ -21,9 +21,7 @@ Route::get('/detail_buku/{id}', [DetailBukuController::class, 'index'])->name('l
 Auth::routes();
 
 // Route default
-Route::get('/', function () {
-    return view('layouts.app');
-});
+Route::get('/', [ListBukuController::class,'index']);
 
 Route::get('/beranda', function () {
     return view('general.beranda');
