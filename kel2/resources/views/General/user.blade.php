@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.UserApp')
 @section('content')
     <div class="container-fluid fade-in">
         <div class="objek-lp fade-in">

@@ -19,6 +19,19 @@ class ListBukuController extends Controller
         return view('general.beranda', compact('listBuku'));
     }
 
+    public function indexUser()
+    {
+        $listBuku = ListBuku::inRandomOrder()->paginate(3); // Menampilkan 3 buku per halaman
+        return view('general.user', compact('listBuku'));
+    }
+
+
+    public function indexList()
+    {
+        $listBuku = ListBuku::inRandomOrder()->paginate(8);        
+        return view('ListBuku.list_buku', compact('listBuku'));
+    }
+
     /**
      * Show the form for creating a new resource.
      */
@@ -41,18 +54,19 @@ class ListBukuController extends Controller
             'halaman' => 'required|integer',
             'foto' => 'required|image|mimes:jpeg,png,jpg|max:5000',
         ]);
-    
+
         $listBuku = new \App\Models\ListBuku;
         $listBuku->fill($requestData);
         $listBuku->foto = $request->file('foto')->store('cover');
 
         $listBuku->save();
-        if ($request->wantsJson()) {
-            return response()->json($listBuku);
-        }
-    
-        return back()->with('success', 'Buku berhasil ditambahkan!');
+
+        // Flash message
+        session()->flash('success', 'Buku berhasil ditambahkan!');
+
+        return back();
     }
+
     
 
     /**

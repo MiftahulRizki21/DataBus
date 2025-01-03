@@ -21,6 +21,8 @@ Route::get('/', function () {
 });
 
 Route::get('/beranda', [ListBukuController::class, 'index'])->name('listBuku.detailBuku_show');
+Route::get('/user', [ListBukuController::class, 'indexUser'])->name('listBuku.detailBuku_show');
+Route::get('/list', [ListBukuController::class, 'indexList'])->name('listBuku.detailBuku_show');
 
 Route::get('/detail_buku/{id}', [ListBukuController::class, 'show'])->name('detailBuku_show');
 
@@ -31,10 +33,6 @@ Route::get('/editor', function () {
 
 Route::get('/staf', function () {
     return view('General.staf');
-});
-
-Route::get('/user', function () {
-    return view('General.user');
 });
 
 Route::get('/pengajuan', function () {

@@ -42,13 +42,13 @@
         <!-- Navbar Right -->
         <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4" style="position: absolute; right: 0;">
             <div class="container-navlink">
-                <p><a href="#" class="navlink">Ajukkan</a></p>
+                <p><a href="/pengajuan" class="navlink">Ajukkan</a></p>
             </div>
             <div class="container-navlink">
-                <p><a href="#" class="navlink">Beranda</a></p>
+                <p><a href="/user" class="navlink">Beranda</a></p>
             </div>
             <div class="container-navlink">
-                <p><a href="#" class="navlink">List Buku</a></p>
+                <p><a href="/list" class="navlink">List Buku</a></p>
             </div>
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">

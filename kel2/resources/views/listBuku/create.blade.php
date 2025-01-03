@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.UserApp')
 @section('content')
 
 <!-- CSS -->
