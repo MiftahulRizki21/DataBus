@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Middleware\RoleBasedAccess;
 use App\Http\Controllers\StaffPustakaController;
 use App\Http\Controllers\EditorController;
-use App\Http\Controllers\Auth\LoginController;
+// use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 
 Auth::routes();
@@ -58,13 +58,13 @@ Route::get('/logout', function () {
     return redirect('login');
 });
 
-<<<<<<< HEAD
-Route::controller(SocialiteController::class)->group(function(){
-    Route::get('auth/google', 'googlelogin')->name('auth.google');
-    Route::get('auth/google-callback','googleAuthentication')->name('auth.google-callback');
-});
-=======
-Route::middleware([RoleBasedAccess::class . ':staff'])->get('/staff/dashboard', [StaffPustakaController::class, 'index'])->name('staff.dashboard');
-Route::middleware([RoleBasedAccess::class . ':user'])->get('/', [ListBukuController::class, 'show'])->name('listBuku');
-Route::middleware([RoleBasedAccess::class . ':editor'])->get('/editor/dashboard', [EditorController::class, 'index'])->name('editor.dashboard');
->>>>>>> 14df0e0278260e9dd92c2cb7c6b5c22123dfb299
+// /*<<<<<<< HEAD*/
+// Route::controller(SocialiteController::class)->group(function(){
+//     Route::get('auth/google', 'googlelogin')->name('auth.google');
+//     Route::get('auth/google-callback','googleAuthentication')->name('auth.google-callback');
+// });
+// /*=======*/
+// Route::middleware([RoleBasedAccess::class . ':staff'])->get('/staff/dashboard', [StaffPustakaController::class, 'index'])->name('staff.dashboard');
+// Route::middleware([RoleBasedAccess::class . ':user'])->get('/', [ListBukuController::class, 'show'])->name('listBuku');
+// Route::middleware([RoleBasedAccess::class . ':editor'])->get('/editor/dashboard', [EditorController::class, 'index'])->name('editor.dashboard');
+// /*>>>>>>> 14df0e0278260e9dd92c2cb7c6b5c22123dfb299*/

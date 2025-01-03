@@ -31,6 +31,7 @@
                 margin: 25px;
                 padding: 20px;
                 width: 100%;
+                min-height: 400px;
                 max-width: 500px;
                 background-color: white;
                 border-radius: 8px;
@@ -49,6 +50,7 @@
             }
 
             .card img {
+                min-height: 100px;
                 max-width: 150px;
                 height: auto;
                 border-radius: 5px;
@@ -125,7 +127,7 @@
                                     <td>Penulis: {{ $listbuku->nama_penulis }}</td>
                                 </tr>
                                 <tr>
-                                    <td>Penerbit: {{ $listbuku->nama_Penerbit }}</td>
+                                    <td>Penerbit: {{ $listbuku->nama_penerbit }}</td>
                                 </tr>
                                 <tr>
                                     <td>Release:{{ $listbuku->tgl_rilis }}</td>
