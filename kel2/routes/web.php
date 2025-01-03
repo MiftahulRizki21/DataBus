@@ -1,9 +1,12 @@
 <?php
 
 use App\Http\Controllers\AnggotaController;
+use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\DetailBukuController;
 use App\Http\Controllers\ListBukuController;
+use App\Http\Controllers\SocialiteController;
 use App\Models\ListBuku;
+use Illuminate\Auth\Events\Login;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Middleware\RoleBasedAccess;
@@ -55,6 +58,13 @@ Route::get('/logout', function () {
     return redirect('login');
 });
 
+<<<<<<< HEAD
+Route::controller(SocialiteController::class)->group(function(){
+    Route::get('auth/google', 'googlelogin')->name('auth.google');
+    Route::get('auth/google-callback','googleAuthentication')->name('auth.google-callback');
+});
+=======
 Route::middleware([RoleBasedAccess::class . ':staff'])->get('/staff/dashboard', [StaffPustakaController::class, 'index'])->name('staff.dashboard');
 Route::middleware([RoleBasedAccess::class . ':user'])->get('/', [ListBukuController::class, 'show'])->name('listBuku');
 Route::middleware([RoleBasedAccess::class . ':editor'])->get('/editor/dashboard', [EditorController::class, 'index'])->name('editor.dashboard');
+>>>>>>> 14df0e0278260e9dd92c2cb7c6b5c22123dfb299
