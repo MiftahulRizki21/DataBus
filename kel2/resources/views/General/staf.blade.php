@@ -120,7 +120,7 @@
 
     .container-fluid {
         position: relative;
-        top:140px;
+        top:200px;
     }
 
     /* Gaya untuk judul h1 */
@@ -189,7 +189,8 @@
                     <th>No</th>
                     <th>Nama</th>
                     <th>Detail Buku</th>
-                    <th>Alasan</th> <!-- Kolom Alasan -->
+                    <th>NO ISBN</th> <!-- Kolom Alasan -->
+                    <th>Alasan</th>
                     <th>Aksi</th>
                 </tr>
             </thead>
@@ -199,10 +200,13 @@
                     <td>Contoh Buku 1</td>
                     <td><button class="btn btn-primary">Detail Buku</button></td>
                     <td>
-                        <p>...</p>
+                        <input type="text" id="noisbn" name="noisbn">
                     </td>
                     <td>
-                        <button class="btn btn-success">Terima</button>
+                        <textarea placeholder="Masukkan alasan..." rows="3"></textarea>
+                    </td>
+                    <td>
+                        <button class="btn btn-success">Upload</button>
                         <button class="btn btn-danger">Tolak</button>
                     </td>
                 </tr>
@@ -211,10 +215,13 @@
                     <td>Contoh Buku 2</td>
                     <td><button class="btn btn-primary">Detail Buku</button></td>
                     <td>
-                        <p>...</p>
+                        <input type="text" id="noisbn" name="noisbn">
                     </td>
                     <td>
-                        <button class="btn btn-success">Terima</button>
+                        <textarea placeholder="Masukkan alasan..." rows="3"></textarea>
+                    </td>
+                    <td>
+                        <button class="btn btn-success">Upload</button>
                         <button class="btn btn-danger">Tolak</button>
                     </td>
                 </tr>

@@ -1,6 +1,7 @@
 @extends('layouts.app')
 @section('content')
 
+
 <style>
     .table-container {
         margin: 20px auto;
@@ -175,6 +176,24 @@
         text-align: left;
     }
 
+    .download{
+        background-color: DodgerBlue;
+        border: none;
+        color: white;
+        padding: 8px 12px;
+        font-size: 14px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: transform 0.3s;
+
+        }
+
+        /* Darker background on mouse-over */
+        .download:hover {
+        background-color: RoyalBlue;
+        }
+
 </style>
 
 <!-- Judul Halaman Editor -->
@@ -188,6 +207,8 @@
                 <tr>
                     <th>No</th>
                     <th>Nama</th>
+                    <th>File Buku</th>
+                    <th>File Edit Buku</th>
                     <th>Detail Buku</th>
                     <th>Alasan</th> <!-- Kolom Alasan -->
                     <th>Aksi</th>
@@ -197,6 +218,12 @@
                 <tr>
                     <td>1</td>
                     <td>Contoh Buku 1</td>
+                    <td><button class="download"><i class="fa fa-download"></i> Download</button></td>
+                    <td>
+                        <div class="form-group">
+                            <input type="file" name="file_edit" id="file_edit" class="form-input" required>
+                        </div>
+                    </td>
                     <td><button class="btn btn-primary">Detail Buku</button></td>
                     <td>
                         <textarea placeholder="Masukkan alasan..." rows="3"></textarea>
@@ -207,8 +234,14 @@
                     </td>
                 </tr>
                 <tr>
-                    <td>2</td>
-                    <td>Contoh Buku 2</td>
+                    <td>1</td>
+                    <td>Contoh Buku 1</td>
+                    <td><button class="download"><i class="fa fa-download"></i> Download</button></td>
+                    <td>
+                        <div class="form-group">
+                            <input type="file" name="file_edit" id="file_edit" class="form-input" required>
+                        </div>
+                    </td>
                     <td><button class="btn btn-primary">Detail Buku</button></td>
                     <td>
                         <textarea placeholder="Masukkan alasan..." rows="3"></textarea>

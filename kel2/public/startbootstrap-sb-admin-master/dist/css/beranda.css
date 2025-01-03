@@ -170,14 +170,7 @@
     }
 
     a.navlink{
-        margin: 0 20 0;
         padding: 20px;
-    }
-    a.navlink:hover{
-        margin: 0 20 0;
-        padding: 20px;
-        color: #f0f0f0;
-        
     }
 
     .fade-in {
@@ -275,6 +268,7 @@
 
     .footer{
         position: relative;
+        width: 130%;
         top: 600px;
     }
 

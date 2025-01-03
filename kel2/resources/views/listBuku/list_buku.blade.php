@@ -95,7 +95,7 @@
 
             .container{
                 position: relative;
-                top: 800px;
+                top: 950px;
             }
 
             /* Fade-in and Slide-up animation */
@@ -109,7 +109,31 @@
                     transform: translateY(0);
                 }
             }
+            .pagination {
+                display: flex;
+                justify-content: center;
+                padding: 20px 0;
+            }
 
+            .pagination .page-item.active .page-link {
+                background-color: #002855;
+                border-color: #002855;
+                color: white;
+            }
+
+            .pagination .page-link {
+                color: #002855;
+                background-color: white;
+                border: 1px solid #ddd;
+                padding: 8px 12px;
+                margin: 0 5px;
+                border-radius: 4px;
+            }
+
+            .pagination .page-link:hover {
+                background-color: #f0f8ff;
+                border-color: #ddd;
+            }
         </style>
 
         <div class="container" >
@@ -139,8 +163,36 @@
                             <a href="/detail_buku/{{ $listbuku->id }}">Detail</a>
                         </div>
                     </div>
+
                 </div>
                 @endforeach
+
+                <!-- Pagination -->
+                    <div class="pagination" >
+                        <ul class="pagination">
+                            <li class="page-item">
+                                <a class="page-link" href="#" aria-label="Previous">
+                                    <span aria-hidden="true">&laquo;</span>
+                                </a>
+                            </li>
+                            <li class="page-item active">
+                                <a class="page-link" href="#">1</a>
+                            </li>
+                            <li class="page-item">
+                                <a class="page-link" href="#">2</a>
+                            </li>
+                            <li class="page-item">
+                                <a class="page-link" href="#">3</a>
+                            </li>
+                            <li class="page-item">
+                                <a class="page-link" href="#" aria-label="Next">
+                                    <span aria-hidden="true">&raquo;</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+
+
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
     </body>
 

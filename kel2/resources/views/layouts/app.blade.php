@@ -50,13 +50,13 @@
             <!-- Navbar Right -->
             <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4" style="position: absolute; right: 0;">
                 <div class="container-navlink">
-                    <p><a href="#" class="navlink">Beranda</a></p>
+                    <p><a href="/beranda" class="navlink">Beranda</a></p>
                 </div>
                 <div class="container-navlink">
-                    <p><a href="#" class="navlink">List Buku</a></p>
+                    <p><a href="/listPengunjung" class="navlink">List Buku</a></p>
                 </div>
                 <div class="container-navlink">
-                    <p><a href="#" class="navlink">Login</a></p>
+                    <p><a href="/login" class="navlink">Login</a></p>
                 </div>
                 
             </ul>

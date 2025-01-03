@@ -126,6 +126,11 @@
         <input type="file" name="foto" id="foto" class="form-input" required>
     </div>
 
+    <div class="form-group">
+        <label for="foto">File Buku</label>
+        <input type="file" name="file" id="file" class="form-input" required>
+    </div>
+
     <button type="submit" class="btn-submit">Submit</button>
 </form>
 
