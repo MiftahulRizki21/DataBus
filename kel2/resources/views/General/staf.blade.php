@@ -198,7 +198,7 @@
 <h1>Halaman Staf</h1>
 
 <div class="container-fluid">
-    <h5>Table Pengajuan</h5>
+    <h5 class="text-center text-gray-500 font-semibold text-lg mb-4">Table Pengajuan</h5>
     <div class="table-container">
         <table class="table">
             <thead>
@@ -273,7 +273,7 @@
     </div>
 
     <!-- Tabel History -->
-    <h5>Table History</h5>
+    <h5 class="text-center text-gray-500 font-semibold text-lg mb-4">Table History</h5>
     <center><div class="history-table-container">
         <table class="history-table">
             <thead>

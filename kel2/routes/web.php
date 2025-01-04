@@ -15,6 +15,8 @@ use App\Http\Controllers\EditorController;
 // use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\PengajuanController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ProfileController;
 
 Auth::routes();
 
@@ -26,8 +28,6 @@ Auth::routes();
 
 Route::get('/beranda', [ListBukuController::class, 'index'])->name('detailBuku_show');
 
-Route::get('/list', [ListBukuController::class, 'indexList'])->name('listBuku.detailBuku_show');
-Route::get('/listPengunjung', [ListBukuController::class, 'indexListPengunjung'])->name('listBuku.detailBuku_show');
 
 // Route::get('/detail_buku/{id}', [ListBukuController::class, 'show'])->name('detailBuku_show');
 
@@ -41,13 +41,6 @@ Route::get('/listPengunjung', [ListBukuController::class, 'indexListPengunjung']
 // });
 
 
-Route::get('/profile', function () {
-    return view('profile.profile');
-});
-
-
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
 Route::get('/register', [RegisterController::class, 'showRegistrationForm'])->name('register');
@@ -59,6 +52,9 @@ Route::get('/logout', function () {
     return redirect('login');
 });
 
+
+Route::get('/listPengunjung', [ListBukuController::class, 'indexListPengunjung'])->name('listBukuPengunjung');
+
 // /*<<<<<<< HEAD*/
 // Route::controller(SocialiteController::class)->group(function(){
 //     Route::get('auth/google', 'googlelogin')->name('auth.google');
@@ -69,16 +65,21 @@ Route::get('/logout', function () {
 // Rute untuk User
 
 Route::middleware([RoleBasedAccess::class . ':user'])->group(function () {
-    Route::get('/', [ListBukuController::class, 'show'])->name('listBuku');
+    
     Route::get('/buku/{id}', [ListBukuController::class, 'detail'])->name('buku.detail');
     Route::get('/pengajuan', [PengajuanController::class, 'create'])->name('pengajuan.create');
     Route::post('/pengajuan/tambah', [PengajuanController::class, 'store'])->name('pengajuan.store');
+    Route::get('/profile/user', [ProfileController::class, 'user'])->name('profile.profile');
+    Route::get('/list', [ListBukuController::class, 'indexList'])->name('listBuku');
+    
+    
+    
 });
 
 // Rute untuk Staff
 Route::middleware([RoleBasedAccess::class . ':staff'])->group(function () {
     Route::get('/staff/dashboard', [StaffPustakaController::class, 'index'])->name('staff.dashboard');
-    Route::get('/', [ListBukuController::class, 'show'])->name('listBuku');
+    // Route::get('/', [ListBukuController::class, 'show'])->name('listBuku');
     Route::get('/buku/{id}', [ListBukuController::class, 'detail'])->name('buku.detail');
 });
 

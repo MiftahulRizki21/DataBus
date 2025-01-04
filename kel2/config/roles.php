@@ -5,11 +5,12 @@ return [
             'listBuku',
             'pengajuan.create',
             'pengajuan.store',
-            'buku.detail'
+            'buku.detail',
+            'profile.profile'
         ],
         'staff' => [
             'staff.dashboard',
-            'listBuku',
+            // 'listBuku',
             'buku.detail'
         ],
         'editor' => [

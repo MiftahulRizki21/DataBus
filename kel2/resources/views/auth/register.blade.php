@@ -74,9 +74,9 @@
                 <select name="role" required
                     class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500">
                     <option value="" disabled selected>Pilih Role</option>
-                    <option value="user" {{ old('role') == 'user' ? 'selected' : '' }}>User</option>
-                    <option value="staf" {{ old('role') == 'staf' ? 'selected' : '' }}>Staf</option>
-                    <option value="editor" {{ old('role') == 'editor' ? 'selected' : '' }}>Editor</option>
+                    <option value="user" >User</option>
+                    <option value="staff" >Staff</option>
+                    <option value="editor">Editor</option>
                 </select>
             </div>
             <div class="mb-4">

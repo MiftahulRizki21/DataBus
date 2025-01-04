@@ -17,6 +17,7 @@ class LoginController extends Controller
      * @param \App\Models\User $user
      * @return \Illuminate\Http\RedirectResponse
      */
+    
     protected function authenticated($request, $user)
 {
     // Redirect based on role after login

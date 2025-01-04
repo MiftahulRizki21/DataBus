@@ -22,8 +22,8 @@
 
     h2 {
         text-align: center;
-        color: #333;
         margin-bottom: 30px;
+        color: rgb(107 114 128 / var(--tw-text-opacity, 1));
     }
 
     .form-group {

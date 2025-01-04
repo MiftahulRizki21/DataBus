@@ -198,7 +198,6 @@
 
 <!-- Judul Halaman Editor -->
 <h1>Halaman Editor</h1>
-
 <div class="container-fluid">
     <h5>Table Pengajuan</h5>
     <div class="table-container">

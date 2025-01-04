@@ -3,8 +3,11 @@
     <div class="container-fluid fade-in">
         <div class="objek-lp fade-in">
             <h1 class="selamat">Selamat Datang</h1>
-            <button class="btn-login zoom-in">LOGIN</button>
-            <u><a href="" class="link-regis slide-in-left">Register</a></u>
+            <a href="/login">
+                <button class="btn-login zoom-in">LOGIN</button>
+            </a>
+            
+            <u><a href="/register" class="link-regis slide-in-left">Register</a></u>
         </div>
 
         <div class="isi fade-in" style="padding: 30px">

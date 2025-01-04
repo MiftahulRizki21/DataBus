@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\DetailBuku;
 use Illuminate\Http\Request;
-use App\Http\Requests\StoreDetailBukuRequest;
 use App\Http\Requests\UpdateDetailBukuRequest;
 
 class DetailBukuController extends Controller
@@ -22,7 +21,7 @@ class DetailBukuController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreDetailBukuRequest $request)
+    public function store($request)
     {
         $requestData = $request->validate([
             'judul_buku' => 'required|string|max:255',

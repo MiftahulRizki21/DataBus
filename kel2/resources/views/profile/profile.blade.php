@@ -22,7 +22,7 @@
 
     h2 {
         text-align: center;
-        color: #333;
+        color: rgb(107 114 128 / var(--tw-text-opacity, 1));
         margin-bottom: 30px;
     }
 
