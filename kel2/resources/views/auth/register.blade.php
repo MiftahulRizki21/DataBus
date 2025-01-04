@@ -8,8 +8,21 @@
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
-<body class="bg-[#191919] flex justify-center items-center h-screen">
-    <div class="bg-[#f1f0e8] w-96 rounded-lg shadow-lg p-8">
+<style>
+    .logo {
+        width: 120px;
+        position: relative;
+        top: 120px; /* Adjusted to align visually */
+    }
+</style>
+
+<body class="bg-[#f4f7fc] flex justify-center items-center h-screen overflow-auto">
+    <div class="flex flex-col items-center">
+        <!-- Logo Section -->
+        <div class="logo mb-6">
+            <img src="../startbootstrap-sb-admin-master/dist/assets/img/logoweb.png" alt="Logo" class="w-36">
+        </div>
+    <div class="bg-[#ffffff] w-96 rounded-lg shadow-lg p-8" style="margin-top: 120px;">
         <!-- Tampilkan pesan error jika ada -->
         @if ($errors->any())
         <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-4">
@@ -26,7 +39,7 @@
         <!-- Sosial Media Login -->
         <div class="flex justify-center mb-6">
             <button type="button"
-                class="w-1/2 ml-2 bg-[#493628] text-[#FFF5D7] border border-gray-300 rounded-lg px-4 py-2 flex items-center justify-center hover:bg-[#AF8F6F] transition">
+                class="w-1/2 ml-2 bg-[#ADD8E6] text-[#FFF5D7] border border-gray-300 rounded-lg px-4 py-2 flex items-center justify-center hover:bg-[#92C1D9] transition">
                 <svg class="w-5 h-5 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                     <path fill="#EA4335"
                         d="M12 10.2v3.84h5.45c-.24 1.25-.98 2.31-2.09 3.02l3.36 2.61c1.96-1.8 3.28-4.44 3.28-7.63 0-.95-.1-1.87-.27-2.76H12z" />
@@ -58,8 +71,13 @@
                     class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500">
             </div>
             <div class="mb-4">
-                <input type="text" name="role" placeholder="Role" value="{{ old('role') }}" required
+                <select name="role" required
                     class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500">
+                    <option value="" disabled selected>Pilih Role</option>
+                    <option value="user" {{ old('role') == 'user' ? 'selected' : '' }}>User</option>
+                    <option value="staf" {{ old('role') == 'staf' ? 'selected' : '' }}>Staf</option>
+                    <option value="editor" {{ old('role') == 'editor' ? 'selected' : '' }}>Editor</option>
+                </select>
             </div>
             <div class="mb-4">
                 <input type="email" name="email" placeholder="Email" value="{{ old('email') }}" required
@@ -74,7 +92,7 @@
                     class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500">
             </div>
             <button type="submit"
-                class="w-full bg-[#493628] text-white py-2 rounded-lg font-semibold hover:bg-[#AF8F6F] transition-all">
+                class="w-full bg-[#002855] text-white py-2 rounded-lg font-semibold hover:bg-[#004c99] transition-all">
                 Register
             </button>
         </form>
@@ -85,5 +103,3 @@
         </div>
     </div>
 </body>
-
-</html>

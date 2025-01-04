@@ -24,8 +24,8 @@ Auth::routes();
 //     return view('layouts.app');
 // });
 
-Route::get('/beranda', [ListBukuController::class, 'index'])->name('listBuku.detailBuku_show');
-Route::get('/user', [ListBukuController::class, 'indexUser'])->name('listBuku.detailBuku_show');
+Route::get('/beranda', [ListBukuController::class, 'index'])->name('detailBuku_show');
+
 Route::get('/list', [ListBukuController::class, 'indexList'])->name('listBuku.detailBuku_show');
 Route::get('/listPengunjung', [ListBukuController::class, 'indexListPengunjung'])->name('listBuku.detailBuku_show');
 
