@@ -70,6 +70,7 @@ Route::middleware([RoleBasedAccess::class . ':user'])->group(function () {
     Route::get('/pengajuan', [PengajuanController::class, 'create'])->name('pengajuan.create');
     Route::post('/pengajuan/tambah', [PengajuanController::class, 'store'])->name('pengajuan.store');
     Route::get('/profile/user', [ProfileController::class, 'user'])->name('profile.profile');
+    Route::put('/profile/user/edit', [ProfileController::class, 'UpdateUser'])->name('profile.edit');
     Route::get('/list', [ListBukuController::class, 'indexList'])->name('listBuku');
     
     

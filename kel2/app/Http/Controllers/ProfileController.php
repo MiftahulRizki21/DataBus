@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Models\Profile;
+use App\Http\Requests\StoreProfileRequest;
+use App\Http\Requests\UpdateProfileRequest;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Http\Request;
 
 class ProfileController extends Controller
 {
@@ -12,10 +16,8 @@ class ProfileController extends Controller
      */
     public function index()
     {
-        //
+        
     }
-
-    // Menampilkan halaman profil
     public function user()
     {
         // Ambil data pengguna yang sedang login
@@ -28,6 +30,33 @@ class ProfileController extends Controller
     /**
      * Show the form for creating a new resource.
      */
+    public function UpdateUser( $request)
+    {
+        // Validate the input
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users,email,' . Auth::id(),
+        ]);
+
+        // Get the authenticated user
+        $user = Auth::user();
+
+        // Update the user's name and email
+        $user->name = $request->name;
+        $user->email = $request->email;
+
+        // Save the changes to the users table
+        $user->save();
+
+        return redirect()->route('profile.profile')->with('success', 'Profil berhasil diperbarui');
+        
+    }
+    
+
+
+    /**
+     * Show the form for creating a new resource.
+     */
     public function create()
     {
         //
@@ -36,7 +65,7 @@ class ProfileController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreProfileRequest $request)
     {
         //
     }
@@ -44,7 +73,7 @@ class ProfileController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Profile $profile)
     {
         //
     }
@@ -52,7 +81,7 @@ class ProfileController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Profile $profile)
     {
         //
     }
@@ -60,7 +89,7 @@ class ProfileController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UpdateProfileRequest $request, Profile $profile)
     {
         //
     }
@@ -68,7 +97,7 @@ class ProfileController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Profile $profile)
     {
         //
     }

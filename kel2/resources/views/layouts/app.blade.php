@@ -17,6 +17,7 @@
         <!-- FontAwesome & jQuery -->
         <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+        
 
         <style>
             /* Tambahkan gaya untuk memastikan footer berada di bawah */
@@ -49,9 +50,6 @@
 
             <!-- Navbar Right -->
             <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4" style="position: absolute; right: 0;">
-                <div class="container-navlink">
-                    <p><a href="/beranda" class="navlink">Beranda</a></p>
-                </div>
                 <div class="container-navlink">
                     <p><a href="/listPengunjung" class="navlink">List Buku</a></p>
                 </div>

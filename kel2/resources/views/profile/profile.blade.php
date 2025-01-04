@@ -119,23 +119,24 @@
 </style>
 
 <!-- Form Profile -->
-<form action="#" method="POST" enctype="multipart/form-data" class="form-container">
-    @csrf
+    <form action="{{ route('profile.edit') }}" method="POST"enctype="multipart/form-data" class="form-container">
+        @csrf
+        @method('PUT')  <!-- Simulate PUT request for update -->
     <h2>Update Profile</h2>
     <br>
     <div class="form-group">
         <label for="name">Nama Lengkap</label>
-        <input type="text" name="name" id="name" class="form-input" placeholder="Masukkan nama lengkap" value="{{ old('name') }}" required>
+        <input type="text" name="name" id="name" class="form-input" value="{{ $user -> name}}" required>
     </div>
 
     <div class="form-group">
         <label for="email">Email</label>
-        <input type="email" name="email" id="email" class="form-input" placeholder="Masukkan email" value="{{ old('email') }}" required>
+        <input type="email" name="email" id="email" class="form-input" value="{{ $user -> email}}"  required>
     </div>
 
     <div class="form-group">
         <label for="role">Role</label>
-        <input type="text" name="role" id="role" class="form-input" value="User" readonly>
+        <input type="text" name="role" id="role" class="form-input" placeholder="{{ $user -> role}}" readonly>
     </div>
 
     <button type="submit" class="btn-submit">Perbarui Profile</button>
