@@ -7,9 +7,21 @@
     <title>Login</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
+<style>
+    .logo {
+        width: 120px;
+        position: relative;
+        top: 0px; /* Adjusted to align visually */
+    }
+</style>
 
-<body class="bg-[#191919] flex justify-center items-center h-screen">
-    <div class="bg-[#f1f0e8] w-96 rounded-lg shadow-lg p-8">
+<body class="bg-[#f4f7fc] flex justify-center items-center h-screen">
+    <div class="flex flex-col items-center">
+        <!-- Logo Section -->
+        <div class="logo mb-6">
+            <img src="../startbootstrap-sb-admin-master/dist/assets/img/logoweb.png" alt="Logo" class="w-36">
+        </div>
+    <div class="bg-[#ffffff] w-96 rounded-lg shadow-lg p-8">
         <!-- Tampilkan pesan error jika ada -->
         @if ($errors->any())
             <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-4">
@@ -97,7 +109,7 @@
             </div>
 
             <button type="submit"
-                class="w-full bg-[#493628] text-white py-2 rounded-lg font-semibold hover:bg-[#AF8F6F] transition-all">
+                class="w-full bg-[#002855] text-white py-2 rounded-lg font-semibold hover:bg-[#004c99] transition-all">
                 Login
             </button>
         </form>

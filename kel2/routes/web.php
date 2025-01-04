@@ -24,8 +24,8 @@ Auth::routes();
 //     return view('layouts.app');
 // });
 
-Route::get('/beranda', [ListBukuController::class, 'index'])->name('listBuku.detailBuku_show');
-Route::get('/user', [ListBukuController::class, 'indexUser'])->name('listBuku.detailBuku_show');
+Route::get('/beranda', [ListBukuController::class, 'index'])->name('detailBuku_show');
+
 Route::get('/list', [ListBukuController::class, 'indexList'])->name('listBuku.detailBuku_show');
 Route::get('/listPengunjung', [ListBukuController::class, 'indexListPengunjung'])->name('listBuku.detailBuku_show');
 
@@ -75,6 +75,7 @@ Route::get('/logout', function () {
 
 Route::middleware([RoleBasedAccess::class . ':user'])->group(function () {
     Route::get('/', [ListBukuController::class, 'show'])->name('listBuku');
+    Route::get('/user', [ListBukuController::class, 'indexUser'])->name('listBuku.detailBuku_show');
     Route::get('/pengajuan', [PengajuanController::class, 'index'])->name('pengajuan.index');
     Route::get('/buku/{id}', [ListBukuController::class, 'detail'])->name('buku.detail');
 });
