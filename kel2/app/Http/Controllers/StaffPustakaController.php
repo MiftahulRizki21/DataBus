@@ -17,7 +17,8 @@ class StaffPustakaController extends Controller
     public function index()
     {
         $pengajuans = Pengajuan::where('status', 'Diterima')->get();
-        return view('General.staf',compact('pengajuans'));
+        $history = Pengajuan::whereIn('status', ['Diterima', 'Ditolak'])->get();
+        return view('General.staf',compact('pengajuans', 'history'));
     }
 
     public function review($id)

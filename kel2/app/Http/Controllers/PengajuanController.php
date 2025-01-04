@@ -15,7 +15,9 @@ class PengajuanController extends Controller
      */
     public function index()
     {
-        //
+        $pengajuans = Pengajuan::latest()->paginate(10);
+        $history = Pengajuan::whereIn('status', ['Revisi', 'Diterima', 'ditolak'])->get();
+        return view('General.user', compact('pengajuans', 'history'));
     }
 
     /**
@@ -72,7 +74,8 @@ class PengajuanController extends Controller
     public function indexEditor()
     {
         $pengajuans = Pengajuan::where('status', 'Tidak Diterima')->get();
-        return route('pengajuan.edit', compact('pengajuans'));
+        $history = Pengajuan::whereIn('status', ['Revisi', 'Diterima'])->get();
+        return route('pengajuan.edit', compact('pengajuans', 'history'));
     }
     /**
      * Display the specified resource.
@@ -111,7 +114,7 @@ class PengajuanController extends Controller
         }
     
         // Update alasan editor
-        $pengajuan->alasan_editor = $request->input('alasan_editor');
+        $pengajuan->Alasan_editor = $request->input('Alasan_editor');
     
         // Simpan perubahan ke database
         $pengajuan->save();

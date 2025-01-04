@@ -239,7 +239,7 @@
                         
                         <!-- Kolom alasan -->
                         <td>
-                            <textarea name="alasan" form="rejectForm{{ $data->id }}" placeholder="Masukkan alasan..." rows="3"></textarea>
+                            <textarea name="Alasan_editor" form="rejectForm{{ $data->id }}" placeholder="Masukkan alasan..." rows="3"></textarea>
                         </td>
                         
                         <!-- Tombol aksi -->
@@ -271,7 +271,7 @@
                                             <div class="modal-body">
                                                 <input type="hidden" name="status" value="Revisi">
                                                 <div class="form-group">
-                                                    <textarea name="alasan" class="form-control" placeholder="Masukkan alasan..." required></textarea>
+                                                    <textarea name="Alasan_editor" class="form-control" placeholder="Masukkan alasan..." required></textarea>
                                                 </div>
                                             </div>
                                             <div class="modal-footer">
@@ -328,21 +328,22 @@
                             <th>Tanggal</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    @foreach ($history as $data )
                         <tr>
-                            <td>1</td>
-                            <td>Contoh Buku 1</td>
-                            <td>Disetujui</td>
-                            <td>2025-01-02</td>
+                            <td>
+                                {{ $loop->iteration }}
+                            </td>
+                            <td>
+                                {{ $data->judul }}
+                            </td>
+                            <td>
+                                {{ $data->status }}
+                            </td>
+                            <td>
+                                {{ $data->updated_at }}
+                            </td>
                         </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>Contoh Buku 2</td>
-                            <td>Ditolak</td>
-                            <td>2025-01-02</td>
-                        </tr>
-                        <!-- Tambahkan baris lainnya sesuai kebutuhan -->
-                    </tbody>
+                    @endforeach
                 </table>
             </div>
         </center>

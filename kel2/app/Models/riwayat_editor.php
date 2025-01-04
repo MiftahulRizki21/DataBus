@@ -11,12 +11,17 @@ class riwayat_editor extends Model
     /** @use HasFactory<\Database\Factories\RiwayatEditorFactory> */
     use HasFactory;
 
-    public function editor(): BelongsTo
+    protected $fillable = [
+        'pengajuan_id', 'editor_id', 'status',
+    ];
+
+    public function pengajuan()
     {
-        return $this->belongsTo(User::class)->withDefault();
+        return $this->belongsTo(Pengajuan::class);
     }
-    public function pengajuan(): BelongsTo
+
+    public function editor()
     {
-        return $this->belongsTo(pengajuan::class)->withDefault();
+        return $this->belongsTo(User::class, 'editor_id');
     }
 }

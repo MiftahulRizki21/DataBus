@@ -22,7 +22,9 @@ class pengajuan extends Model
         'ISBN',
         'user_id', // Pastikan ini ada
         'editor_id',
-        'staff_id'
+        'staff_id',
+        'Alasan_editor',
+        'Alasan_staff'
     ];
 
     // public function nextStep()

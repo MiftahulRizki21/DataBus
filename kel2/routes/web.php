@@ -73,19 +73,20 @@ Route::get('/pengajuan/{id}/edit', [EditorController::class, 'edit'])->name('pen
 Route::put('/pengajuan/{id}', [EditorController::class, 'update'])->name('pengajuan.update');
 
 // Route untuk Staff
-Route::get('/pengajuan/{id}/review', [StaffPustakaController::class, 'review'])->name('pengajuan.review');
+Route::get('/pengajuan/{id}/reject', [StaffPustakaController::class, 'reject'])->name('pengajuan.reject');
 Route::put('/pengajuan/{id}/approve', [StaffPustakaController::class, 'approve'])->name('pengajuan.approve');
-// Route::middleware([RoleBasedAccess::class . ':user'])->group(function () {
+Route::middleware([RoleBasedAccess::class . ':user'])->group(function () {
     
-//     Route::get('/buku/{id}', [ListBukuController::class, 'detail'])->name('buku.detail');
-//     Route::get('/pengajuan', [PengajuanController::class, 'create'])->name('pengajuan.create');
-//     Route::get('/profile/user', [ProfileController::class, 'user'])->name('profile.profile');
-//     Route::put('/profile/user/edit', [ProfileController::class, 'UpdateUser'])->name('profile.edit');
-//     Route::get('/list', [ListBukuController::class, 'indexList'])->name('listBuku');
+    Route::get('/user/dashboard', [PengajuanController::class, 'index'])->name('user.dashboard');
+    Route::get('/buku/{id}', [ListBukuController::class, 'detail'])->name('buku.detail');
+    Route::get('/pengajuan', [PengajuanController::class, 'create'])->name('pengajuan.create');
+    Route::get('/profile/user', [ProfileController::class, 'user'])->name('profile.profile');
+    Route::put('/profile/user/edit', [ProfileController::class, 'UpdateUser'])->name('profile.edit');
+    Route::get('/list', [ListBukuController::class, 'indexList'])->name('listBuku');
     
     
     
-// });
+});
 
 // Rute untuk Staff
 Route::middleware([RoleBasedAccess::class . ':staff'])->group(function () {

@@ -17,7 +17,9 @@ class EditorController extends Controller
     public function index()
     {
         $pengajuans = Pengajuan::where('status', 'Tidak Diterima')->get();
-        return view('general.editor', compact('pengajuans'));
+        $history = Pengajuan::whereIn('status', ['Revisi', 'Diterima'])->get();
+
+        return view('general.editor', compact('pengajuans', 'history'));
     }
 
     /**
@@ -61,7 +63,7 @@ class EditorController extends Controller
         if ($request->status == 'Revisi') {
             $pengajuan->update([
                 'status' => 'Revisi',
-                'alasan' => $request->alasan,
+                'Alasan_editor' => $request->Alasan_editor,
                 'editor_id' => Auth::id(),
             ]);
         } else {

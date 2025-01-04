@@ -364,19 +364,22 @@
                         </tr>
                     </thead>
                     <tbody>
+                        @foreach ($history as $data )
                         <tr>
-                            <td>1</td>
-                            <td>Contoh Buku 1</td>
-                            <td>Disetujui</td>
-                            <td>2025-01-02</td>
+                            <td>
+                                {{ $loop->iteration }}
+                            </td>
+                            <td>
+                                {{ $data->judul }}
+                            </td>
+                            <td>
+                                {{ $data->status }}
+                            </td>
+                            <td>
+                                {{ $data->updated_at }}
+                            </td>
                         </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>Contoh Buku 2</td>
-                            <td>Ditolak</td>
-                            <td>2025-01-02</td>
-                        </tr>
-                        <!-- Tambahkan baris lainnya sesuai kebutuhan -->
+                    @endforeach
                     </tbody>
                 </table>
             </div>
