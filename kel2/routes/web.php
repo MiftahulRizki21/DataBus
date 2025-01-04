@@ -64,18 +64,28 @@ Route::get('/listPengunjung', [ListBukuController::class, 'indexListPengunjung']
 // /*>>>>>>> 14df0e0278260e9dd92c2cb7c6b5c22123dfb299*/
 // Rute untuk User
 
-Route::middleware([RoleBasedAccess::class . ':user'])->group(function () {
+// Route untuk User
+Route::get('/pengajuan', [PengajuanController::class, 'create'])->name('pengajuan.create');
+Route::post('/pengajuan/store', [PengajuanController::class, 'store'])->name('pengajuan.store');
+
+// Route untuk Editor
+Route::get('/pengajuan/{id}/edit', [EditorController::class, 'edit'])->name('pengajuan.edit');
+Route::put('/pengajuan/{id}', [EditorController::class, 'update'])->name('pengajuan.update');
+
+// Route untuk Staff
+Route::get('/pengajuan/{id}/review', [StaffPustakaController::class, 'review'])->name('pengajuan.review');
+Route::put('/pengajuan/{id}/approve', [StaffPustakaController::class, 'approve'])->name('pengajuan.approve');
+// Route::middleware([RoleBasedAccess::class . ':user'])->group(function () {
     
-    Route::get('/buku/{id}', [ListBukuController::class, 'detail'])->name('buku.detail');
-    Route::get('/pengajuan', [PengajuanController::class, 'create'])->name('pengajuan.create');
-    Route::post('/pengajuan/tambah', [PengajuanController::class, 'store'])->name('pengajuan.store');
-    Route::get('/profile/user', [ProfileController::class, 'user'])->name('profile.profile');
-    Route::put('/profile/user/edit', [ProfileController::class, 'UpdateUser'])->name('profile.edit');
-    Route::get('/list', [ListBukuController::class, 'indexList'])->name('listBuku');
+//     Route::get('/buku/{id}', [ListBukuController::class, 'detail'])->name('buku.detail');
+//     Route::get('/pengajuan', [PengajuanController::class, 'create'])->name('pengajuan.create');
+//     Route::get('/profile/user', [ProfileController::class, 'user'])->name('profile.profile');
+//     Route::put('/profile/user/edit', [ProfileController::class, 'UpdateUser'])->name('profile.edit');
+//     Route::get('/list', [ListBukuController::class, 'indexList'])->name('listBuku');
     
     
     
-});
+// });
 
 // Rute untuk Staff
 Route::middleware([RoleBasedAccess::class . ':staff'])->group(function () {
