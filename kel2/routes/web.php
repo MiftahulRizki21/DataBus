@@ -78,7 +78,7 @@ Route::middleware([RoleBasedAccess::class . ':user'])->group(function () {
 // Rute untuk Staff
 Route::middleware([RoleBasedAccess::class . ':staff'])->group(function () {
     Route::get('/staff/dashboard', [StaffPustakaController::class, 'index'])->name('staff.dashboard');
-    Route::get('/', [ListBukuController::class, 'show'])->name('listBuku');
+    // Route::get('/', [ListBukuController::class, 'show'])->name('listBuku');
     Route::get('/buku/{id}', [ListBukuController::class, 'detail'])->name('buku.detail');
 });
 

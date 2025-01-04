@@ -22,7 +22,7 @@ class DetailBukuController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreDetailBukuRequest $request)
+    public function store( $request)
     {
         $requestData = $request->validate([
             'judul_buku' => 'required|string|max:255',
