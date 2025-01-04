@@ -37,9 +37,10 @@ class LoginController extends Controller
         $this->middleware('guest')->except('logout');
         $this->middleware('auth')->only('logout');
     }
-<<<<<<< HEAD
-}
-=======
-}
+// <<<<<<< HEAD
+// }
+// =======
+// }
 
->>>>>>> 14df0e0278260e9dd92c2cb7c6b5c22123dfb299
+// >>>>>>> 14df0e0278260e9dd92c2cb7c6b5c22123dfb299
+}

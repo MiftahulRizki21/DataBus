@@ -11,7 +11,7 @@ class Updatestaff_pustakaRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**

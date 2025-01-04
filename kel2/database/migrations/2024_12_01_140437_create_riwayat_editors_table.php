@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('riwayat_editors', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('id_editor');
-            $table->foreignId('id_naskah');
+            $table->foreignId('id_editor')->constrained()->onDelete('cascade');
+            $table->foreignId('id_pengajuan')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
     }

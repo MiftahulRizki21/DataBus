@@ -13,7 +13,7 @@ class EditorController extends Controller
      */
     public function index()
     {
-        //
+        return view('general.editor');
     }
 
     /**
