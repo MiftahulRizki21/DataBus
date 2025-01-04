@@ -32,6 +32,12 @@ class ListBukuController extends Controller
         return view('ListBuku.list_buku', compact('listBuku'));
     }
 
+    public function indexListPengunjung()
+    {
+        $listBuku = ListBuku::inRandomOrder()->paginate(8);        
+        return view('ListBuku.list_bukuPengunjung', compact('listBuku'));
+    }
+
     /**
      * Show the form for creating a new resource.
      */
