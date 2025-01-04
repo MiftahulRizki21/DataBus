@@ -41,6 +41,10 @@ Route::get('/listPengunjung', [ListBukuController::class, 'indexListPengunjung']
 // });
 
 
+Route::get('/profile', function () {
+    return view('profile.profile');
+});
+
 
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

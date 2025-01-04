@@ -15,7 +15,7 @@ class ListBukuController extends Controller
      */
     public function index()
     {
-        $listBuku = ListBuku::inRandomOrder()->take(9)->get();        
+        $listBuku = ListBuku::inRandomOrder()->paginate(3);      
         return view('general.beranda', compact('listBuku'));
     }
 

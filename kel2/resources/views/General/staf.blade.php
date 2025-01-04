@@ -3,12 +3,12 @@
 
 <style>
     .table-container {
-        margin: 20px auto;
-        max-width: 90%;
-        border-radius: 10px;
-        overflow: hidden;
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-        animation: fadeIn 1s ease-in-out;
+    margin: 20px auto;
+    max-width: 90%;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    animation: fadeIn 1s ease-in-out;
     }
 
     .table {
@@ -120,7 +120,7 @@
 
     .container-fluid {
         position: relative;
-        top:200px;
+        top: 140px;
     }
 
     /* Gaya untuk judul h1 */
@@ -134,7 +134,7 @@
         border-radius: 8px;
         box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
         text-transform: uppercase; /* Huruf kapital semua untuk efek profesional */
-        margin-top: 200px;
+        margin-top: 290px;
     }
 
     h5 {
@@ -173,6 +173,23 @@
     .history-table tbody td {
         padding: 12px 15px;
         text-align: left;
+    }
+
+    .download {
+        background-color: DodgerBlue;
+        border: none;
+        color: white;
+        padding: 8px 12px;
+        font-size: 14px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: transform 0.3s;
+    }
+
+    /* Darker background on mouse-over */
+    .download:hover {
+        background-color: RoyalBlue;
     }
 
 </style>
