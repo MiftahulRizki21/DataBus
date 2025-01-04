@@ -20,8 +20,9 @@ return new class extends Migration
             $table->date('tgl_rilis');
             $table->string('halaman');
             $table->string('foto');
+            $table->string('file');
             $table->enum('status', (['Tidak Diterima', 'Diterima', 'Revisi', 'Ditolak']));
-            $table->string('ISBN');
+            $table->string('ISBN')->nullable();
             $table->timestamps();
         });
     }

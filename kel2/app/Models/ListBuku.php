@@ -9,5 +9,17 @@ class ListBuku extends Model
 {
     /** @use HasFactory<\Database\Factories\ListBukuFactory> */
     use HasFactory;
-    protected $guarded = [];
+    protected $fillable = [
+        'judul_buku',
+        'sipnosis',
+        'nama_penulis',
+        'nama_penerbit',
+        'tgl_rilis',
+        'halaman',
+        'foto',
+        'file',
+        'status',
+        'ISBN',
+    ];
+    
 }

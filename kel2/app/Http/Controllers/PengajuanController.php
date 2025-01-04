@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\pengajuan;
 use App\Http\Requests\StorepengajuanRequest;
 use App\Http\Requests\UpdatepengajuanRequest;
+use Illuminate\Support\Facades\Log;
 
 class PengajuanController extends Controller
 {
@@ -21,7 +22,7 @@ class PengajuanController extends Controller
      */
     public function create()
     {
-        //
+        return view('listBuku.create');
     }
 
     /**
@@ -29,7 +30,32 @@ class PengajuanController extends Controller
      */
     public function store(StorepengajuanRequest $request)
     {
-        //
+        Log::info($request->all());
+        $requestData = $request->validate([
+            'judul_buku' => 'required',
+            'sipnosis' => 'required',
+            'nama_penulis' => 'required|string',
+            'nama_penerbit' => 'required',
+            'tgl_rilis' => 'nullable|date',
+            'halaman' => 'required|integer',
+            'foto' => 'required|image|mimes:jpeg,png,jpg|max:5000',
+            'file' => 'required|file|mimes:pdf|max:5000',
+            'status'=> 'required',
+            'ISBN'=> 'nullable'
+        ]);
+
+        $listBuku = new \App\Models\pengajuan;
+        $listBuku->fill($requestData);
+        $listBuku->foto = $request->file('foto')->store('cover');
+        $listBuku->file = $request->file('file')->store('uploads', 'public');
+
+
+        $listBuku->save();
+
+        // Flash message
+        session()->flash('success', 'Buku berhasil ditambahkan!');
+
+        return back();
     }
 
     /**

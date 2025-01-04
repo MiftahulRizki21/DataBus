@@ -9,7 +9,18 @@ class pengajuan extends Model
 {
     /** @use HasFactory<\Database\Factories\PengajuanFactory> */
     use HasFactory;
-    protected $guarded = [];
+    protected $fillable = [
+        'judul_buku',
+        'sipnosis',
+        'nama_penulis',
+        'nama_penerbit',
+        'tgl_rilis',
+        'halaman',
+        'foto',
+        'file',
+        'status',
+        'ISBN',
+    ];
 
     public function nextStep()
     {

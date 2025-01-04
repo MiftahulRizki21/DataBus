@@ -3,7 +3,8 @@ return [
     'roles' => [
         'user' => [
             'listBuku',
-            'pengajuan.index',
+            'pengajuan.create',
+            'pengajuan.store',
             'buku.detail'
         ],
         'staff' => [
