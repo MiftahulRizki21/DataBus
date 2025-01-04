@@ -34,7 +34,7 @@
         @endif
         <!-- Sign in with social media -->
         <h2 class="text-center text-gray-500 font-semibold text-lg mb-4">Masuk dengan</h2>
-        <div class="flex justify-center mb-6">
+        {{-- <div class="flex justify-center mb-6">
             <a href="{{ route('auth.google') }}" class="w-1/2">
                 <button type="button"
                     class="w-full bg-[#493628] text-[#FFF5D7] border border-gray-300 rounded-lg px-4 py-2 flex items-center justify-center hover:bg-[#AF8F6F] transition">
@@ -52,7 +52,7 @@
                     Google
                 </button>
             </a>
-        </div>
+        </div> --}}
 
         <!-- Divider -->
         <div class="flex items-center my-6">

@@ -13,10 +13,10 @@ class riwayat_editor extends Model
 
     public function editor(): BelongsTo
     {
-        return $this->belongsTo(editor::class)->withDefault();
+        return $this->belongsTo(User::class)->withDefault();
     }
-    public function naskah(): BelongsTo
+    public function pengajuan(): BelongsTo
     {
-        return $this->belongsTo(naskah::class)->withDefault();
+        return $this->belongsTo(pengajuan::class)->withDefault();
     }
 }

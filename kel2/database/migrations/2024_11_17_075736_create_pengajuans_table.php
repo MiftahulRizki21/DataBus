@@ -13,6 +13,15 @@ return new class extends Migration
     {
         Schema::create('pengajuans', function (Blueprint $table) {
             $table->id();
+            $table->string('judul_buku');
+            $table->string('sipnosis');
+            $table->string('nama_penulis');
+            $table->string('nama_penerbit');
+            $table->date('tgl_rilis');
+            $table->string('halaman');
+            $table->string('foto');
+            $table->enum('status', (['Tidak Diterima', 'Diterima', 'Revisi', 'Ditolak']));
+            $table->string('ISBN');
             $table->timestamps();
         });
     }
