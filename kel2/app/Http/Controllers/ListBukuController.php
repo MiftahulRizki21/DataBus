@@ -6,18 +6,37 @@ use App\Models\ListBuku;
 use App\Http\Requests\StoreListBukuRequest;
 use App\Http\Requests\UpdateListBukuRequest;
 use App\Support\Facedes\Storage;
-
+use Illuminate\Http\Request;
 class ListBukuController extends Controller
 {
 
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $listBuku = ListBuku::inRandomOrder()->paginate(3);      
+        // Ambil data buku secara acak dan paginate
+        $listBuku = ListBuku::inRandomOrder()->paginate(3);
+    
+        // Pastikan data berhasil diambil
+        if ($listBuku->isEmpty()) {
+            return response()->json(['message' => 'Tidak ada data buku'], 404);
+        }
+    
+        // Jika permintaan berasal dari AJAX, kirimkan konten dalam bentuk JSON
+        if ($request->ajax()) {
+            return response()->json([
+                'html' => view('general.beranda', compact('listBuku'))->render(),
+                'next_page' => $listBuku->nextPageUrl(),
+                'previous_page' => $listBuku->previousPageUrl(),
+            ]);
+        }
+    
+        // Jika bukan permintaan AJAX, tampilkan view biasa
         return view('general.beranda', compact('listBuku'));
     }
+    
+    
 
     public function indexUser()
     {

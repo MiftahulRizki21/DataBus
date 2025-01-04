@@ -23,6 +23,8 @@ return new class extends Migration
             $table->string('file');
             $table->enum('status', (['Tidak Diterima', 'Diterima', 'Revisi', 'Ditolak']));
             $table->string('ISBN')->nullable();
+            $table->string('Alasan_editor')->nullable();
+            $table->string('Alasan_staff')->nullable();
             $table->timestamps();
         });
     }

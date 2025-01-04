@@ -77,7 +77,34 @@ class PengajuanController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdatepengajuanRequest $request, pengajuan $pengajuan)
+    public function updateEditor(UpdatepengajuanRequest $request, pengajuan $pengajuan)
+    {
+        // Validasi file yang diupload jika ada
+        $validated = $request->validated();
+    
+        // Cek apakah ada file yang diupload
+        if ($request->hasFile('file')) {
+            // Hapus file lama jika ada
+            if ($pengajuan->file && file_exists(storage_path('app/public/' . $pengajuan->file))) {
+                unlink(storage_path('app/public/' . $pengajuan->file));
+            }
+    
+            // Simpan file baru dan ambil path-nya
+            $path = $request->file('file')->store('uploads/pengajuan', 'public');
+            $pengajuan->file = $path; // Update path file di database
+        }
+    
+        // Update alasan editor
+        $pengajuan->alasan_editor = $request->input('alasan_editor');
+    
+        // Simpan perubahan ke database
+        $pengajuan->save();
+    
+        // Redirect atau return response sesuai kebutuhan
+        return redirect()->route('pengajuan.index')->with('success', 'Pengajuan berhasil diperbarui');
+    }
+    
+    public function updateStaff(UpdatepengajuanRequest $request, pengajuan $pengajuan)
     {
         //
     }

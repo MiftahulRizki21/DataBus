@@ -40,7 +40,7 @@
                                     @foreach ($listBuku as $listbuku)
                                         <td>
                                             <div class="rekom fade-in">
-                                                <a href="{{ route('detailBuku_show', $listbuku->id) }}" style="width: 100%; height: 100%;">
+                                                <a href="{{ route('listBuku.detailBuku_show', $listbuku->id) }}" style="width: 100%; height: 100%;">
                                                     <img src="{{ Storage::url($listbuku->foto) }}"
                                                          alt="{{ $listbuku->judul_buku }}"
                                                          style="width: 100%; height: 100%;">
@@ -113,7 +113,7 @@
             }
     
             // Simpan posisi scroll sebelum berpindah halaman
-            document.querySelectorAll('.pagination a').forEach(link => {
+            document.querySelectorAll('.container-rekom a').forEach(link => {
                 link.addEventListener('click', function (e) {
                     e.preventDefault(); // Mencegah reload langsung
                     const currentScrollPos = window.scrollY;
