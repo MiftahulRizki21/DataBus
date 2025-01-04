@@ -87,7 +87,7 @@
     }
 </style>
 
-<form action="{{ route('listBuku.store') }}" method="POST" enctype="multipart/form-data" class="form-container">
+<form action="{{ route('pengajuan.store') }}" method="POST" enctype="multipart/form-data" class="form-container">
     @csrf
     <h2>Form Pengajuan Buku</h2>
     <br>
@@ -130,6 +130,9 @@
         <label for="foto">File Buku</label>
         <input type="file" name="file" id="file" class="form-input" required>
     </div>
+    <input type="hidden" name="status" value="Tidak Diterima">
+    <input type="hidden" name="ISBN" value= '' >
+
 
     <button type="submit" class="btn-submit">Submit</button>
 </form>

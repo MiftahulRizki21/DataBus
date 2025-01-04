@@ -40,11 +40,6 @@ Route::get('/listPengunjung', [ListBukuController::class, 'indexListPengunjung']
 //     return view('General.staf');
 // });
 
-Route::get('/pengajuan', function () {
-    return view('listBuku.create');
-});
-Route::resource('listBuku', ListBukuController::class);
-Route::post('/tambah', [ListBukuController::class, 'store']);
 
 
 
@@ -71,8 +66,9 @@ Route::get('/logout', function () {
 
 Route::middleware([RoleBasedAccess::class . ':user'])->group(function () {
     Route::get('/', [ListBukuController::class, 'show'])->name('listBuku');
-    Route::get('/pengajuan', [PengajuanController::class, 'index'])->name('pengajuan.index');
     Route::get('/buku/{id}', [ListBukuController::class, 'detail'])->name('buku.detail');
+    Route::get('/pengajuan', [PengajuanController::class, 'create'])->name('pengajuan.create');
+    Route::post('/pengajuan/tambah', [PengajuanController::class, 'store'])->name('pengajuan.store');
 });
 
 // Rute untuk Staff
