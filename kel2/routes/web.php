@@ -45,6 +45,10 @@ Route::get('/pengajuan', function () {
 Route::resource('listBuku', ListBukuController::class);
 Route::post('/tambah', [ListBukuController::class, 'store']);
 
+Route::get('/profile', function () {
+    return view('profile.profile');
+});
+
 
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

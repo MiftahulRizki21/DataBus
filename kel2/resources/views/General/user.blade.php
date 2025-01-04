@@ -20,31 +20,49 @@
                     <center>
                         <table class="rekom">
                             <tr>
-                                <td><a href="#" class="previous round fade-in">
-                                        <h2>&#8249;</h2>
-                                    </a></td>
-                                    @foreach ($listBuku as $listbuku)
-                                    <td>
-                                        <div class="rekom fade-in">
-                                            <a href="{{ route('detailBuku_show', $listbuku->id) }}" style="width: 100%; height: 100%;">
-                                                <img src="{{ Storage::url($listbuku->foto) }}"
-                                                     alt="{{ $listbuku->judul_buku }}"
-                                                     style="width: 100%; height: 100%;">
+                                <tr>
+                                    <!-- Tombol Previous -->
+                                    @if ($listBuku->onFirstPage())
+                                        <td><span class="previous round fade-in disabled"><h2>&#8249;</h2></span></td>
+                                    @else
+                                        <td>
+                                            <a href="{{ $listBuku->previousPageUrl() }}" class="previous round fade-in">
+                                                <h2>&#8249;</h2>
                                             </a>
-                                        </div>
-                                    </td>
-                                @endforeach
+                                        </td>
+                                    @endif
                                 
-
-                                <td><a href="#" class="next round fade-in">
-                                        <h2>&#8250;</h2>
-                                    </a></td>
+                                    <!-- Buku -->
+                                    @foreach ($listBuku as $listbuku)
+                                        <td>
+                                            <div class="rekom fade-in">
+                                                <a href="{{ route('detailBuku_show', $listbuku->id) }}" style="width: 100%; height: 100%;">
+                                                    <img src="{{ Storage::url($listbuku->foto) }}"
+                                                         alt="{{ $listbuku->judul_buku }}"
+                                                         style="width: 100%; height: 100%;">
+                                                </a>
+                                            </div>
+                                        </td>
+                                    @endforeach
+                                
+                                    <!-- Tombol Next -->
+                                    @if ($listBuku->hasMorePages())
+                                        <td>
+                                            <a href="{{ $listBuku->nextPageUrl() }}" class="next round fade-in">
+                                                <h2>&#8250;</h2>
+                                            </a>
+                                        </td>
+                                    @else
+                                        <td><span class="next round fade-in disabled"><h2>&#8250;</h2></span></td>
+                                    @endif
+                                </tr>                                
                             </tr>
                         </table>
                     </center>
                 </div>
-            </div>
 
+            </div>
+            
             <div class="contact fade-in" style="margin-top: 70px">
                 <h2>Kontak Kami</h2>
                 <center>
@@ -79,25 +97,42 @@
     </div>
 
     <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            // Add fade-in effect for elements already in view
+        document.addEventListener("DOMContentLoaded", function () {
             const fadeElements = document.querySelectorAll('.fade-in');
-
+    
+            // Mendapatkan posisi scroll dari URL hash
+            if (window.location.hash && window.location.hash.includes("scrollPos")) {
+                const scrollPosition = parseInt(window.location.hash.replace("#scrollPos=", ""));
+                if (!isNaN(scrollPosition)) {
+                    window.scrollTo({ top: scrollPosition, behavior: 'smooth' });
+                }
+            }
+    
+            // Simpan posisi scroll sebelum berpindah halaman
+            document.querySelectorAll('.pagination a').forEach(link => {
+                link.addEventListener('click', function (e) {
+                    e.preventDefault(); // Mencegah reload langsung
+                    const currentScrollPos = window.scrollY;
+                    const url = new URL(link.href);
+                    url.hash = `scrollPos=${currentScrollPos}`;
+                    window.location.href = url.toString(); // Navigasi ke URL baru
+                });
+            });
+    
+            // Efek animasi scroll untuk elemen dengan kelas fade-in
             function handleScroll() {
                 fadeElements.forEach((el) => {
                     const rect = el.getBoundingClientRect();
                     const isVisible = rect.top <= window.innerHeight && rect.bottom >= 0;
-
-                    // When the element is in view, add the "show" class
+    
                     if (isVisible) {
                         el.classList.add('show');
                     }
                 });
             }
-
-            // Apply fade-in when the page is loaded and on scroll
+    
             handleScroll();
             window.addEventListener("scroll", handleScroll);
         });
-    </script>
+    </script>    
 @endsection
