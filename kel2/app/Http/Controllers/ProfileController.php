@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Profile;
 use App\Http\Requests\StoreProfileRequest;
 use App\Http\Requests\UpdateProfileRequest;
+use App\Models\pengajuan;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\Model;
@@ -24,9 +25,13 @@ class ProfileController extends Controller
     {
             // Ambil data pengguna yang sedang login
             $user = Auth::user();
+            $history = Pengajuan::where('user_id', $user->id)->get();
 
-            // Kirimkan data pengguna ke view
-            return view('profile.profile', compact('user'));
+            // Jika tidak ada pengajuan, pastikan $history tetap array kosong
+            if (!$history) {
+                $history = [];
+            }
+            return view('profile.profile', compact('user', 'history'));
     }
 
             

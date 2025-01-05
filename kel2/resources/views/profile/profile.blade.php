@@ -180,25 +180,20 @@
         <thead>
             <tr>
                 <th>Judul Buku</th>
-                <th>Tanggal Pengajuan</th>
+                <th>Tanggal Pengubahan Status</th>
                 <th>Status</th>
                 
             </tr>
         </thead>
         <tbody>
             <!-- Loop untuk menampilkan history pengajuan -->
-            {{-- @foreach ($historyPengajuan as $pengajuan)
+            @foreach ($history as $pengajuan)
             <tr>
                 <td>{{ $pengajuan->judul_buku }}</td>
+                <td>{{ $pengajuan->updated_at }}</td>
                 <td>{{ $pengajuan->status }}</td>
-                <td>{{ $pengajuan->tanggal_pengajuan }}</td>
             </tr>
-            @endforeach --}}
-            <tr>
-                <td>test</td>
-                <td>test</td>
-                <td>test</td>
-            </tr>
+            @endforeach
         </tbody>
     </table>
     <div class="loading" id="loadingMore" style="display: none;">Memuat lebih banyak...</div>
