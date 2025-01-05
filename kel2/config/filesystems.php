@@ -33,14 +33,16 @@ return [
         'local' => [
             'driver' => 'local',
             'root' => storage_path('app/public'),
-            'serve' => true,
+            'url' => env('APP_URL') . '/storage', 
+            'serve' => true, 
             'throw' => false,
         ],
+
 
         'public' => [
             'driver' => 'local',
             'root' => storage_path('app/public'),
-            'url' => env('APP_URL').'/storage',
+            'url' => env('APP_URL') . '/storage/public',
             'visibility' => 'public',
             'throw' => false,
         ],

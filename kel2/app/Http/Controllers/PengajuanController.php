@@ -59,7 +59,7 @@ class PengajuanController extends Controller
 
     // Menyimpan file yang diupload
     $pengajuan->foto = $request->file('foto')->store('cover');
-    $pengajuan->file = $request->file('file')->store('uploads', 'public');
+    $pengajuan->file = $request->file('file')->store('uploads');
 
     // Simpan data pengajuan
     $pengajuan->save();
@@ -96,32 +96,60 @@ class PengajuanController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function updateEditor(UpdatepengajuanRequest $request, pengajuan $pengajuan)
-    {
-        // Validasi file yang diupload jika ada
-        $validated = $request->validated();
-    
-        // Cek apakah ada file yang diupload
-        if ($request->hasFile('file')) {
-            // Hapus file lama jika ada
-            if ($pengajuan->file && file_exists(storage_path('app/public/' . $pengajuan->file))) {
-                unlink(storage_path('app/public/' . $pengajuan->file));
-            }
-    
-            // Simpan file baru dan ambil path-nya
-            $path = $request->file('file')->store('uploads/pengajuan', 'public');
-            $pengajuan->file = $path; // Update path file di database
+    public function updateEditor(UpdatepengajuanRequest $request, $id)
+{
+    // Debug: Melihat data request dan ID
+    dd($request->all(), $id);
+
+    $request->validate([
+        'file' => 'required|file|mimes:pdf,docx|max:2048',
+        'status' => 'required|string',
+    ]);
+
+    // Cari pengajuan berdasarkan ID
+    $pengajuan = Pengajuan::findOrFail($id);
+
+    // Debug: Melihat pengajuan yang ditemukan
+    dd($pengajuan);
+
+    // Cek apakah ada file lama, dan hapus jika ada
+    if ($pengajuan->file_edit) {
+        // Hapus file lama
+        $oldFilePath = storage_path('app/public/' . $pengajuan->file_edit);
+        Log::info('Mencoba menghapus file lama: ' . $oldFilePath);
+        if (file_exists($oldFilePath)) {
+            unlink($oldFilePath); // Menghapus file lama
+            Log::info('File lama berhasil dihapus.');
         }
-    
-        // Update alasan editor
-        $pengajuan->Alasan_editor = $request->input('Alasan_editor');
-    
-        // Simpan perubahan ke database
-        $pengajuan->save();
-    
-        // Redirect atau return response sesuai kebutuhan
-        return redirect()->route('pengajuan.index')->with('success', 'Pengajuan berhasil diperbarui');
     }
+
+    // Simpan file edit jika ada
+    if ($request->hasFile('file')) {
+        // Debug: Melihat file yang diupload
+        dd($request->file('file'));
+        
+        $filePath = $request->file('file')->store('uploads', 'public');
+        $pengajuan->file_edit = $filePath; // Simpan path file edit baru
+    }
+
+    // Perbarui status pengajuan
+    $pengajuan->status = $request->input('status');
+
+    // Simpan perubahan
+    $pengajuan->save();
+
+    // Debug: Menampilkan status yang telah diset
+    dd($pengajuan->status);
+
+    // Redirect dengan pesan berhasil
+    return redirect()->back()->with('success', 'Pengajuan berhasil diperbarui!');
+}
+
+
+
+
+
+    
     
     public function updateStaff(UpdatepengajuanRequest $request, pengajuan $pengajuan)
     {
@@ -131,8 +159,8 @@ class PengajuanController extends Controller
          // Cek apakah ada file yang diupload
          if ($request->hasFile('file')) {
              // Hapus file lama jika ada
-             if ($pengajuan->file && file_exists(storage_path('app/public/' . $pengajuan->file))) {
-                 unlink(storage_path('app/public/' . $pengajuan->file));
+             if ($pengajuan->file && file_exists(asset('storage/' . $pengajuan->file))) {
+                 unlink(asset('storage/' . $pengajuan->file));
              }
      
              // Simpan file baru dan ambil path-nya
@@ -141,15 +169,14 @@ class PengajuanController extends Controller
          }
      
          // Update alasan editor
-         $pengajuan->alasan_editor = $request->input('alasan_editor');
+         $pengajuan->alasan_editor = $request->input('alasan_staff');
      
          // Simpan perubahan ke database
          $pengajuan->save();
      
          // Redirect atau return response sesuai kebutuhan
-         return redirect()->route('pengajuan.index')->with('success', 'Pengajuan berhasil diperbarui');
+         return redirect()->route('staff.dashboard')->with('success', 'Pengajuan berhasil diperbarui');
     }
-
     /**
      * Remove the specified resource from storage.
      */

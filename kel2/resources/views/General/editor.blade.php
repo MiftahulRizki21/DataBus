@@ -220,14 +220,21 @@
                 <tbody>
                     @foreach ($pengajuans as $data)
                     <tr>
-                        <!-- Kolom untuk unggah file -->
                         <td>
-                            {{-- <form action="{{ route('editor.pengajuan.accept', $data->id) }}" method="POST" enctype="multipart/form-data">
+                            {{ $loop->iteration }}
+                        </td>
+                        <!-- Kolom untuk unggah file -->
+                        {{-- <td>
+                            <form action="{{ route('editor.pengajuan.accept', $data->id) }}" method="POST" enctype="multipart/form-data">
                                 @csrf
                                 <div class="form-group">
                                     <input type="file" name="file_edit" id="file_edit" class="form-input" required>
                                 </div>
-                            </form> --}}
+                            </form>
+                        </td> --}}
+                        <td>
+                            <a href="{{ asset('storage/' . $data->file) }}" target="_blank" class="download">Download File</a>
+
                         </td>
                         
                         <!-- Tombol detail -->
@@ -236,7 +243,8 @@
                                 <button type="button" class="btn btn-primary">Detail Buku</button>
                             </a>
                         </td>
-                        
+                        <td>
+
                         <!-- Kolom alasan -->
                         <td>
                             <textarea name="Alasan_editor" form="rejectForm{{ $data->id }}" placeholder="Masukkan alasan..." rows="3"></textarea>
@@ -245,13 +253,41 @@
                         <!-- Tombol aksi -->
                         <td>
                             <!-- Form Terima -->
-                            <form action="{{ route('pengajuan.update', $data->id) }}" method="POST" style="display:inline-block;">
-                                @csrf
-                                @method('PUT')
-                                <input type="hidden" name="status" value="diterima">
-                                <button type="submit" class="btn btn-success">Terima</button>
-                            </form>
-                        
+                            <button type="button" class="btn btn-success" data-bs-toggle="modal"
+                            data-bs-target="#acceptModal{{ $data->id }}">
+                            Terima
+                        </button>
+                            <div class="modal fade" id="acceptModal{{ $data->id }}" tabindex="-1"
+                                aria-labelledby="acceptModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <form action="{{ route('pengajuan.update', $data->id) }}" method="POST" enctype="multipart/form-data">
+                                            @csrf
+                                            @method('PUT')
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="acceptModalLabel">Masukkan File yang diedit</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                    aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <input type="hidden" name="status" value="diterima">
+                                                <div class="form-group">
+                                                    <label for="file">{{ $data->file }}</label>
+                                                    <input type="file" name="file" class="form-control"
+                                                        placeholder="File buku" required>
+                                                </div>
+                                                
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary"
+                                                    data-bs-dismiss="modal">Batal</button>
+                                                <button type="submit" class="btn btn-success">Terima</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+
                             <!-- Form Tolak dengan Modal -->
                             <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#rejectModal{{ $data->id }}">
                                 Revisi
@@ -261,7 +297,7 @@
                             <div class="modal fade" id="rejectModal{{ $data->id }}" tabindex="-1" aria-labelledby="rejectModalLabel" aria-hidden="true">
                                 <div class="modal-dialog">
                                     <div class="modal-content">
-                                        <form action="{{ route('pengajuan.update', $data->id) }}" method="POST">
+                                        <form action="{{ route('pengajuan.update', $data->id) }}" enctype="multipart/form-data" method="POST">
                                             @csrf
                                             @method('PUT')
                                             <div class="modal-header">

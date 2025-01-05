@@ -8,6 +8,9 @@ use App\Http\Requests\UpdateeditorRequest;
 use App\Models\pengajuan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Log;
+
 
 class EditorController extends Controller
 {
@@ -56,26 +59,78 @@ class EditorController extends Controller
     }
 
     public function update(Request $request, $id)
-    {
-        $pengajuan = Pengajuan::findOrFail($id);
+{
+    // Validasi status dan file jika statusnya 'Revisi'
+    $request->validate([
+        'status' => 'required|string',
+        'file' => 'nullable|file|mimes:pdf,docx|max:2048', // Validasi file (optional)
+        'Alasan_editor' => 'nullable|string',
+    ]);
 
-        // Jika status ditolak, masukkan alasan
-        if ($request->status == 'Revisi') {
-            $pengajuan->update([
-                'status' => 'Revisi',
-                'Alasan_editor' => $request->Alasan_editor,
-                'editor_id' => Auth::id(),
-            ]);
-        } else {
-            // Jika diterima, status diubah menjadi diterima dan dikirim ke staff
-            $pengajuan->update([
-                'status' => 'diterima',
-                'editor_id' => Auth::id(),
-            ]);
+    $pengajuan = Pengajuan::findOrFail($id);
+
+
+    // Jika status ditolak atau perlu revisi
+    if ($request->status == 'Revisi') {
+        // Pastikan alasan editor ada
+        if (!$request->has('Alasan_editor')) {
+            return redirect()->back()->with('error', 'Alasan editor diperlukan.');
         }
 
-        return redirect()->route('editor.dashboard');
+        // Debugging: cek apakah file ada di request
+        dd('File ada di request:', $request->hasFile('file'));
+
+        // Jika ada file yang diupload, simpan file tersebut
+        if ($request->hasFile('file')) {
+            // Hapus file lama jika ada
+            if ($pengajuan->file) {
+                Storage::disk('public')->delete($pengajuan->file);
+            }
+            // Simpan file baru di folder uploads dalam storage/public
+            $filePath = $request->file('file')->store('uploads', 'public'); // Menyimpan di storage/app/public/uploads
+            $pengajuan->file = $filePath; // Simpan path file edit
+
+            // Debugging: cek path file yang berhasil disimpan
+        }
+
+        // Update status revisi dan alasan editor
+        $pengajuan->update([
+            'status' => 'Revisi',
+            'Alasan_editor' => $request->Alasan_editor,
+            'editor_id' => Auth::id(),
+        ]);
+    } else {
+        // Jika diterima, update status menjadi diterima
+        $pengajuan->update([
+            'status' => 'diterima',
+            'editor_id' => Auth::id(),
+        ]);
+
+        // Jika ada file yang diupload, simpan file tersebut
+        if ($request->hasFile('file')) {
+            // Hapus file lama jika ada
+            if ($pengajuan->file) {
+                Storage::disk('public')->delete($pengajuan->file);
+            }
+            // Simpan file baru di folder uploads dalam storage/public
+            $filePath = $request->file('file')->store('uploads', 'public'); // Menyimpan di storage/app/public/uploads
+            $pengajuan->file = $filePath; // Simpan path file edit
+            $pengajuan->save(); // Simpan perubahan file
+
+            // Debugging: cek path file yang berhasil disimpan
+        }
     }
+
+    return redirect()->route('editor.dashboard')->with('success', 'Pengajuan berhasil diperbarui!');
+}
+
+
+    
+    
+    
+
+
+
 
     /**
      * Remove the specified resource from storage.

@@ -23,7 +23,7 @@ return new class extends Migration
             $table->date('tgl_rilis');
             $table->string('halaman');
             $table->string('foto');
-            $table->string('file');
+            $table->string('file')->nullable();
             $table->enum('status', (['Tidak Diterima', 'Diterima', 'Revisi', 'Ditolak']));
             $table->string('ISBN')->nullable();
             $table->string('Alasan_editor')->nullable();

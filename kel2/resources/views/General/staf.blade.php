@@ -230,6 +230,10 @@
                             </form> --}}
                             </td>
 
+                            <td>
+                                <a href="{{ asset('storage/' . $data->file) }}" target="_blank" class="download">Download File</a>
+    
+                            </td>
                             <!-- Tombol detail -->
                             <td>
                                 <a href="/detail_buku/{{ $data->id }}">
