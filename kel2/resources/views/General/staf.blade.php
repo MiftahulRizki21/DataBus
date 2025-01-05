@@ -219,6 +219,7 @@
                 </thead>
                 <tbody>
                     @foreach ($pengajuans as $data)
+                    @if ($data->status === 'Diterima')
                         <tr>
                             <!-- Kolom untuk unggah file -->
                             <td>
@@ -324,6 +325,7 @@
                             </td>
 
                         </tr>
+                        @endif
                     @endforeach
                 </tbody>
             </table>
@@ -369,6 +371,8 @@
                     </thead>
                     <tbody>
                         @foreach ($history as $data )
+                        @if ($data->status === 'Ditolak'|| $data->ISBN != Null)
+
                         <tr>
                             <td>
                                 {{ $loop->iteration }}
@@ -383,6 +387,7 @@
                                 {{ $data->updated_at }}
                             </td>
                         </tr>
+                        @endif
                     @endforeach
                     </tbody>
                 </table>

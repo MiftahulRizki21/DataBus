@@ -7,6 +7,9 @@ use App\Http\Requests\StoreListBukuRequest;
 use App\Http\Requests\UpdateListBukuRequest;
 use App\Support\Facedes\Storage;
 use Illuminate\Http\Request;
+use App\Models\pengajuan;
+use Illuminate\Support\Facades\DB;
+
 class ListBukuController extends Controller
 {
 
@@ -34,11 +37,44 @@ class ListBukuController extends Controller
     
     
 
+
     public function indexUser()
     {
-        $listBuku = ListBuku::inRandomOrder()->paginate(3); // Menampilkan 3 buku per halaman
-        return view('general.user', compact('listBuku'));
+        // Query untuk data pengajuans
+        $pengajuans = DB::select("
+            SELECT * 
+            FROM pengajuans 
+            WHERE status IN ('Tidak Diterima', 'Revisi')
+        ");
+    
+        // Query untuk data history
+        $history = DB::select("
+            SELECT * 
+            FROM pengajuans 
+            WHERE status IN ('ditolak', 'Diterima')
+            AND id NOT IN (
+                SELECT id 
+                FROM pengajuans 
+                WHERE status IN ('Tidak Diterima', 'Revisi')
+            )
+        ");
+        dd([
+            'pengajuans' => $pengajuans,
+            'history' => $history,
+        ]);
+        
+        // Kirim data ke view
+        return view('general.user', [
+            'pengajuans' => collect($pengajuans), // Ubah ke koleksi agar kompatibel dengan Blade
+            'history' => collect($history),      // Ubah ke koleksi agar kompatibel dengan Blade
+        ]);
     }
+    
+    
+
+    
+
+    
 
 
     public function indexList()
