@@ -214,7 +214,6 @@
                         <th>Nama</th>
                         <th>File Buku</th>
                         <th>Detail Buku</th>
-                        <th>Alasan</th> <!-- Kolom Alasan -->
                         <th>Aksi</th>
                     </tr>
                 </thead>
