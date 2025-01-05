@@ -119,7 +119,7 @@
 </style>
 
 <!-- Form Profile -->
-    <form action="{{ route('profile.update') }}" method="POST"enctype="multipart/form-data" class="form-container">
+    <form action="{{ route('profile.update', $user->id) }}" method="POST"enctype="multipart/form-data" class="form-container">
         @csrf
         @method('PUT')  <!-- Simulate PUT request for update -->
     <h2>Update Profile</h2>

@@ -5,9 +5,11 @@ namespace App\Http\Controllers;
 use App\Models\Profile;
 use App\Http\Requests\StoreProfileRequest;
 use App\Http\Requests\UpdateProfileRequest;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
+use Illuminate\Auth\SessionGuard;
 
 class ProfileController extends Controller
 {
@@ -25,44 +27,29 @@ class ProfileController extends Controller
 
             // Kirimkan data pengguna ke view
             return view('profile.profile', compact('user'));
-        }
-
+    }
+    
         /**
          * Show the form for creating a new resource.
          */
-        public function UpdateUser(Request $request)
-        {
-            // Validasi data input
-            $validated = $request->validate([
-                'name' => 'required|string|max:255',
-                'email' => 'required|string|email|max:255|unique:users,email,' . Auth::id(),
-            ]);
+    public function UpdateUser(Request $request, $id)
+    {
+    // Validasi status dan file jika statusnya 'Revisi'
+    $request->validate([
+        'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users,email,' . Auth::id(),
+        ]);
 
-            // Ambil pengguna yang sedang login
-            $user = Auth::user();
-
-            // Update data pada model User
-            $user->name = $request->input('name');
-            $user->email = $request->input('email');
-            
-            // Simpan perubahan pada model User
-            $user->save();
-
-            // Periksa apakah pengguna memiliki profil yang terkait
-            if ($user->profile) {
-                // Update data pada model Profile jika ada
-                $user->profile->name = $request->input('name');
-                $user->profile->save();
-            }
-
-            // Redirect kembali ke halaman edit profile dengan pesan sukses
-            return redirect()->route('profile.edit')->with('success', 'Profil berhasil diperbarui!');
-        }
-
-
-
-    
-
+    $user = User::findOrFail($id);
+        // Jika diterima, update status menjadi diterima
+        $user->update([
+            'name' => $request->name,
+            'email' => $request->email,
+        ]);
+            $user->save(); // Simpan perubahan file
+            // Debugging: cek path file yang berhasil disimpan
+            return redirect()->route('profile.profile')->with('success', 'Pengajuan berhasil diperbarui!');
+    }
 
     /**
      * Show the form for creating a new resource.
