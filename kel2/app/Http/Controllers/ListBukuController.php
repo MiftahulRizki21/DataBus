@@ -36,9 +36,15 @@ class ListBukuController extends Controller
         return view('general.beranda', compact('listBuku'));
     }
     
+    public function detailBuku(Request $request, $id)
+    {
+        // Ambil data buku berdasarkan ID
+        $detailBuku = ListBuku::findOrFail($id);
     
-
-
+        // Kirim data buku ke view
+        return view('listBuku.detailBuku_show', compact('detailBuku'));
+    }
+    
     public function indexUser()
     {
         // Query untuk data pengajuans

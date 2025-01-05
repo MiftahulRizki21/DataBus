@@ -11,10 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('statuses', function (Blueprint $table) {
-            $table->id();
-            $table->text('keterangan_status');
-            $table->timestamps();
+        Schema::table('list_bukus', function (Blueprint $table) {
+            $table->string('ISBN')->nullable();
         });
     }
 
@@ -23,6 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('statuses');
+        Schema::table('list_bukus', function (Blueprint $table) {
+            //
+        });
     }
 };

@@ -51,6 +51,8 @@ class StaffPustakaController extends Controller
                 'nama_penulis' => $pengajuan->nama_penulis,
                 'nama_penerbit' => $pengajuan->nama_penerbit,
                 'tgl_rilis' => $pengajuan->tgl_rilis,
+                'editor_id' => $pengajuan->editor_id,
+                'staff_id' => $pengajuan->staff_id,
                 'halaman' => $pengajuan->halaman,
                 'isbn' => $request->ISBN,  // Masukkan ISBN yang baru
                 'foto' => $pengajuan->foto,  // Jika ada foto, sesuaikan dengan field yang ada

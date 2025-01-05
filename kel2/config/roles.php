@@ -13,12 +13,12 @@ return [
         'staff' => [
             'staff.dashboard',
             'listBuku',
-            'buku.detail'
+            // 'buku.detail'
 
         ],
         'editor' => [
             'profile',
-            'buku.detail',
+            // 'buku.detail',
             'editor.dashboard',
         ],
     ],
