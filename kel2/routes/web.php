@@ -27,7 +27,6 @@ Auth::routes();
 //     return view('layouts.app');
 // });
 
-Route::get('/', [ListBukuController::class, 'index'])->name('detailBuku_show');
 
 
 // Route::get('/detail_buku/{id}', [ListBukuController::class, 'show'])->name('detailBuku_show');
@@ -55,7 +54,7 @@ Route::get('/logout', function () {
 
 
 Route::get('/listPengunjung', [ListBukuController::class, 'indexListPengunjung'])->name('listBukuPengunjung');
-Route::get('/list', [ListBukuController::class, 'indexList'])->name('listBuku');
+
 
 // /*<<<<<<< HEAD*/
 // Route::controller(SocialiteController::class)->group(function(){
@@ -72,9 +71,8 @@ Route::get('/profile/edit', [ProfileController::class, 'user'])->name('profile.e
 Route::put('/profile/update/{id}', [ProfileController::class, 'UpdateUser'])->name('profile.update');
 
 // Route untuk User
-Route::get('/pengajuan', [PengajuanController::class, 'create'])->name('pengajuan.create');
-Route::post('/pengajuan/store', [PengajuanController::class, 'store'])->name('pengajuan.store');
 
+Route::get('/list', [ListBukuController::class, 'indexList'])->name('listBuku');
 // Route untuk Editor
 Route::get('/pengajuan/{id}/edit', [EditorController::class, 'edit'])->name('pengajuan.edit');
 Route::put('/pengajuan/{id}', [EditorController::class, 'update'])->name('pengajuan.update');
@@ -88,14 +86,17 @@ Route::middleware([RoleBasedAccess::class . ':user'])->group(function () {
     Route::get('/user/dashboard', [PengajuanController::class, 'index'])->name('user.dashboard');
     Route::get('/detail_buku/{id}', [ListBukuController::class, 'show'])->name('buku.detail');
     Route::get('/pengajuan', [PengajuanController::class, 'create'])->name('pengajuan.create');
+    Route::post('/pengajuan/store', [PengajuanController::class, 'store'])->name('pengajuan.store');
+
     
 });
 
 // Rute untuk Staff
 Route::middleware([RoleBasedAccess::class . ':staff'])->group(function () {
     Route::get('/staff/dashboard', [StaffPustakaController::class, 'index'])->name('staff.dashboard');
+    Route::get('/detail_buku/{id}', [ListBukuController::class, 'show'])->name('buku.detail');
+    Route::get('/staff/buku/{id}', [PengajuanController::class, 'show'])->name('buku.detail');
     // Route::get('/', [ListBukuController::class, 'show'])->name('listBuku');
-    Route::get('editor/detail_buku/{id}', [PengajuanController::class, 'show'])->name('buku.detail');
     Route::get('/list/staff', [ListBukuController::class, 'indexList'])->name('listBuku');
 
 });
@@ -103,5 +104,6 @@ Route::middleware([RoleBasedAccess::class . ':staff'])->group(function () {
 // Rute Bersama (Profil untuk Staff dan Editor)
 Route::middleware([RoleBasedAccess::class . ':editor'])->group(function () {
     Route::get('/editor/dashboard', [EditorController::class, 'index'])->name('editor.dashboard');
+    Route::get('/editor/buku/{id}', [PengajuanController::class, 'show'])->name('buku.detail');
     // Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
 });

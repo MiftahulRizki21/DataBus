@@ -28,6 +28,8 @@ class ProfileController extends Controller
             // Kirimkan data pengguna ke view
             return view('profile.profile', compact('user'));
     }
+
+            
     
         /**
          * Show the form for creating a new resource.

@@ -240,7 +240,7 @@
                                 </td>
                                 <!-- Tombol detail -->
                                 <td>
-                                    <a href="/detail_buku/{{ $data->id }}">
+                                    <a href="/staff/buku/{{ $data->id }}">
                                         <button type="button" class="btn btn-primary">Detail Buku</button>
                                     </a>
                                 </td>

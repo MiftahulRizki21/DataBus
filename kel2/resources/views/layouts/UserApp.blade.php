@@ -38,6 +38,34 @@
                 width: 50%;
                 height: 50%;
             }
+            b{
+                color: white;
+            }
+            /* Gaya untuk navbar */
+            .navbar-nav .navlink {
+                color: white;
+                font-weight: bold;
+                text-decoration: none;
+                padding: 10px 20px;
+                transition: background-color 0.3s ease, color 0.3s ease;
+            }
+
+            /* Efek hover */
+            .navbar-nav .navlink:hover {
+                background-color: #0056b3; /* Ganti dengan warna yang Anda inginkan */
+                color: white;
+                border-radius: 4px; /* Menambahkan border radius untuk sudut tumpul */
+            }
+
+            /* Menambahkan padding dan efek ketika hover pada navbar */
+            .navbar-nav .navlink:active {
+                background-color: #00408d; /* Ganti dengan warna yang Anda inginkan saat klik */
+            }
+            div.fas fa-user fa-fw{
+                font-size: 100px;
+            }
+
+
         </style>
     </head>
 <body class="sb-nav-fixed">
@@ -54,16 +82,11 @@
             <div class="container-navlink">
                 <p><a href="/list" class="navlink">List Buku</a></p>
             </div>
-            <li class="nav-item dropdown" >
-                <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    <i class="fas fa-user fa-fw"></i>
-                </a>
-                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                    <li><a class="dropdown-item" href="/profile/user">Profile</a></li>
-                    <li><hr class="dropdown-divider" /></li>
-                    <li><a class="dropdown-item" href="/logout">Logout</a></li>
-                </ul>
-            </li>
+            <div class="container-navlink">
+                <a href="/profile/user" class="navlink"><div class="fas fa-user fa-fw" style="margin-top:5px;"></div></a>
+            </div>
+
+            
         </ul>
     </nav>
 

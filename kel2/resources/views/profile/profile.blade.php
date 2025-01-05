@@ -115,8 +115,39 @@
         text-align: center;
         padding: 20px;
     }
+    .logout-container {
+        position: fixed;
+        top: 80px;
+        right: 35px;
+        z-index: 9999;
+    }
+
+    .btn-logout {
+        background-color: #dc3545;
+        color: white;
+        padding: 10px 20px;
+        font-size: 14px;
+        font-weight: bold;
+        border: none;
+        border-radius: 4px;
+        text-decoration: none;
+        text-align: center;
+        cursor: pointer;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        transition: background-color 0.3s, transform 0.2s;
+    }
+
+    .btn-logout:hover {
+        background-color: #c82333;
+        color: rgb(231, 227, 227);
+        transform: scale(1.05);
+    }
+
 
 </style>
+<div class="logout-container">
+    <a href="/logout" onclick="confirmLogout(event)" class="btn-logout">Logout</a>
+</div>
 
 <!-- Form Profile -->
     <form action="{{ route('profile.update', $user->id) }}" method="POST"enctype="multipart/form-data" class="form-container">

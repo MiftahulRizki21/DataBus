@@ -16,6 +16,9 @@ class PengajuanController extends Controller
      */
     public function index()
     {
+        // Ambil data pengguna yang sedang login
+        $user = Auth::user();
+        
         $pengajuans = Pengajuan::latest()->paginate(10);
         $history = Pengajuan::whereIn('status', ['Revisi', 'Diterima', 'ditolak'])->get();
         return view('General.user', compact('pengajuans', 'history'));
@@ -26,7 +29,10 @@ class PengajuanController extends Controller
      */
     public function create()
     {
-        return view('listBuku.create');
+        // Ambil data pengguna yang sedang login
+        $user = Auth::user();
+
+        return view('listBuku.create', compact( 'user'));
     }
 
     /**
@@ -34,44 +40,67 @@ class PengajuanController extends Controller
      */
     public function store(StorepengajuanRequest $request)
 {
-    // Log request data (opsional untuk debugging)
-    Log::info($request->all());
+    // Log awal untuk memastikan request diterima
+    Log::info('Memulai proses penyimpanan pengajuan...');
+    Log::info('Data request diterima:', $request->all());
 
     // Validasi input
-    $requestData = $request->validate([
-        'judul_buku' => 'required',
-        'sipnosis' => 'required',
-        'nama_penulis' => 'required|string',
-        'nama_penerbit' => 'required',
-        'tgl_rilis' => 'nullable|date',
-        'halaman' => 'required|integer',
-        'foto' => 'required|image|mimes:jpeg,png,jpg|max:5000',
-        'file' => 'required|file|mimes:pdf|max:5000',
-        'status'=> 'required',
-        'ISBN'=> 'nullable',
-    ]);
+    try {
+        $requestData = $request->validate([
+            'judul_buku' => 'required',
+            'sipnosis' => 'required',
+            'nama_penulis' => 'required|string',
+            'nama_penerbit' => 'required',
+            'tgl_rilis' => 'nullable|date',
+            'halaman' => 'required|integer',
+            'foto' => 'required|image|mimes:jpeg,png,jpg|max:5000',
+            'file' => 'required|file|mimes:pdf|max:5000',
+            'status' => 'required',
+            'ISBN' => 'nullable',
+        ]);
+
+        Log::info('Validasi berhasil:', $requestData);
+    } catch (\Illuminate\Validation\ValidationException $e) {
+        Log::error('Validasi gagal:', $e->errors());
+        return redirect()->back()->withErrors($e->errors())->withInput();
+    }
 
     // Menambahkan user_id ke request data
     $requestData['user_id'] = Auth::id();
+    Log::info('User ID ditambahkan:', ['user_id' => $requestData['user_id']]);
 
     // Membuat pengajuan baru
-    $pengajuan = new \App\Models\Pengajuan;
+    $pengajuan = new \App\Models\Pengajuan();
     $pengajuan->fill($requestData);
 
-    // Menyimpan file yang diupload
-    $pengajuan->foto = $request->file('foto')->store('cover');
-    $pengajuan->file = $request->file('file')->store('uploads');
+    // Log data sebelum menyimpan
+    Log::info('Data yang akan disimpan ke database:', $pengajuan->toArray());
 
-    // Simpan data pengajuan
-    $pengajuan->save();
+    try {
+        // Menyimpan file yang diupload
+        $pengajuan->foto = $request->file('foto')->store('cover');
+        $pengajuan->file = $request->file('file')->store('uploads');
 
-    // Flash message
-    session()->flash('success', 'Buku berhasil ditambahkan!');
+        Log::info('File berhasil disimpan:', [
+            'foto' => $pengajuan->foto,
+            'file' => $pengajuan->file,
+        ]);
+
+        // Simpan data pengajuan
+        $pengajuan->save();
+        Log::info('Data pengajuan berhasil disimpan ke database:', $pengajuan->toArray());
+
+        // Flash message
+        session()->flash('success', 'Buku berhasil ditambahkan!');
+    } catch (\Exception $e) {
+        Log::error('Gagal menyimpan pengajuan:', ['error' => $e->getMessage()]);
+        return redirect()->back()->with('error', 'Terjadi kesalahan saat menyimpan data.')->withInput();
+    }
 
     // Redirect kembali ke halaman sebelumnya
-    return redirect()->route('pengajuan.create');
-
+    return redirect()->route('pengajuan.create')->with('success', 'Buku berhasil ditambahkan!');
 }
+
 
 public function updatePengajuanStatus(Request $request, $id)
 {
@@ -122,7 +151,7 @@ public function updatePengajuanStatus(Request $request, $id)
     public function show($id)
     { 
         $pengajuan= \App\Models\pengajuan::findOrFail($id); // Ambil data buku berdasarkan ID
-        return view('listBuku.detail_buku', compact('buku'));
+        return view('listBuku.detail_buku', compact('pengajuan'));
     }
 
     /**
