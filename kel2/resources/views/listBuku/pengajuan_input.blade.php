@@ -1,6 +1,9 @@
 @extends('layout.app') <!-- Menggunakan template layout utama -->
 
 @section('content')
+<title>Pengajuan</title>
+<link rel="shortcut icon" type="x-icon" href="..\startbootstrap-sb-admin-master\dist\assets\img\logoweb.png">
+
 <div class="container-fluid px-4">
     <h1 class="mt-4">List Buku</h1>
     <ol class="breadcrumb mb-4">

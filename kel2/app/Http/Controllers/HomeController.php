@@ -25,7 +25,7 @@ class HomeController extends Controller
     public function beranda(Request $request)
     {
         $user = Auth::user();
-        $listBuku = ListBuku::inRandomOrder()->paginate(8);        
+        $listBuku = ListBuku::inRandomOrder()->paginate(3);  
         return view('General.user', compact('listBuku', 'user'));
     }
     public function show(string $id)

@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+<link rel="shortcut icon" type="x-icon" href="..\startbootstrap-sb-admin-master\dist\assets\img\logoweb.png">
+
 @section('content')
 <div class="container">
     <div class="row justify-content-center">

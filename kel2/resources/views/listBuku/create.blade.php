@@ -1,6 +1,8 @@
 @extends('layouts.UserApp')
 @section('content')
+<link rel="shortcut icon" type="x-icon" href="..\startbootstrap-sb-admin-master\dist\assets\img\logoweb.png">
 
+<title>Pengajuan | User</title>
 <!-- CSS -->
 <style>
     body {
