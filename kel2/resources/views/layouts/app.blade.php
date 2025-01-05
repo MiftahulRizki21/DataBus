@@ -38,15 +38,18 @@
                 text-align: center;
                 padding: 10px 0;
             }
+
+        .logo{
+                width: 50%;
+                height: 50%;
+            }
         </style>
     </head>
+<body class="sb-nav-fixed">
 
-    <body class="sb-nav-fixed">
-
-        <!-- Navbar -->
-        <nav class="sb-topnav navbar navbar-expand navbar-dark" style="background-color: #002855;">
-            <!-- Navbar Brand -->
-            <a class="navbar-brand ps-3" href="index.html">Start Bootstrap</a>
+    <nav class="sb-topnav navbar navbar-expand navbar-dark" style="background-color: #002855;">
+        <!-- Navbar Brand -->
+        <a class="navbar-brand ps-3" href="index.html"><img src="..\startbootstrap-sb-admin-master\dist\assets\img\logo.png" alt="" class="logo"></a>
 
             <!-- Navbar Right -->
             <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4" style="position: absolute; right: 0;">

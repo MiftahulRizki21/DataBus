@@ -83,6 +83,8 @@ Route::get('/pengajuan/download/{id}', [PengajuanController::class, 'download'])
 // Route untuk Staff
 Route::get('/pengajuan/{id}/reject', [StaffPustakaController::class, 'reject'])->name('pengajuan.reject');
 Route::put('/pengajuan/{id}/approve', [StaffPustakaController::class, 'approve'])->name('pengajuan.approve');
+
+
 Route::middleware([RoleBasedAccess::class . ':user'])->group(function () {
     Route::get('/user/dashboard', [PengajuanController::class, 'index'])->name('user.dashboard');
     Route::get('/buku/{id}', [ListBukuController::class, 'detail'])->name('buku.detail');

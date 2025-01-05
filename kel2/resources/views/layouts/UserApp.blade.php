@@ -12,6 +12,8 @@
         <link href="../startbootstrap-sb-admin-master/dist/css/beranda.css" rel="stylesheet" />
         <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+        <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
         <style>
             /* Tambahkan gaya untuk memastikan footer berada di bawah */
             html, body {
@@ -31,13 +33,18 @@
                 text-align: center;
                 padding: 10px 0;
             }
+
+            .logo{
+                width: 50%;
+                height: 50%;
+            }
         </style>
     </head>
 <body class="sb-nav-fixed">
 
     <nav class="sb-topnav navbar navbar-expand navbar-dark" style="background-color: #002855;">
         <!-- Navbar Brand -->
-        <a class="navbar-brand ps-3" href="index.html">Start Bootstrap</a>
+        <a class="navbar-brand ps-3" href="index.html"><img src="..\startbootstrap-sb-admin-master\dist\assets\img\logo.png" alt="" class="logo"></a>
 
         <!-- Navbar Right -->
         <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4" style="position: absolute; right: 0;">
