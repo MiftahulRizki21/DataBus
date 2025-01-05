@@ -187,78 +187,70 @@
                                 <button type="button" class="btn btn-primary">Detail Buku</button>
                             </a>
                         </td>
-                        <td>
-                            <!-- Action Buttons -->
-                            <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#acceptModal{{ $data->id }}">
-                                Terima
-                            </button>
-                            <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#rejectModal{{ $data->id }}">
-                                Tolak
-                            </button>
-                        </td>
                         <!-- Tombol aksi -->
                         <td>
                             <!-- Form Terima -->
                             <button type="button" class="btn btn-success" data-bs-toggle="modal"
-                            data-bs-target="#acceptModal{{ $data->id }}">
-                            Terima
-                        </button>
-                            <div class="modal fade" id="acceptModal{{ $data->id }}" tabindex="-1"
-                                aria-labelledby="acceptModalLabel" aria-hidden="true">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <form action="{{ route('pengajuan.update', $data->id) }}" method="POST" enctype="multipart/form-data">
-                                            @csrf
-                                            @method('PUT')
-                                            <div class="modal-header">
-                                                <h5 class="modal-title" id="acceptModalLabel">Masukkan File yang diedit</h5>
-                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                    aria-label="Close"></button>
-                                            </div>
-                                            <div class="modal-body">
-                                                <input type="hidden" name="status" value="diterima">
-                                                <div class="form-group">
-                                                    <label for="file">{{ $data->file }}</label>
-                                                    <input type="file" name="file" class="form-control"
-                                                        placeholder="File buku" required>
-                                                </div>
-                                                  
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary"
-                                                    data-bs-dismiss="modal">Batal</button>
-                                                <button type="submit" class="btn btn-success">Terima</button>
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
+    data-bs-target="#acceptModal{{ $data->id }}">
+    Terima
+</button>
+<div class="modal fade" id="acceptModal{{ $data->id }}" tabindex="-1"
+    aria-labelledby="acceptModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form action="{{ route('pengajuan.approve', $data->id) }}" method="POST" enctype="multipart/form-data">
+                @csrf
+                @method('PUT')
+                <div class="modal-header">
+                    <h5 class="modal-title" id="acceptModalLabel">Masukkan Data Diperlukan</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <!-- Status -->
+                    <input type="hidden" name="status" value="diterima">
+
+                    <!-- ISBN Input -->
+                    <div class="form-group mt-3">
+                        <label for="isbn">Masukkan ISBN</label>
+                        <input type="text" name="isbn" class="form-control" placeholder="Masukkan ISBN" required>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                    <button type="submit" class="btn btn-success">Terima</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
 
                             <!-- Form Tolak dengan Modal -->
                             <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#rejectModal{{ $data->id }}">
-                                Revisi
+                                Tolak
                             </button>
                         
-                            <!-- Modal Revisi -->
+                            <!-- Modal Tolak -->
                             <div class="modal fade" id="rejectModal{{ $data->id }}" tabindex="-1" aria-labelledby="rejectModalLabel" aria-hidden="true">
                                 <div class="modal-dialog">
                                     <div class="modal-content">
-                                        <form action="{{ route('pengajuan.update', $data->id) }}" enctype="multipart/form-data" method="POST">
+                                        <form action="{{ route('pengajuan.approve', $data->id) }}" enctype="multipart/form-data" method="POST">
                                             @csrf
                                             @method('PUT')
                                             <div class="modal-header">
-                                                <h5 class="modal-title" id="rejectModalLabel">Masukkan Alasan Revisi</h5>
+                                                <h5 class="modal-title" id="rejectModalLabel">Masukkan Alasan Penolakan</h5>
                                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                             </div>
                                             <div class="modal-body">
-                                                <input type="hidden" name="status" value="Revisi">
+                                                <input type="hidden" name="status" value="Ditolak">
                                                 <div class="form-group">
                                                     <textarea name="Alasan_editor" class="form-control" placeholder="Masukkan alasan..." required></textarea>
                                                 </div>
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-                                                <button type="submit" class="btn btn-danger">Kirim Revisi</button>
+                                                <button type="submit" class="btn btn-danger">Kirim Penolakan</button>
                                             </div>
                                         </form>
                                     </div>
