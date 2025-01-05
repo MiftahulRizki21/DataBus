@@ -71,7 +71,7 @@ class EditorController extends Controller
 
 
     // Jika status ditolak atau perlu revisi
-    if ($request->status == 'Revisi') {
+    if ($request->status == 'Tidak Diterima') {
         // Pastikan alasan editor ada
         if (!$request->has('Alasan_editor')) {
             return redirect()->back()->with('error', 'Alasan editor diperlukan.');

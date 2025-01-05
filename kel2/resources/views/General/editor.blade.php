@@ -338,7 +338,7 @@
                                 {{ $loop->iteration }}
                             </td>
                             <td>
-                                {{ $data->judul }}
+                                {{ $data->judul_buku }}
                             </td>
                             <td>
                                 {{ $data->status }}

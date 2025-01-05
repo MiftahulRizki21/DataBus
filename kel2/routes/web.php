@@ -83,11 +83,8 @@ Route::get('/pengajuan/{id}/reject', [StaffPustakaController::class, 'reject'])-
 Route::put('/pengajuan/{id}/approve', [StaffPustakaController::class, 'approve'])->name('pengajuan.approve');
 
 Route::middleware([RoleBasedAccess::class . ':user'])->group(function () {
-
     Route::get('/user/dashboard', [HomeController::class, 'beranda'])->name('user.dashboard');
     Route::get('/detail_buku/{id}', [ListBukuController::class, 'show'])->name('buku.detail');
-
-
     Route::get('/pengajuan', [PengajuanController::class, 'create'])->name('pengajuan.create');
     Route::post('/pengajuan/store', [PengajuanController::class, 'store'])->name('pengajuan.store');
 
