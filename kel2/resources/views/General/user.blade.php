@@ -206,6 +206,7 @@
         <h5>Table Pengajuan</h5>
         <div class="table-container">
             <table class="table">
+
                 <thead>
                     <tr>
                         <th>No</th>
@@ -218,73 +219,83 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($pengajuans as $data)
-                    <tr>
-                        <!-- Kolom untuk unggah file -->
-                        <td>
-                            {{-- <form action="{{ route('editor.pengajuan.accept', $data->id) }}" method="POST" enctype="multipart/form-data">
+
+                    @foreach ($pengajuans as $data )
+                    @if ($data->status === 'Tidak Diterima' || $data->status === 'Revisi')
+
+                        <tr>
+                            <!-- Kolom untuk unggah file -->
+                            <td>
+                                {{-- <form action="{{ route('editor.pengajuan.accept', $data->id) }}" method="POST" enctype="multipart/form-data">
                                 @csrf
                                 <div class="form-group">
                                     <input type="file" name="file_edit" id="file_edit" class="form-input" required>
                                 </div>
                             </form> --}}
-                        </td>
-                        
-                        <!-- Tombol detail -->
-                        <td>
-                            <a href="/detail_buku/{{ $data->id }}">
-                                <button type="button" class="btn btn-primary">Detail Buku</button>
-                            </a>
-                        </td>
-                        
-                        <!-- Kolom alasan -->
-                        <td>
-                            <textarea name="Alasan_editor" form="rejectForm{{ $data->id }}" placeholder="Masukkan alasan..." rows="3"></textarea>
-                        </td>
-                        
-                        <!-- Tombol aksi -->
-                        <td>
-                            <!-- Form Terima -->
-                            <form action="{{ route('pengajuan.create', $data->id) }}" method="POST" style="display:inline-block;">
-                                @csrf
-                                @method('PUT')
-                                <input type="hidden" name="status" value="diterima">
-                                <button type="submit" class="btn btn-success">Terima</button>
-                            </form>
-                        
-                            <!-- Form Tolak dengan Modal -->
-                            <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#rejectModal{{ $data->id }}">
-                                Revisi
-                            </button>
-                        
-                            <!-- Modal Revisi -->
-                            <div class="modal fade" id="rejectModal{{ $data->id }}" tabindex="-1" aria-labelledby="rejectModalLabel" aria-hidden="true">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <form action="{{ route('pengajuan.update', $data->id) }}" method="POST">
-                                            @csrf
-                                            @method('PUT')
-                                            <div class="modal-header">
-                                                <h5 class="modal-title" id="rejectModalLabel">Masukkan Alasan Revisi</h5>
-                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                            </div>
-                                            <div class="modal-body">
-                                                <input type="hidden" name="status" value="Revisi">
-                                                <div class="form-group">
-                                                    <textarea name="Alasan_editor" class="form-control" placeholder="Masukkan alasan..." required></textarea>
+                            </td>
+
+                            <!-- Tombol detail -->
+                            <td>
+                                <a href="/detail_buku/{{ $data->id }}">
+                                    <button type="button" class="btn btn-primary">Detail Buku</button>
+                                </a>
+                            </td>
+
+                            <!-- Kolom alasan -->
+                            <td>
+                                <textarea name="Alasan_editor" form="rejectForm{{ $data->id }}" placeholder="Masukkan alasan..." rows="3"></textarea>
+                            </td>
+
+                            <!-- Tombol aksi -->
+                            <td>
+                                <!-- Form Terima -->
+                                <form action="{{ route('pengajuan.create', $data->id) }}" method="POST"
+                                    style="display:inline-block;">
+                                    @csrf
+                                    @method('PUT')
+                                    <input type="hidden" name="status" value="diterima">
+                                    <button type="submit" class="btn btn-success">Terima</button>
+                                </form>
+
+                                <!-- Form Tolak dengan Modal -->
+                                <button type="button" class="btn btn-danger" data-bs-toggle="modal"
+                                    data-bs-target="#rejectModal{{ $data->id }}">
+                                    Revisi
+                                </button>
+
+                                <!-- Modal Revisi -->
+                                <div class="modal fade" id="rejectModal{{ $data->id }}" tabindex="-1"
+                                    aria-labelledby="rejectModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <form action="{{ route('pengajuan.update', $data->id) }}" method="POST">
+                                                @csrf
+                                                @method('PUT')
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="rejectModalLabel">Masukkan Alasan Revisi
+                                                    </h5>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                        aria-label="Close"></button>
                                                 </div>
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-                                                <button type="submit" class="btn btn-danger">Kirim Revisi</button>
-                                            </div>
-                                        </form>
+                                                <div class="modal-body">
+                                                    <input type="hidden" name="status" value="Revisi">
+                                                    <div class="form-group">
+                                                        <textarea name="Alasan_editor" class="form-control" placeholder="Masukkan alasan..." required></textarea>
+                                                    </div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary"
+                                                        data-bs-dismiss="modal">Batal</button>
+                                                    <button type="submit" class="btn btn-danger">Kirim Revisi</button>
+                                                </div>
+                                            </form>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        </td>
-                        
-                    </tr>
+                            </td>
+
+                        </tr>
+                    @endif
                     @endforeach
                 </tbody>
             </table>
@@ -328,21 +339,24 @@
                             <th>Tanggal</th>
                         </tr>
                     </thead>
-                    @foreach ($history as $data )
+                    @foreach ($history as $data2)
+                    @if ($data2->status === 'Diterima' || $data->status === 'ditolak')
+
                         <tr>
                             <td>
                                 {{ $loop->iteration }}
                             </td>
                             <td>
-                                {{ $data->judul }}
+                                {{ $data2->judul_buku }}
                             </td>
                             <td>
-                                {{ $data->status }}
+                                {{ $data2->status }}
                             </td>
                             <td>
-                                {{ $data->updated_at }}
+                                {{ $data2->updated_at }}
                             </td>
                         </tr>
+                    @endif
                     @endforeach
                 </table>
             </div>

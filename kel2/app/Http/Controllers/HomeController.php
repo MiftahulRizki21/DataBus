@@ -31,4 +31,5 @@ class HomeController extends Controller
         return view('profile.profile', $data);    
 
     }
+    
 }
