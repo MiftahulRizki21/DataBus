@@ -73,8 +73,6 @@
                     <hr class="garis-horizontal">
                 </center>
                 <div class="contact fade-in" style="margin-top: 20px">
-                    <p class="sample-text">Sample text. Click to select the text box. Click again or double-click to start
-                        editing the text.</p>
                     <div class="contact-container">
                         <div class="contact-card">
                             <img src="../startbootstrap-sb-admin-master/dist/assets/img/lokasi.png" alt="Address Icon"
