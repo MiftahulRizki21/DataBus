@@ -26,7 +26,7 @@ Auth::routes();
 //     return view('layouts.app');
 // });
 
-Route::get('/beranda', [ListBukuController::class, 'index'])->name('detailBuku_show');
+Route::get('/', [ListBukuController::class, 'index'])->name('detailBuku_show');
 
 
 // Route::get('/detail_buku/{id}', [ListBukuController::class, 'show'])->name('detailBuku_show');
@@ -70,7 +70,8 @@ Route::middleware([RoleBasedAccess::class . ':user'])->group(function () {
     Route::get('/pengajuan', [PengajuanController::class, 'create'])->name('pengajuan.create');
     Route::post('/pengajuan/tambah', [PengajuanController::class, 'store'])->name('pengajuan.store');
     Route::get('/profile/user', [ProfileController::class, 'user'])->name('profile.profile');
-    Route::put('/profile/user/edit', [ProfileController::class, 'UpdateUser'])->name('profile.edit');
+    Route::get('/profile/edit', [ProfileController::class, 'user'])->name('profile.edit');
+    Route::put('/profile/update', [ProfileController::class, 'UpdateUser'])->name('profile.update');
     Route::get('/list', [ListBukuController::class, 'indexList'])->name('listBuku');
     
     

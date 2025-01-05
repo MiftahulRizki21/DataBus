@@ -8,16 +8,18 @@
         background-color: #f4f7fc;
         margin: 0;
         padding: 0;
+        overflow-x: hidden; /* Mencegah scroll horizontal */
     }
 
     .form-container {
-        width: 80%;
+        width: 100%;
         max-width: 600px;
         margin: 40px auto;
         padding: 20px;
         background-color: white;
         border-radius: 8px;
         box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        margin-top: 200px;
     }
 
     h2 {

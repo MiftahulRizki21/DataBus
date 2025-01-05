@@ -18,10 +18,6 @@ class ListBukuController extends Controller
         // Ambil data buku secara acak dan paginate
         $listBuku = ListBuku::inRandomOrder()->paginate(3);
     
-        // Pastikan data berhasil diambil
-        if ($listBuku->isEmpty()) {
-            return response()->json(['message' => 'Tidak ada data buku'], 404);
-        }
     
         // Jika permintaan berasal dari AJAX, kirimkan konten dalam bentuk JSON
         if ($request->ajax()) {

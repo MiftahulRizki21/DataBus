@@ -20,37 +20,47 @@ class ProfileController extends Controller
     }
     public function user()
     {
-        // Ambil data pengguna yang sedang login
-        $user = Auth::user();
+            // Ambil data pengguna yang sedang login
+            $user = Auth::user();
 
-        // Kirimkan data pengguna ke view
-        return view('profile.profile', compact('user'));
-    }
+            // Kirimkan data pengguna ke view
+            return view('profile.profile', compact('user'));
+        }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function UpdateUser( $request)
-    {
-        // Validate the input
-        $validated = $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users,email,' . Auth::id(),
-        ]);
+        /**
+         * Show the form for creating a new resource.
+         */
+        public function UpdateUser(Request $request)
+        {
+            // Validasi data input
+            $validated = $request->validate([
+                'name' => 'required|string|max:255',
+                'email' => 'required|string|email|max:255|unique:users,email,' . Auth::id(),
+            ]);
 
-        // Get the authenticated user
-        $user = Auth::user();
+            // Ambil pengguna yang sedang login
+            $user = Auth::user();
 
-        // Update the user's name and email
-        $user->name = $request->name;
-        $user->email = $request->email;
+            // Update data pada model User
+            $user->name = $request->input('name');
+            $user->email = $request->input('email');
+            
+            // Simpan perubahan pada model User
+            $user->save();
 
-        // Save the changes to the users table
-        $user->save();
+            // Periksa apakah pengguna memiliki profil yang terkait
+            if ($user->profile) {
+                // Update data pada model Profile jika ada
+                $user->profile->name = $request->input('name');
+                $user->profile->save();
+            }
 
-        return redirect()->route('profile.profile')->with('success', 'Profil berhasil diperbarui');
-        
-    }
+            // Redirect kembali ke halaman edit profile dengan pesan sukses
+            return redirect()->route('profile.edit')->with('success', 'Profil berhasil diperbarui!');
+        }
+
+
+
     
 
 
