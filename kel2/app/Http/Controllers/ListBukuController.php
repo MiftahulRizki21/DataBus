@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use App\Models\pengajuan;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use App\Models\DetailBuku;
 
 class ListBukuController extends Controller
 {
@@ -87,12 +88,12 @@ class ListBukuController extends Controller
     
     public function indexList()
     {
-        // Ambil data pengguna yang sedang login
         $user = Auth::user();
-        
+
         $listBuku = ListBuku::inRandomOrder()->paginate(8);        
         return view('ListBuku.list_buku', compact('listBuku', 'user'));
     }
+
 
     public function indexListPengunjung()
     {
@@ -142,8 +143,8 @@ class ListBukuController extends Controller
      */
     public function show($id)
     { 
-        $buku = ListBuku::findOrFail($id); // Ambil data buku berdasarkan ID
-        return view('listBuku.detail_buku', compact('buku'));
+        $listbuku = ListBuku::findOrFail($id); // Ambil data buku berdasarkan ID
+        return view('listBuku.detailBuku_show', compact('listbuku'));
     }
 
     /**

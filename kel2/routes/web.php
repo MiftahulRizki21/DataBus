@@ -48,7 +48,7 @@ Route::post('register', [RegisterController::class, 'register']);
 
 Route::get('/logout', function () {
     Auth::logout();
-    return redirect('login');
+    return redirect('/');
 });
 
 

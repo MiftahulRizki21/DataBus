@@ -8,18 +8,18 @@
             overflow: hidden;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
             animation: fadeIn 1s ease-in-out;
+            height: 300px; /* Set a fixed height for the scrollable table */
+            overflow-y: scroll; /* Make the table scrollable */
         }
 
         .table {
             width: 100%;
             border-collapse: collapse;
             background-color: #fff;
-            overflow: hidden;
         }
 
         .table thead {
             background-color: #002855;
-            /* Sesuaikan warna header tabel dengan navbar */
             color: white;
             text-align: left;
         }
@@ -42,44 +42,6 @@
         .table tbody td {
             padding: 12px 15px;
             text-align: left;
-        }
-
-        .btn {
-            padding: 8px 12px;
-            font-size: 14px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            transition: transform 0.3s;
-        }
-
-        .btn:hover {
-            transform: scale(1.1);
-        }
-
-        .btn-primary {
-            background-color: #002855;
-            /* Sesuaikan dengan warna navbar */
-            color: white;
-        }
-
-        .btn-success {
-            background-color: #198754;
-            color: white;
-        }
-
-        .btn-danger {
-            background-color: #c82333;
-            color: white;
-        }
-
-        textarea {
-            width: 100%;
-            padding: 8px;
-            font-size: 14px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            resize: vertical;
         }
 
         .pagination {
@@ -108,6 +70,8 @@
             border-color: #ddd;
         }
 
+        /* Other styles remain the same */
+
         @keyframes fadeIn {
             from {
                 opacity: 0;
@@ -125,20 +89,18 @@
             top: 140px;
         }
 
-        /* Gaya untuk judul h1 */
         h1 {
             text-align: center;
             font-size: 36px;
             font-weight: bold;
             color: #002855;
             background-color: #f0f8ff;
-            /* Latar belakang yang lebih terang */
             padding: 20px;
             border-radius: 8px;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
             text-transform: uppercase;
-            /* Huruf kapital semua untuk efek profesional */
             margin-top: 290px;
+            width: 86%;
         }
 
         h5 {
@@ -146,14 +108,12 @@
             margin-left: 60px;
         }
 
-        /* Gaya khusus untuk tabel history */
+        /* Scrollable History Table Styles */
         .history-table-container {
             margin-top: 30px;
             max-width: 90%;
             height: 200px;
-            /* Lebih pendek dari tabel pengajuan */
             overflow-y: scroll;
-            /* Mengaktifkan scroll vertikal */
             border-radius: 10px;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
         }
@@ -187,21 +147,17 @@
             color: white;
             padding: 8px 12px;
             font-size: 14px;
-            border: none;
             border-radius: 4px;
             cursor: pointer;
             transition: transform 0.3s;
-
         }
 
-        /* Darker background on mouse-over */
         .download:hover {
             background-color: RoyalBlue;
         }
     </style>
 
-    <!-- Judul Halaman Editor -->
-    <h1>Halaman Staff</h1>
+    <center><h1>Halaman Staff</h1></center>
     <div class="container-fluid">
         <h5>Table Pengajuan</h5>
         <div class="table-container">
@@ -212,7 +168,7 @@
                         <th>Nama</th>
                         <th>File Buku</th>
                         <th>Detail Buku</th>
-                        <th>Alasan</th> <!-- Kolom Alasan -->
+                        <th>Alasan</th>
                         <th>Aksi</th>
                     </tr>
                 </thead>
@@ -220,147 +176,36 @@
                     @foreach ($pengajuans as $data)
                     @if ($data->status === 'Diterima' && $data->ISBN === null)
                     <tr>
-                                <!-- Kolom untuk unggah file -->
-                                <td>
-                                    {{ $loop->iteration }}
-                                </td>
-                                <td><p>{{ $data->judul_buku }}</p></td>
-                                    {{-- <form action="{{ route('editor.pengajuan.accept', $data->id) }}" method="POST" enctype="multipart/form-data">
-                                @csrf
-                                <div class="form-group">
-                                    <input type="file" name="file_edit" id="file_edit" class="form-input" required>
-                                </div>
-                            </form> --}}
-                                
-
-                                <td>
-                                    <a href="{{ asset('storage/' . $data->file) }}" target="_blank" class="download">Download
-                                        File</a>
-
-                                </td>
-                                <!-- Tombol detail -->
-                                <td>
-                                    <a href="/staff/buku/{{ $data->id }}">
-                                        <button type="button" class="btn btn-primary">Detail Buku</button>
-                                    </a>
-                                </td>
-
-                                <!-- Kolom alasan -->
-                                <td>
-                                    <textarea name="alasan" form="rejectForm{{ $data->id }}" placeholder="Masukkan alasan..." rows="3"></textarea>
-                                </td>
-
-                                <!-- Tombol aksi -->
-                                <td>
-                                    <!-- Tombol Terima -->
-                                    <button type="button" class="btn btn-success" data-bs-toggle="modal"
-                                        data-bs-target="#acceptModal{{ $data->id }}">
-                                        Terima
-                                    </button>
-
-                                    <!-- Modal Terima -->
-                                    <div class="modal fade" id="acceptModal{{ $data->id }}" tabindex="-1"
-                                        aria-labelledby="acceptModalLabel" aria-hidden="true">
-                                        <div class="modal-dialog">
-                                            <div class="modal-content">
-                                                <form action="{{ route('pengajuan.approve', $data->id) }}" method="POST">
-                                                    @csrf
-                                                    @method('PUT')
-                                                    <div class="modal-header">
-                                                        <h5 class="modal-title" id="acceptModalLabel">Masukkan ISBN</h5>
-                                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                            aria-label="Close"></button>
-                                                    </div>
-                                                    <div class="modal-body">
-                                                        <input type="hidden" name="status" value="Diterima">
-                                                        <div class="form-group">
-                                                            <label for="ISBN">ISBN:</label>
-                                                            <input type="text" name="ISBN" class="form-control"
-                                                                placeholder="Masukkan ISBN" required>
-                                                        </div>
-                                                    </div>
-                                                    <div class="modal-footer">
-                                                        <button type="button" class="btn btn-secondary"
-                                                            data-bs-dismiss="modal">Batal</button>
-                                                        <button type="submit" class="btn btn-success">Terima</button>
-                                                    </div>
-                                                </form>
-                                            </div>
-                                        </div>
-                                    </div>
-
-
-
-                                    <!-- Form Tolak dengan Modal -->
-                                    <button type="button" class="btn btn-danger" data-bs-toggle="modal"
-                                        data-bs-target="#rejectModal{{ $data->id }}">
-                                        Tolak
-                                    </button>
-
-                                    <!-- Modal Revisi -->
-                                    <div class="modal fade" id="rejectModal{{ $data->id }}" tabindex="-1"
-                                        aria-labelledby="rejectModalLabel" aria-hidden="true">
-                                        <div class="modal-dialog">
-                                            <div class="modal-content">
-                                                <form action="{{ route('pengajuan.reject', $data->id) }}" method="POST">
-                                                    @csrf
-                                                    @method('PUT')
-                                                    <div class="modal-header">
-                                                        <h5 class="modal-title" id="rejectModalLabel">Masukkan Alasan Revisi
-                                                        </h5>
-                                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                            aria-label="Close"></button>
-                                                    </div>
-                                                    <div class="modal-body">
-                                                        <input type="hidden" name="status" value="Revisi">
-                                                        <div class="form-group">
-                                                            <textarea name="alasan" class="form-control" placeholder="Masukkan alasan..." required></textarea>
-                                                        </div>
-                                                    </div>
-                                                    <div class="modal-footer">
-                                                        <button type="button" class="btn btn-secondary"
-                                                            data-bs-dismiss="modal">Batal</button>
-                                                        <button type="submit" class="btn btn-danger">Tolak</button>
-                                                    </div>
-                                                </form>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </td>
-
-                            </tr>
-                        @endif
+                        <td>{{ $loop->iteration }}</td>
+                        <td>{{ $data->judul_buku }}</td>
+                        <td>
+                            <a href="{{ asset('storage/' . $data->file) }}" target="_blank" class="download">Download File</a>
+                        </td>
+                        <td>
+                            <a href="/staff/buku/{{ $data->id }}">
+                                <button type="button" class="btn btn-primary">Detail Buku</button>
+                            </a>
+                        </td>
+                        <td>
+                            <textarea name="alasan" form="rejectForm{{ $data->id }}" placeholder="Masukkan alasan..." rows="3"></textarea>
+                        </td>
+                        <td>
+                            <!-- Action Buttons -->
+                            <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#acceptModal{{ $data->id }}">
+                                Terima
+                            </button>
+                            <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#rejectModal{{ $data->id }}">
+                                Tolak
+                            </button>
+                        </td>
+                    </tr>
+                    @endif
                     @endforeach
                 </tbody>
             </table>
         </div>
 
-        <!-- Pagination -->
-        <div class="pagination" style="margin-bottom: 100px">
-            <ul class="pagination">
-                <li class="page-item">
-                    <a class="page-link" href="#" aria-label="Previous">
-                        <span aria-hidden="true">&laquo;</span>
-                    </a>
-                </li>
-                <li class="page-item active">
-                    <a class="page-link" href="#">1</a>
-                </li>
-                <li class="page-item">
-                    <a class="page-link" href="#">2</a>
-                </li>
-                <li class="page-item">
-                    <a class="page-link" href="#">3</a>
-                </li>
-                <li class="page-item">
-                    <a class="page-link" href="#" aria-label="Next">
-                        <span aria-hidden="true">&raquo;</span>
-                    </a>
-                </li>
-            </ul>
-        </div>
 
-        <!-- Tabel History -->
         <h5>Table History</h5>
         <center>
             <div class="history-table-container">
@@ -377,18 +222,10 @@
                         @foreach ($history as $data)
                             @if ($data->status === 'Ditolak' || $data->ISBN != null)
                                 <tr>
-                                    <td>
-                                        {{ $loop->iteration }}
-                                    </td>
-                                    <td>
-                                        {{ $data->judul_buku }}
-                                    </td>
-                                    <td>
-                                        {{ $data->status }}
-                                    </td>
-                                    <td>
-                                        {{ $data->updated_at }}
-                                    </td>
+                                    <td>{{ $loop->iteration }}</td>
+                                    <td>{{ $data->judul_buku }}</td>
+                                    <td>{{ $data->status }}</td>
+                                    <td>{{ $data->updated_at }}</td>
                                 </tr>
                             @endif
                         @endforeach
@@ -398,3 +235,5 @@
         </center>
     </div>
 @endsection
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">

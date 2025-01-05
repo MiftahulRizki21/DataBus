@@ -6,6 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>List Buku</title>
     <style>
+        b{
+            color: black;
+        }
         body {
             background-color: #f8f9fa;
             display: flex;
@@ -18,10 +21,18 @@
         }
 
         h1 {
-            margin-bottom: 30px;
-            font-size: 2rem;
-            text-align: center;
-        }
+                text-align: center;
+                font-size: 36px;
+                font-weight: bold;
+                color: #002855;
+                background-color: #f0f8ff;
+                /* Latar belakang yang lebih terang */
+                padding: 20px;
+                border-radius: 8px;
+                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+                text-transform: uppercase;
+                /* Huruf kapital semua untuk efek profesional */
+            }
 
         .card {
             display: flex;
@@ -135,62 +146,46 @@
         }
     </style>
 
-    <div class="container" >
-        <center><h1>List Buku</h1></center>
-        <div class="row">
+    <div class="container" style="margin-top: 200px;">
+        <center><h1 >List Buku</h1></center>
+        <div class="row" style="margin-top: 150px;">
             @foreach ($listBuku as $listbuku )
             <div class="col-md-6">
                 <div class="card">
-                    <img src="{{ Storage::url($listbuku->foto) }}" alt="{{ $listbuku->judul_buku }}">
+                    <img src="{{ asset('storage/'. $listbuku->foto) }}" alt="{{ $listbuku->judul_buku }}">
                     
                     <div class="book-info">
-                        <h4>{{ $listbuku->judul_buku }}</h4>
+                        <center><h4>{{ $listbuku->judul_buku }}</h4>
                         <table>
                             <tr>
-                                <td>Penulis: {{ $listbuku->nama_penulis }}</td>
+                                <td><b>Penulis:</b> {{ $listbuku->nama_penulis }}</td>
                             </tr>
                             <tr>
-                                <td>Penerbit: {{ $listbuku->nama_penerbit }}</td>
+                                <td><b>Penerbit:</b> {{ $listbuku->nama_penerbit }}</td>
                             </tr>
                             <tr>
-                                <td>Release:{{ $listbuku->tgl_rilis }}</td>
+                                <td><b>Release:</b>{{ $listbuku->tgl_rilis }}</td>
                             </tr>
                             <tr>
-                                <td>Hal: {{ $listbuku->halaman }}</td>
+                                <td><b>Hal:</b> {{ $listbuku->halaman }}</td>
                             </tr>
                         </table>
                         <a href="/detail_buku/{{ $listbuku->id }}">Detail</a>
-                    </div>
+                    </div></center>
                 </div>
 
             </div>
             @endforeach
 
-            <!-- Pagination -->
-                <div class="pagination" >
-                    <ul class="pagination">
-                        <li class="page-item">
-                            <a class="page-link" href="#" aria-label="Previous">
-                                <span aria-hidden="true">&laquo;</span>
-                            </a>
-                        </li>
-                        <li class="page-item active">
-                            <a class="page-link" href="#">1</a>
-                        </li>
-                        <li class="page-item">
-                            <a class="page-link" href="#">2</a>
-                        </li>
-                        <li class="page-item">
-                            <a class="page-link" href="#">3</a>
-                        </li>
-                        <li class="page-item">
-                            <a class="page-link" href="#" aria-label="Next">
-                                <span aria-hidden="true">&raquo;</span>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
+            
 
+                <div class="pagination">
+                    {{ $listBuku->links('pagination::bootstrap-5') }}
+                </div>
+                
+
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
 </body>

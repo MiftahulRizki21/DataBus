@@ -26,7 +26,7 @@ class HomeController extends Controller
     {
         $user = Auth::user();
         $listBuku = ListBuku::inRandomOrder()->paginate(8);        
-        return view('general.user', compact('listBuku', 'user'));
+        return view('General.user', compact('listBuku', 'user'));
     }
     public function show(string $id)
     {

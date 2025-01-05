@@ -13,7 +13,7 @@
 
     .form-container {
         width: 100%;
-        max-width: 600px;
+        max-width: 800px;
         margin: 40px auto;
         padding: 20px;
         background-color: white;
@@ -28,15 +28,20 @@
         color: rgb(107 114 128 / var(--tw-text-opacity, 1));
     }
 
+    .form-row {
+        display: flex;
+        gap: 10px; /* Jarak horizontal antar elemen */
+        margin-bottom: 20px; /* Jarak vertikal antar baris */
+    }
+
     .form-group {
-        margin-bottom: 20px;
+        flex: 1; /* Membuat elemen di sisi kiri dan kanan memiliki ukuran yang sama */
     }
 
     .form-group label {
         font-size: 14px;
         color: #555;
         margin-bottom: 8px;
-        display: block;
     }
 
     .form-input {
@@ -77,15 +82,19 @@
             width: 90%;
         }
 
+        .form-row {
+            flex-direction: column;
+        }
+
         .btn-submit {
             padding: 12px;
             font-size: 14px;
         }
     }
 
-    .form-container{
+    .form-container {
         position: relative;
-        top: 40%;
+        top: 25%;
     }
 </style>
 
@@ -93,51 +102,52 @@
     @csrf
     <h2>Form Pengajuan Buku</h2>
     <br>
-    <div class="form-group">
-        <label for="judul_buku">Judul Buku</label>
-        <input type="text" name="judul_buku" id="judul_buku" class="form-input" placeholder="Masukkan judul buku" required>
+    <div class="form-row">
+        <div class="form-group">
+            <label for="judul_buku">Judul Buku</label>
+            <input type="text" name="judul_buku" id="judul_buku" class="form-input" placeholder="Masukkan judul buku" required>
+        </div>
+        <div class="form-group">
+            <label for="sipnosis">Sipnosis</label>
+            <input type="text" name="sipnosis" id="sipnosis" class="form-input" placeholder="Masukkan sipnosis" required>
+        </div>
     </div>
 
-    <div class="form-group">
-        <label for="sipnosis">Sipnosis</label>
-        <input type="text" name="sipnosis" id="sipnosis" class="form-input" placeholder="Masukkan sipnosis" required>
+    <div class="form-row">
+        <div class="form-group">
+            <label for="nama_penulis">Nama Penulis</label>
+            <input type="text" name="nama_penulis" id="nama_penulis" class="form-input" placeholder="Masukkan nama penulis" required>
+        </div>
+        <div class="form-group">
+            <label for="nama_penerbit">Nama Penerbit</label>
+            <input type="text" name="nama_penerbit" id="nama_penerbit" class="form-input" placeholder="Masukkan nama penerbit" required>
+        </div>
     </div>
 
-    <div class="form-group">
-        <label for="nama_penulis">Nama Penulis</label>
-        <input type="text" name="nama_penulis" id="nama_penulis" class="form-input" placeholder="Masukkan nama penulis" required>
+    <div class="form-row">
+        <div class="form-group">
+            <label for="tgl_rilis">Tanggal Rilis</label>
+            <input type="date" name="tgl_rilis" id="tgl_rilis" class="form-input" required>
+        </div>
+        <div class="form-group">
+            <label for="halaman">Jumlah Halaman</label>
+            <input type="number" name="halaman" id="halaman" class="form-input" placeholder="Masukkan jumlah halaman" required>
+        </div>
     </div>
 
-    <div class="form-group">
-        <label for="nama_penerbit">Nama Penerbit</label>
-        <input type="text" name="nama_penerbit" id="nama_penerbit" class="form-input" placeholder="Masukkan nama penerbit" required>
+    <div class="form-row">
+        <div class="form-group">
+            <label for="foto">Foto Buku "Maksimal 5MB"</label>
+            <input type="file" name="foto" id="foto" class="form-input" required>
+        </div>
+        <div class="form-group">
+            <label for="file">File Buku "Pdf"</label>
+            <input type="file" name="file" id="file" class="form-input" required>
+        </div>
     </div>
 
-    <div class="form-group">
-        <label for="tgl_rilis">Tanggal Rilis</label>
-        <input type="date" name="tgl_rilis" id="tgl_rilis" class="form-input" required>
-    </div>
-
-    <div class="form-group">
-        <label for="halaman">Jumlah Halaman</label>
-        <input type="number" name="halaman" id="halaman" class="form-input" placeholder="Masukkan jumlah halaman" required>
-    </div>
-
-    <div class="form-group">
-        <label for="foto">Foto Buku</label>
-        <input type="file" name="foto" id="foto" class="form-input" required>
-    </div>
-
-    <div class="form-group">
-        <label for="foto">File Buku</label>
-        <input type="file" name="file" id="file" class="form-input" required>
-    </div>
     <input type="hidden" name="status" value="Tidak Diterima">
-    <input type="hidden" name="ISBN" value= '' >
-
+    <input type="hidden" name="ISBN" value=''>
 
     <button type="submit" class="btn-submit">Submit</button>
 </form>
-
-
-

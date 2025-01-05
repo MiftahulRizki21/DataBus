@@ -33,7 +33,7 @@
             }
 
             footer {
-                background-color: #343a40;
+                background-color: #002855;
                 color: white;
                 text-align: center;
                 padding: 10px 0;

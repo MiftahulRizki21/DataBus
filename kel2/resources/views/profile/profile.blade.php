@@ -19,7 +19,7 @@
         border-radius: 8px;
         box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     }
-
+    
     h2 {
         text-align: center;
         color: rgb(107 114 128 / var(--tw-text-opacity, 1));
@@ -143,7 +143,6 @@
         transform: scale(1.05);
     }
 
-
 </style>
 <div class="logout-container">
     <a href="/logout" onclick="confirmLogout(event)" class="btn-logout">Logout</a>
@@ -182,7 +181,12 @@
                 <th>Judul Buku</th>
                 <th>Tanggal Pengubahan Status</th>
                 <th>Status</th>
+                <th>Alasan Editor</th>
+                <th>Alasan Staff</th>   
                 
+                @if (Auth::user()->role === 'user')
+                    <th>Aksi</th>
+                @endif
             </tr>
         </thead>
         <tbody>
@@ -192,6 +196,18 @@
                 <td>{{ $pengajuan->judul_buku }}</td>
                 <td>{{ $pengajuan->updated_at }}</td>
                 <td>{{ $pengajuan->status }}</td>
+                <td>{{ $pengajuan->Alasan_editor }}</td>
+                <td>{{ $pengajuan->Alasan_staff }}</td>
+
+                @if (Auth::user()->role === 'user')
+                    <td>
+                        @if ($pengajuan->status === 'Revisi')
+                            <a href="{{ route('pengajuan.edit', $pengajuan->id) }}" class="btn btn-warning">Update</a>
+                        @else
+                            <span class="text-muted">Tidak Ada Aksi</span>
+                        @endif
+                    </td>
+                @endif
             </tr>
             @endforeach
         </tbody>

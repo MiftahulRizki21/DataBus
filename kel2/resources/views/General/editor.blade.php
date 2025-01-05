@@ -8,6 +8,8 @@
             overflow: hidden;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
             animation: fadeIn 1s ease-in-out;
+            height: 400px; /* Tentukan tinggi maksimum untuk scroll */
+            overflow-y: scroll; /* Aktifkan scroll vertikal */
         }
 
         .table {
@@ -139,6 +141,7 @@
             text-transform: uppercase;
             /* Huruf kapital semua untuk efek profesional */
             margin-top: 290px;
+            width: 86%;
         }
 
         h5 {
@@ -191,7 +194,6 @@
             border-radius: 4px;
             cursor: pointer;
             transition: transform 0.3s;
-
         }
 
         /* Darker background on mouse-over */
@@ -201,7 +203,7 @@
     </style>
 
     <!-- Judul Halaman Editor -->
-    <h1>Halaman Editor</h1>
+    <center><h1>Halaman Editor</h1></center>
     <div class="container-fluid">
         <h5>Table Pengajuan</h5>
         <div class="table-container">
@@ -234,7 +236,6 @@
                         <td><p>{{ $data->judul_buku }}</p></td>
                         <td>
                             <a href="{{ asset('storage/' . $data->file) }}" target="_blank" class="download">Download File</a>
-
                         </td>
                         
                         <!-- Tombol detail -->
@@ -275,7 +276,7 @@
                                                     <input type="file" name="file" class="form-control"
                                                         placeholder="File buku" required>
                                                 </div>
-                                                
+                                                  
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary"
@@ -318,36 +319,10 @@
                                 </div>
                             </div>
                         </td>
-                        
                     </tr>
                     @endforeach
                 </tbody>
             </table>
-        </div>
-
-        <!-- Pagination -->
-        <div class="pagination" style="margin-bottom: 100px">
-            <ul class="pagination">
-                <li class="page-item">
-                    <a class="page-link" href="#" aria-label="Previous">
-                        <span aria-hidden="true">&laquo;</span>
-                    </a>
-                </li>
-                <li class="page-item active">
-                    <a class="page-link" href="#">1</a>
-                </li>
-                <li class="page-item">
-                    <a class="page-link" href="#">2</a>
-                </li>
-                <li class="page-item">
-                    <a class="page-link" href="#">3</a>
-                </li>
-                <li class="page-item">
-                    <a class="page-link" href="#" aria-label="Next">
-                        <span aria-hidden="true">&raquo;</span>
-                    </a>
-                </li>
-            </ul>
         </div>
 
         <!-- Tabel History -->
@@ -384,3 +359,5 @@
         </center>
     </div>
 @endsection
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
