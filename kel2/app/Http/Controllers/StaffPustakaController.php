@@ -8,7 +8,7 @@ use App\Http\Requests\Updatestaff_pustakaRequest;
 use App\Models\pengajuan;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
-
+use App\Models\ListBuku;
 class StaffPustakaController extends Controller
 {
     /**
@@ -30,26 +30,46 @@ class StaffPustakaController extends Controller
     public function approve(Request $request, $id)
     {
         $pengajuan = Pengajuan::findOrFail($id);
-
-        // Jika diterima, staff mengisi ISBN
+    
+        // Jika status diterima, pastikan ISBN diisi
         if ($request->status == 'Diterima') {
-            if (is_null($pengajuan->ISBN)) {
+            if (is_null($request->ISBN) || empty($request->ISBN)) {
                 return redirect()->back()->with('error', 'ISBN tidak boleh kosong untuk pengajuan yang diterima.');
             }
+    
+            // Perbarui pengajuan
             $pengajuan->update([
                 'status' => 'Diterima',
-                'isbn' => $request->isbn,
-                'staff_id'=>Auth::id(),
+                'ISBN' => $request->ISBN,
+                'staff_id' => Auth::id(),
             ]);
+    
+            // Masukkan data ke tabel ListBuku
+            \App\Models\ListBuku::create([
+                'judul_buku' => $pengajuan->judul_buku,  // Ambil data dari pengajuan
+                'sipnosis' => $pengajuan->sipnosis,
+                'nama_penulis' => $pengajuan->nama_penulis,
+                'nama_penerbit' => $pengajuan->nama_penerbit,
+                'tgl_rilis' => $pengajuan->tgl_rilis,
+                'halaman' => $pengajuan->halaman,
+                'isbn' => $request->ISBN,  // Masukkan ISBN yang baru
+                'foto' => $pengajuan->foto,  // Jika ada foto, sesuaikan dengan field yang ada
+            ]);
+    
+            // Flash message sukses
+            session()->flash('success', 'Pengajuan diterima dan buku berhasil dimasukkan ke List Buku!');
         } else {
             // Jika ditolak, status diubah menjadi ditolak
             $pengajuan->update([
                 'status' => 'Ditolak',
             ]);
         }
-
+    
         return redirect()->route('staff.dashboard');
     }
+    
+
+
     /**
      * Show the form for creating a new resource.
      */

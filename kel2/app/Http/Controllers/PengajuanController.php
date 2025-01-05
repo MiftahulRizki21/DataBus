@@ -7,6 +7,7 @@ use App\Http\Requests\StorepengajuanRequest;
 use App\Http\Requests\UpdatepengajuanRequest;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
 
 class PengajuanController extends Controller
 {
@@ -70,6 +71,44 @@ class PengajuanController extends Controller
     // Redirect kembali ke halaman sebelumnya
     return redirect()->route('pengajuan.create');
 
+}
+
+public function updatePengajuanStatus(Request $request, $id)
+{
+    // Validasi data yang dikirim
+    $request->validate([
+        'status' => 'required|in:Diterima,Revisi,Ditolak',
+    ]);
+
+    // Cari pengajuan berdasarkan ID
+    $pengajuan = \App\Models\Pengajuan::findOrFail($id);
+
+    // Perbarui status pengajuan
+    $pengajuan->status = $request->input('status');
+    $pengajuan->save();
+
+    // Jika status diterima, pindahkan ke ListBuku
+    if ($pengajuan->status === 'Diterima') {
+        // Buat entri baru di ListBuku
+        $listBuku = new \App\Models\ListBuku([
+            'judul_buku' => $pengajuan->judul, // Sesuaikan nama kolom
+            'sipnosis' => $pengajuan->sipnosis,
+            'nama_penulis' => $pengajuan->nama_penulis,
+            'nama_penerbit' => $pengajuan->nama_penerbit,
+            'tgl_rilis' => $pengajuan->tgl_rilis,
+            'halaman' => $pengajuan->halaman,
+            'foto' => $pengajuan->file_buku, // Asumsikan `file_buku` adalah nama kolom file
+            'isbn' => $request->input('isbn'), // Data ISBN dari request
+        ]);
+
+        // Simpan data ke tabel ListBuku
+        $listBuku->save();
+    }
+
+    // Berikan pesan sukses
+    session()->flash('success', 'Status pengajuan berhasil diperbarui!');
+
+    return back();
 }
     public function indexEditor()
     {
