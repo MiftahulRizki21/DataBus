@@ -73,11 +73,11 @@
         <h3 class="text-primary text-center">DETAIL BUKU</h3>
 
         <!-- Menampilkan gambar cover buku -->
-        <img src="{{ asset($detailBuku->cover) }}" alt="{{ $detailBuku->judul }}">
+        <img src="{{ asset('storage/'.$detailBuku->foto) }}" alt="{{ $detailBuku->judul_buku }}">
 
         <!-- Menampilkan judul buku -->
         <div class="book-title">
-            {{ $detailBuku->judul }}
+            {{ $detailBuku->judul_buku}}
         </div>
 
         <!-- Menampilkan sinopsis buku -->
@@ -94,11 +94,11 @@
             <table class="table">
                 <tr>
                     <th>Penulis :</th>
-                    <td>{{ $detailBuku->penulis }}</td>
+                    <td>{{ $detailBuku->nama_penulis }}</td>
                 </tr>
                 <tr>
                     <th>Penerbit : </th>
-                    <td>{{ $detailBuku->penerbit }}</td>
+                    <td>{{ $detailBuku->nama_penerbit }}</td>
                 </tr>
                 <tr>
                     <th>Release : </th>
@@ -110,20 +110,13 @@
                 </tr>
                 <tr>
                     <th>Editor : </th>
-                    <td>{{ $detailBuku->editor }}</td>
-                </tr>
-                <tr>
-                    <th>Media : </th>
-                    <td>{{ $detailBuku->media }}</td>
+                    <td>{{ $detailBuku->editor->name }}</td>
                 </tr>
                 <tr>
                     <th>ISBN : </th>
-                    <td>{{ $detailBuku->isbn }}</td>
+                    <td>{{ $detailBuku->ISBN }}</td>
                 </tr>
-                <tr>
-                    <th>KDT : </th>
-                    <td>{{ $detailBuku->kdt ?? 'Tidak tersedia' }}</td>
-                </tr>
+
             </table>
         </div>
     </div>

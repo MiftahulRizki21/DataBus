@@ -84,7 +84,7 @@ Route::put('/pengajuan/{id}/approve', [StaffPustakaController::class, 'approve']
 
 Route::middleware([RoleBasedAccess::class . ':user'])->group(function () {
     Route::get('/user/dashboard', [PengajuanController::class, 'index'])->name('user.dashboard');
-    Route::get('/detail_buku/{id}', [ListBukuController::class, 'show'])->name('buku.detail');
+    Route::get('/detail_buku/{id}', [ListBukuController::class, 'detailBuku'])->name('buku.detail');
     Route::get('/pengajuan', [PengajuanController::class, 'create'])->name('pengajuan.create');
     Route::post('/pengajuan/store', [PengajuanController::class, 'store'])->name('pengajuan.store');
 
@@ -94,7 +94,7 @@ Route::middleware([RoleBasedAccess::class . ':user'])->group(function () {
 // Rute untuk Staff
 Route::middleware([RoleBasedAccess::class . ':staff'])->group(function () {
     Route::get('/staff/dashboard', [StaffPustakaController::class, 'index'])->name('staff.dashboard');
-    Route::get('/detail_buku/{id}', [ListBukuController::class, 'show'])->name('buku.detail');
+    // Route::get('/detail_buku/{id}', [ListBukuController::class, 'show'])->name('buku.detail');
     Route::get('/staff/buku/{id}', [PengajuanController::class, 'show'])->name('buku.detail');
     // Route::get('/', [ListBukuController::class, 'show'])->name('listBuku');
     Route::get('/list/staff', [ListBukuController::class, 'indexList'])->name('listBuku');

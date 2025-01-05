@@ -20,6 +20,19 @@ class ListBuku extends Model
         'file',
         'status',
         'ISBN',
+        'editor_id',
+        'staff_id',
     ];
+
+    public function editor()
+    {
+        return $this->belongsTo(User::class, 'editor_id');
+    }
+
+    // Relasi ke User sebagai staf
+    public function staff()
+    {
+        return $this->belongsTo(User::class, 'staff_id');
+    }
     
 }
