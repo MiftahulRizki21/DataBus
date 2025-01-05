@@ -13,6 +13,9 @@ return new class extends Migration
     {
         Schema::create('pengajuans', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->constrained()->onDelete('cascade'); // User yang mengajukan
+            $table->foreignId('editor_id')->nullable()->constrained('users')->onDelete('set null'); // Editor yang mengedit, nullable jika belum diedit
+            $table->foreignId('staff_id')->nullable()->constrained('users')->onDelete('set null'); // Staff yang memproses, nullable jika belum diproses
             $table->string('judul_buku');
             $table->string('sipnosis');
             $table->string('nama_penulis');
@@ -20,7 +23,7 @@ return new class extends Migration
             $table->date('tgl_rilis');
             $table->string('halaman');
             $table->string('foto');
-            $table->string('file');
+            $table->string('file')->nullable();
             $table->enum('status', (['Tidak Diterima', 'Diterima', 'Revisi', 'Ditolak']));
             $table->string('ISBN')->nullable();
             $table->string('Alasan_editor')->nullable();

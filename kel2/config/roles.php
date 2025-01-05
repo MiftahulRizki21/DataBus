@@ -6,7 +6,8 @@ return [
             'pengajuan.create',
             'pengajuan.store',
             'buku.detail',
-            'profile.profile'
+            'profile.profile',
+            'user.dashboard',
         ],
         'staff' => [
             'staff.dashboard',

@@ -13,9 +13,13 @@ return new class extends Migration
     {
         Schema::create('riwayat_editors', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('id_editor')->constrained()->onDelete('cascade');
-            $table->foreignId('id_pengajuan')->constrained()->onDelete('cascade');
+            $table->unsignedBigInteger('pengajuan_id');
+            $table->unsignedBigInteger('editor_id');
+            $table->string('status');
             $table->timestamps();
+
+            $table->foreign('pengajuan_id')->references('id')->on('pengajuans')->onDelete('cascade');
+            $table->foreign('editor_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

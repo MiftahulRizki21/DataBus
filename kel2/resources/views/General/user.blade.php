@@ -1,138 +1,351 @@
-@extends('layouts.UserApp')
+@extends('layouts.app')
 @section('content')
-    <div class="container-fluid fade-in">
-        <div class="objek-lp fade-in">
-            <h1 class="selamat">Selamat Datang</h1>
-            <h3>User</h3>
-        </div>
+    <style>
+        .table-container {
+            margin: 20px auto;
+            max-width: 90%;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            animation: fadeIn 1s ease-in-out;
+        }
 
-        <div class="isi fade-in" style="padding: 30px">
-            <div class="rekomendasi fade-in" style="margin-top: 40px">
-                <center>
-                    <h2 class="rekomendasi">Rekomendasi</h2>
-                    <hr class="garis-horizontal">
-                    <p class="sample-text" style="margin-top: 25px">Rekomendasi yang kami tampilkan berupa koleksi buku ISBN
-                        dari Kampus Politeknik
-                        Caltex Riau secara random.</p>
-                </center>
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: #fff;
+            overflow: hidden;
+        }
 
-                <div class="container-rekom fade-in">
-                    <center>
-                        <table class="rekom">
-                            <tr>
-                                <tr>
-                                    <!-- Tombol Previous -->
-                                    @if ($listBuku->onFirstPage())
-                                        <td><span class="previous round fade-in disabled"><h2>&#8249;</h2></span></td>
-                                    @else
-                                        <td>
-                                            <a href="{{ $listBuku->previousPageUrl() }}" class="previous round fade-in">
-                                                <h2>&#8249;</h2>
-                                            </a>
-                                        </td>
-                                    @endif
-                                
-                                    <!-- Buku -->
-                                    @foreach ($listBuku as $listbuku)
-                                        <td>
-                                            <div class="rekom fade-in">
-                                                <a href="{{ route('detailBuku_show', $listbuku->id) }}" style="width: 100%; height: 100%;">
-                                                    <img src="{{ Storage::url($listbuku->foto) }}"
-                                                         alt="{{ $listbuku->judul_buku }}"
-                                                         style="width: 100%; height: 100%;">
-                                                </a>
+        .table thead {
+            background-color: #002855;
+            /* Sesuaikan warna header tabel dengan navbar */
+            color: white;
+            text-align: left;
+        }
+
+        .table thead th {
+            padding: 12px 15px;
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        .table tbody tr {
+            border-bottom: 1px solid #ddd;
+            transition: background-color 0.3s;
+        }
+
+        .table tbody tr:hover {
+            background-color: #f0f8ff;
+        }
+
+        .table tbody td {
+            padding: 12px 15px;
+            text-align: left;
+        }
+
+        .btn {
+            padding: 8px 12px;
+            font-size: 14px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .btn:hover {
+            transform: scale(1.1);
+        }
+
+        .btn-primary {
+            background-color: #002855;
+            /* Sesuaikan dengan warna navbar */
+            color: white;
+        }
+
+        .btn-success {
+            background-color: #198754;
+            color: white;
+        }
+
+        .btn-danger {
+            background-color: #c82333;
+            color: white;
+        }
+
+        textarea {
+            width: 100%;
+            padding: 8px;
+            font-size: 14px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            resize: vertical;
+        }
+
+        .pagination {
+            display: flex;
+            justify-content: center;
+            padding: 20px 0;
+        }
+
+        .pagination .page-item.active .page-link {
+            background-color: #002855;
+            border-color: #002855;
+            color: white;
+        }
+
+        .pagination .page-link {
+            color: #002855;
+            background-color: white;
+            border: 1px solid #ddd;
+            padding: 8px 12px;
+            margin: 0 5px;
+            border-radius: 4px;
+        }
+
+        .pagination .page-link:hover {
+            background-color: #f0f8ff;
+            border-color: #ddd;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .container-fluid {
+            position: relative;
+            top: 140px;
+        }
+
+        /* Gaya untuk judul h1 */
+        h1 {
+            text-align: center;
+            font-size: 36px;
+            font-weight: bold;
+            color: #002855;
+            background-color: #f0f8ff;
+            /* Latar belakang yang lebih terang */
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            text-transform: uppercase;
+            /* Huruf kapital semua untuk efek profesional */
+            margin-top: 290px;
+        }
+
+        h5 {
+            color: #002855;
+            margin-left: 60px;
+        }
+
+        /* Gaya khusus untuk tabel history */
+        .history-table-container {
+            margin-top: 30px;
+            max-width: 90%;
+            height: 200px;
+            /* Lebih pendek dari tabel pengajuan */
+            overflow-y: scroll;
+            /* Mengaktifkan scroll vertikal */
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .history-table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: #fff;
+        }
+
+        .history-table thead {
+            background-color: #002855;
+            color: white;
+            text-align: left;
+        }
+
+        .history-table thead th {
+            padding: 12px 15px;
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        .history-table tbody td {
+            padding: 12px 15px;
+            text-align: left;
+        }
+
+        .download {
+            background-color: DodgerBlue;
+            border: none;
+            color: white;
+            padding: 8px 12px;
+            font-size: 14px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: transform 0.3s;
+
+        }
+
+        /* Darker background on mouse-over */
+        .download:hover {
+            background-color: RoyalBlue;
+        }
+    </style>
+
+    <!-- Judul Halaman Editor -->
+    <h1>Halaman Editor</h1>
+    <div class="container-fluid">
+        <h5>Table Pengajuan</h5>
+        <div class="table-container">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>No</th>
+                        <th>Nama</th>
+                        <th>File Buku</th>
+                        <th>File Edit Buku</th>
+                        <th>Detail Buku</th>
+                        <th>Alasan</th> <!-- Kolom Alasan -->
+                        <th>Aksi</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($pengajuans as $data)
+                    <tr>
+                        <!-- Kolom untuk unggah file -->
+                        <td>
+                            {{-- <form action="{{ route('editor.pengajuan.accept', $data->id) }}" method="POST" enctype="multipart/form-data">
+                                @csrf
+                                <div class="form-group">
+                                    <input type="file" name="file_edit" id="file_edit" class="form-input" required>
+                                </div>
+                            </form> --}}
+                        </td>
+                        
+                        <!-- Tombol detail -->
+                        <td>
+                            <a href="/detail_buku/{{ $data->id }}">
+                                <button type="button" class="btn btn-primary">Detail Buku</button>
+                            </a>
+                        </td>
+                        
+                        <!-- Kolom alasan -->
+                        <td>
+                            <textarea name="Alasan_editor" form="rejectForm{{ $data->id }}" placeholder="Masukkan alasan..." rows="3"></textarea>
+                        </td>
+                        
+                        <!-- Tombol aksi -->
+                        <td>
+                            <!-- Form Terima -->
+                            <form action="{{ route('pengajuan.create', $data->id) }}" method="POST" style="display:inline-block;">
+                                @csrf
+                                @method('PUT')
+                                <input type="hidden" name="status" value="diterima">
+                                <button type="submit" class="btn btn-success">Terima</button>
+                            </form>
+                        
+                            <!-- Form Tolak dengan Modal -->
+                            <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#rejectModal{{ $data->id }}">
+                                Revisi
+                            </button>
+                        
+                            <!-- Modal Revisi -->
+                            <div class="modal fade" id="rejectModal{{ $data->id }}" tabindex="-1" aria-labelledby="rejectModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <form action="{{ route('pengajuan.update', $data->id) }}" method="POST">
+                                            @csrf
+                                            @method('PUT')
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="rejectModalLabel">Masukkan Alasan Revisi</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                             </div>
-                                        </td>
-                                    @endforeach
-                                
-                                    <!-- Tombol Next -->
-                                    @if ($listBuku->hasMorePages())
-                                        <td>
-                                            <a href="{{ $listBuku->nextPageUrl() }}" class="next round fade-in">
-                                                <h2>&#8250;</h2>
-                                            </a>
-                                        </td>
-                                    @else
-                                        <td><span class="next round fade-in disabled"><h2>&#8250;</h2></span></td>
-                                    @endif
-                                </tr>                                
-                            </tr>
-                        </table>
-                    </center>
-                </div>
-
-            </div>
-            
-            <div class="contact fade-in" style="margin-top: 70px">
-                <h2>Kontak Kami</h2>
-                <center>
-                    <hr class="garis-horizontal">
-                </center>
-                <div class="contact fade-in" style="margin-top: 20px">
-                    <p class="sample-text">Sample text. Click to select the text box. Click again or double-click to start
-                        editing the text.</p>
-                    <div class="contact-container">
-                        <div class="contact-card">
-                            <img src="../startbootstrap-sb-admin-master/dist/assets/img/lokasi.png" alt="Address Icon"
-                                class="contact-icon">
-                            <h4>ADDRESS</h4>
-                            <p>27 13 Lowe Haven</p>
-                        </div>
-                        <div class="contact-card">
-                            <img src="../startbootstrap-sb-admin-master/dist/assets/img/telp.png" alt="Phone Icon"
-                                class="contact-icon">
-                            <h4>PHONE</h4>
-                            <p>111 343 43 43</p>
-                        </div>
-                        <div class="contact-card">
-                            <img src="../startbootstrap-sb-admin-master/dist/assets/img/mail.png" alt="Email Icon"
-                                class="contact-icon">
-                            <h4>EMAIL</h4>
-                            <p>business@info.com</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
+                                            <div class="modal-body">
+                                                <input type="hidden" name="status" value="Revisi">
+                                                <div class="form-group">
+                                                    <textarea name="Alasan_editor" class="form-control" placeholder="Masukkan alasan..." required></textarea>
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                                                <button type="submit" class="btn btn-danger">Kirim Revisi</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                        
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
         </div>
-    </div>
 
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            const fadeElements = document.querySelectorAll('.fade-in');
-    
-            // Mendapatkan posisi scroll dari URL hash
-            if (window.location.hash && window.location.hash.includes("scrollPos")) {
-                const scrollPosition = parseInt(window.location.hash.replace("#scrollPos=", ""));
-                if (!isNaN(scrollPosition)) {
-                    window.scrollTo({ top: scrollPosition, behavior: 'smooth' });
-                }
-            }
-    
-            // Simpan posisi scroll sebelum berpindah halaman
-            document.querySelectorAll('.pagination a').forEach(link => {
-                link.addEventListener('click', function (e) {
-                    e.preventDefault(); // Mencegah reload langsung
-                    const currentScrollPos = window.scrollY;
-                    const url = new URL(link.href);
-                    url.hash = `scrollPos=${currentScrollPos}`;
-                    window.location.href = url.toString(); // Navigasi ke URL baru
-                });
-            });
-    
-            // Efek animasi scroll untuk elemen dengan kelas fade-in
-            function handleScroll() {
-                fadeElements.forEach((el) => {
-                    const rect = el.getBoundingClientRect();
-                    const isVisible = rect.top <= window.innerHeight && rect.bottom >= 0;
-    
-                    if (isVisible) {
-                        el.classList.add('show');
-                    }
-                });
-            }
-    
-            handleScroll();
-            window.addEventListener("scroll", handleScroll);
-        });
-    </script>    
+        <!-- Pagination -->
+        <div class="pagination" style="margin-bottom: 100px">
+            <ul class="pagination">
+                <li class="page-item">
+                    <a class="page-link" href="#" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
+                <li class="page-item active">
+                    <a class="page-link" href="#">1</a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" href="#">2</a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" href="#">3</a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" href="#" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Tabel History -->
+        <h5>Table History</h5>
+        <center>
+            <div class="history-table-container">
+                <table class="history-table">
+                    <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>Nama</th>
+                            <th>Status</th>
+                            <th>Tanggal</th>
+                        </tr>
+                    </thead>
+                    @foreach ($history as $data )
+                        <tr>
+                            <td>
+                                {{ $loop->iteration }}
+                            </td>
+                            <td>
+                                {{ $data->judul }}
+                            </td>
+                            <td>
+                                {{ $data->status }}
+                            </td>
+                            <td>
+                                {{ $data->updated_at }}
+                            </td>
+                        </tr>
+                    @endforeach
+                </table>
+            </div>
+        </center>
+    </div>
 @endsection

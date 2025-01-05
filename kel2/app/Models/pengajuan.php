@@ -20,21 +20,36 @@ class pengajuan extends Model
         'file',
         'status',
         'ISBN',
+        'user_id', // Pastikan ini ada
+        'editor_id',
+        'staff_id',
+        'Alasan_editor',
+        'Alasan_staff'
     ];
 
-    public function nextStep()
+    // public function nextStep()
+    // {
+    //     switch ($this->status) {
+    //         case 'tidak diterima':
+    //             return 'Arahkan ke editor';
+    //         case 'diterima':
+    //             return 'Arahkan ke staff';
+    //         case 'revisi':
+    //             return 'Arahkan kembali ke user dari editor';
+    //         case 'ditolak':
+    //             return 'Pengajuan kembali ke user dan tidak dapat diubah';
+    //         default:
+    //             return 'Status tidak valid';
+    //     }
+    // }
+
+    public function user()
     {
-        switch ($this->status) {
-            case 'tidak diterima':
-                return 'Arahkan ke editor';
-            case 'diterima':
-                return 'Arahkan ke staff';
-            case 'revisi':
-                return 'Arahkan kembali ke user dari editor';
-            case 'ditolak':
-                return 'Pengajuan kembali ke user dan tidak dapat diubah';
-            default:
-                return 'Status tidak valid';
-        }
+        return $this->belongsTo(User::class);
+    }
+
+    public function editor()
+    {
+        return $this->belongsTo(User::class, 'editor_id');
     }
 }

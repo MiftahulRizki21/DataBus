@@ -64,11 +64,22 @@ Route::get('/listPengunjung', [ListBukuController::class, 'indexListPengunjung']
 // /*>>>>>>> 14df0e0278260e9dd92c2cb7c6b5c22123dfb299*/
 // Rute untuk User
 
+// Route untuk User
+Route::get('/pengajuan', [PengajuanController::class, 'create'])->name('pengajuan.create');
+Route::post('/pengajuan/store', [PengajuanController::class, 'store'])->name('pengajuan.store');
+
+// Route untuk Editor
+Route::get('/pengajuan/{id}/edit', [EditorController::class, 'edit'])->name('pengajuan.edit');
+Route::put('/pengajuan/{id}', [EditorController::class, 'update'])->name('pengajuan.update');
+// web.php
+Route::get('/pengajuan/download/{id}', [PengajuanController::class, 'download'])->name('pengajuan.download');
+// Route untuk Staff
+Route::get('/pengajuan/{id}/reject', [StaffPustakaController::class, 'reject'])->name('pengajuan.reject');
+Route::put('/pengajuan/{id}/approve', [StaffPustakaController::class, 'approve'])->name('pengajuan.approve');
 Route::middleware([RoleBasedAccess::class . ':user'])->group(function () {
-    
+    Route::get('/user/dashboard', [PengajuanController::class, 'index'])->name('user.dashboard');
     Route::get('/buku/{id}', [ListBukuController::class, 'detail'])->name('buku.detail');
     Route::get('/pengajuan', [PengajuanController::class, 'create'])->name('pengajuan.create');
-    Route::post('/pengajuan/tambah', [PengajuanController::class, 'store'])->name('pengajuan.store');
     Route::get('/profile/user', [ProfileController::class, 'user'])->name('profile.profile');
     Route::get('/profile/edit', [ProfileController::class, 'user'])->name('profile.edit');
     Route::put('/profile/update', [ProfileController::class, 'UpdateUser'])->name('profile.update');
