@@ -54,6 +54,7 @@ Route::get('/logout', function () {
 
 
 Route::get('/listPengunjung', [ListBukuController::class, 'indexListPengunjung'])->name('listBukuPengunjung');
+Route::get('/list', [ListBukuController::class, 'indexList'])->name('listBuku');
 
 // /*<<<<<<< HEAD*/
 // Route::controller(SocialiteController::class)->group(function(){
@@ -63,6 +64,12 @@ Route::get('/listPengunjung', [ListBukuController::class, 'indexListPengunjung']
 // /*=======*/
 // /*>>>>>>> 14df0e0278260e9dd92c2cb7c6b5c22123dfb299*/
 // Rute untuk User
+
+// Route Profile
+Route::get('/profile/user', [ProfileController::class, 'user'])->name('profile.profile');
+Route::get('/profile/edit', [ProfileController::class, 'user'])->name('profile.edit');
+Route::put('/profile/update/{id}', [ProfileController::class, 'UpdateUser'])->name('profile.update');
+
 
 // Route untuk User
 Route::get('/pengajuan', [PengajuanController::class, 'create'])->name('pengajuan.create');
@@ -80,10 +87,6 @@ Route::middleware([RoleBasedAccess::class . ':user'])->group(function () {
     Route::get('/user/dashboard', [PengajuanController::class, 'index'])->name('user.dashboard');
     Route::get('/buku/{id}', [ListBukuController::class, 'detail'])->name('buku.detail');
     Route::get('/pengajuan', [PengajuanController::class, 'create'])->name('pengajuan.create');
-    Route::get('/profile/user', [ProfileController::class, 'user'])->name('profile.profile');
-    Route::get('/profile/edit', [ProfileController::class, 'user'])->name('profile.edit');
-    Route::put('/profile/update', [ProfileController::class, 'UpdateUser'])->name('profile.update');
-    Route::get('/list', [ListBukuController::class, 'indexList'])->name('listBuku');
     
     
     

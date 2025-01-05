@@ -7,6 +7,7 @@ return [
             'pengajuan.store',
             'buku.detail',
             'profile.profile',
+            'profile.update',
             'user.dashboard',
         ],
         'staff' => [
