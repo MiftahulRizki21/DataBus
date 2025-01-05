@@ -74,6 +74,7 @@ Route::put('/profile/update/{id}', [ProfileController::class, 'UpdateUser'])->na
 Route::get('/list', [ListBukuController::class, 'indexList'])->name('listBuku');
 // Route untuk Editor
 Route::get('/pengajuan/{id}/edit', [EditorController::class, 'edit'])->name('pengajuan.edit');
+Route::put('/pengajuan/user/{id}/edit', [PengajuanController::class, 'update'])->name('pengajuan.user.edit');
 Route::put('/pengajuan/{id}', [EditorController::class, 'update'])->name('pengajuan.update');
 // web.php
 Route::get('/pengajuan/download/{id}', [PengajuanController::class, 'download'])->name('pengajuan.download');

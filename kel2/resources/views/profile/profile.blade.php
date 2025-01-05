@@ -202,7 +202,42 @@
                 @if (Auth::user()->role === 'user')
                     <td>
                         @if ($pengajuan->status === 'Revisi')
-                            <a href="{{ route('pengajuan.edit', $pengajuan->id) }}" class="btn btn-warning">Update</a>
+                        <!-- Form Terima -->
+                        <button type="button" class="btn btn-success" data-bs-toggle="modal"
+                        data-bs-target="#acceptModal{{ $pengajuan->id }}">
+                        Revisi
+                        </button>
+                        <div class="modal fade" id="acceptModal{{ $pengajuan->id }}" tabindex="-1"
+                            aria-labelledby="acceptModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <form action="{{ route('pengajuan.user.edit', $pengajuan->id) }}" method="POST" enctype="multipart/form-data">
+                                        @csrf
+                                        @method('PUT')
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="acceptModalLabel">Masukkan File yang diedit</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <input type="hidden" name="status" value="Revisi">
+                                            <input type="hidden" name="Alasan_editor" value="{{ $pengajuan->Alasan_editor }}">
+                                            <div class="form-group">
+                                                <label for="file">Masukkan File Revisi</label>
+                                                <input type="file" name="file" class="form-control"
+                                                    placeholder="File buku" required>
+                                            </div>
+                                              
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary"
+                                                data-bs-dismiss="modal">Batal</button>
+                                            <button type="submit" class="btn btn-success">Terima</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
                         @else
                             <span class="text-muted">Tidak Ada Aksi</span>
                         @endif

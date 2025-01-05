@@ -245,11 +245,6 @@
                                 <button type="button" class="btn btn-primary">Detail Buku</button>
                             </a>
                         </td>
-
-                        <!-- Kolom alasan -->
-                        <td>
-                            <textarea name="Alasan_editor" form="rejectForm{{ $data->id }}" placeholder="Masukkan alasan..." rows="3"></textarea>
-                        </td>
                         
                         <!-- Tombol aksi -->
                         <td>
@@ -257,7 +252,7 @@
                             <button type="button" class="btn btn-success" data-bs-toggle="modal"
                             data-bs-target="#acceptModal{{ $data->id }}">
                             Terima
-                        </button>
+                            </button>
                             <div class="modal fade" id="acceptModal{{ $data->id }}" tabindex="-1"
                                 aria-labelledby="acceptModalLabel" aria-hidden="true">
                                 <div class="modal-dialog">

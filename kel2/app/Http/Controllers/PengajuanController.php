@@ -8,6 +8,7 @@ use App\Http\Requests\UpdatepengajuanRequest;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class PengajuanController extends Controller
 {
@@ -162,93 +163,40 @@ public function updatePengajuanStatus(Request $request, $id)
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function updateEditor(UpdatepengajuanRequest $request, $id)
-{
-    // Debug: Melihat data request dan ID
-    dd($request->all(), $id);
-
-    $request->validate([
-        'file' => 'required|file|mimes:pdf,docx|max:2048',
-        'status' => 'required|string',
-    ]);
-
-    // Cari pengajuan berdasarkan ID
-    $pengajuan = Pengajuan::findOrFail($id);
-
-    // Debug: Melihat pengajuan yang ditemukan
-    dd($pengajuan);
-
-    // Cek apakah ada file lama, dan hapus jika ada
-    if ($pengajuan->file_edit) {
-        // Hapus file lama
-        $oldFilePath = storage_path('app/public/' . $pengajuan->file_edit);
-        Log::info('Mencoba menghapus file lama: ' . $oldFilePath);
-        if (file_exists($oldFilePath)) {
-            unlink($oldFilePath); // Menghapus file lama
-            Log::info('File lama berhasil dihapus.');
-        }
-    }
-
-    // Simpan file edit jika ada
-    if ($request->hasFile('file')) {
-        // Debug: Melihat file yang diupload
-        dd($request->file('file'));
-        
-        $filePath = $request->file('file')->store('uploads', 'public');
-        $pengajuan->file_edit = $filePath; // Simpan path file edit baru
-    }
-
-    // Perbarui status pengajuan
-    $pengajuan->status = $request->input('status');
-
-    // Simpan perubahan
-    $pengajuan->save();
-
-    // Debug: Menampilkan status yang telah diset
-    dd($pengajuan->status);
-
-    // Redirect dengan pesan berhasil
-    return redirect()->back()->with('success', 'Pengajuan berhasil diperbarui!');
-}
-
-
-
-
-
-    
-    
-    public function updateStaff(UpdatepengajuanRequest $request, pengajuan $pengajuan)
+    public function update(Request $request, $id)
     {
-         // Validasi file yang diupload jika ada
-         $validated = $request->validated();
+        // Validasi status dan file jika statusnya 'Revisi'
+        $request->validate([
+            'status' => 'required|string',
+            'file' => 'nullable|file|mimes:pdf,docx|max:2048', // Validasi file (optional)
+            'Alasan_editor' => 'nullable|string', // Validasi alasan editor
+        ]);
     
-         // Cek apakah ada file yang diupload
-         if ($request->hasFile('file')) {
-             // Hapus file lama jika ada
-             if ($pengajuan->file && file_exists(asset('storage/' . $pengajuan->file))) {
-                 unlink(asset('storage/' . $pengajuan->file));
-             }
-     
-             // Simpan file baru dan ambil path-nya
-             $path = $request->file('file')->store('uploads/pengajuan', 'public');
-             $pengajuan->file = $path; // Update path file di database
-         }
-     
-         // Update alasan editor
-         $pengajuan->alasan_editor = $request->input('alasan_staff');
-     
-         // Simpan perubahan ke database
-         $pengajuan->save();
-     
-         // Redirect atau return response sesuai kebutuhan
-         return redirect()->route('staff.dashboard')->with('success', 'Pengajuan berhasil diperbarui');
+        $pengajuan = Pengajuan::findOrFail($id);
+    
+        // Jika status adalah 'Revisi', lakukan update status menjadi 'Tidak Diterima', hapus alasan editor, dan update file
+        if ($request->status == 'Revisi') {
+            // Jika ada file yang diupload, simpan file tersebut
+            if ($request->hasFile('file')) {
+                // Hapus file lama jika ada
+                if ($pengajuan->file) {
+                    Storage::disk('public')->delete($pengajuan->file);
+                }
+                // Simpan file baru di folder uploads dalam storage/public
+                $filePath = $request->file('file')->store('uploads', 'public'); // Menyimpan di storage/app/public/uploads
+                $pengajuan->file = $filePath; // Simpan path file edit
+            }
+    
+            // Update status menjadi 'Tidak Diterima' dan hapus alasan editor
+            $pengajuan->update([
+                'status' => 'Tidak Diterima', // Mengubah status menjadi 'Tidak Diterima'
+                'Alasan_editor' => null, // Menghapus alasan editor
+            ]);
+        }
+    
+        return redirect()->route('profile.profile')->with('success', 'Pengajuan berhasil diperbarui!');
     }
-    /**
-     * Remove the specified resource from storage.
-     */
+    
     public function destroy(pengajuan $pengajuan)
     {
         //
