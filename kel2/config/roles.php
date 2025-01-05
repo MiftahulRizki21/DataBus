@@ -12,7 +12,7 @@ return [
         ],
         'staff' => [
             'staff.dashboard',
-            // 'listBuku',
+            'listBuku',
             'buku.detail'
         ],
         'editor' => [

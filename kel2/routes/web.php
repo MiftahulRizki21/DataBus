@@ -99,6 +99,8 @@ Route::middleware([RoleBasedAccess::class . ':staff'])->group(function () {
     Route::get('/staff/dashboard', [StaffPustakaController::class, 'index'])->name('staff.dashboard');
     // Route::get('/', [ListBukuController::class, 'show'])->name('listBuku');
     Route::get('/buku/{id}', [ListBukuController::class, 'detail'])->name('buku.detail');
+    Route::get('/list/staff', [ListBukuController::class, 'indexList'])->name('listBuku');
+
 });
 
 // Rute Bersama (Profil untuk Staff dan Editor)

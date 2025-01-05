@@ -142,7 +142,7 @@
                 @foreach ($listBuku as $listbuku )
                 <div class="col-md-6">
                     <div class="card">
-                        <img src="{{ Storage::url($listbuku->foto) }}" alt="{{ $listbuku->judul_buku }}">
+                        <img src="{{ asset('storage/'. $listbuku->foto) }}" alt="{{ $listbuku->judul_buku }}">
                         
                         <div class="book-info">
                             <h4>{{ $listbuku->judul_buku }}</h4>
