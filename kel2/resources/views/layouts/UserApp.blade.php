@@ -64,6 +64,12 @@
             div.fas fa-user fa-fw{
                 font-size: 100px;
             }
+            .card-image {
+                margin-top: 19px;
+                margin-bottom: 25px;
+                width: 80%; /* Gambar sesuai lebar card */
+                height: auto; /* Pertahankan rasio aspek */
+            }
 
 
         </style>
@@ -77,8 +83,12 @@
         <!-- Navbar Right -->
         <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4" style="position: absolute; right: 0;">
             <div class="container-navlink">
+                <p><a href="/user/dashboard" class="navlink">Beranda</a></p>
+            </div>
+            <div class="container-navlink">
                 <p><a href="/pengajuan" class="navlink">Ajukkan</a></p>
             </div>
+            
             <div class="container-navlink">
                 <p><a href="/list" class="navlink">List Buku</a></p>
             </div>

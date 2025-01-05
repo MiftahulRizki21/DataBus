@@ -39,12 +39,13 @@
                                     <!-- Buku -->
                                     @foreach ($listBuku as $listbuku)
                                         <td>
-                                            <div class="rekom fade-in">
-                                                <a href="{{ route('listBuku.detailBuku_show', $listbuku->id) }}" style="width: 100%; height: 100%;">
-                                                    <img src="{{ Storage::url($listbuku->foto) }}"
-                                                         alt="{{ $listbuku->judul_buku }}"
-                                                         style="width: 100%; height: 100%;">
+                                            <div class="rekom fade-in card" >
+                                                <a href="/detail_buku/{{ $listbuku->id }}">
+                                                    <img src="{{ asset('storage/'. $listbuku->foto) }}" alt="{{ $listbuku->judul_buku }}" class="card-image">
+                                                
                                                 </a>
+                                                <b><h3><p class="card-title">{{ $listbuku->judul_buku }}</p></h3></b>
+                                                
                                             </div>
                                         </td>
                                     @endforeach

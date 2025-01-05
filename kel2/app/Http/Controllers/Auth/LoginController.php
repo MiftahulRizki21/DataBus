@@ -26,7 +26,7 @@ class LoginController extends Controller
     }
 
     if (str_contains($user->email, '@mahasiswa.pcr.ac.id')) {
-        return redirect()->route('listBuku'); // Redirect to user homepage
+        return redirect()->route('user.dashboard'); // Redirect to user homepage
     }
 
     return redirect()->route('editor.dashboard'); // For editor or other roles

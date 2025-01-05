@@ -43,6 +43,33 @@
                 width: 50%;
                 height: 50%;
             }
+
+            .card-image {
+                margin-top: 19px;
+                margin-bottom: 25px;
+                width: 80%; /* Gambar sesuai lebar card */
+                height: auto; /* Pertahankan rasio aspek */
+            }
+            /* Gaya untuk navbar */
+            .navbar-nav .navlink {
+                color: white;
+                font-weight: bold;
+                text-decoration: none;
+                padding: 10px 20px;
+                transition: background-color 0.3s ease, color 0.3s ease;
+            }
+
+            /* Efek hover */
+            .navbar-nav .navlink:hover {
+                background-color: #0056b3; /* Ganti dengan warna yang Anda inginkan */
+                color: white;
+                border-radius: 4px; /* Menambahkan border radius untuk sudut tumpul */
+            }
+
+            /* Menambahkan padding dan efek ketika hover pada navbar */
+            .navbar-nav .navlink:active {
+                background-color: #00408d; /* Ganti dengan warna yang Anda inginkan saat klik */
+            }
         </style>
     </head>
 <body class="sb-nav-fixed">
@@ -52,15 +79,18 @@
         <a class="navbar-brand ps-3" href="index.html"><img src="..\startbootstrap-sb-admin-master\dist\assets\img\logo.png" alt="" class="logo"></a>
 
             <!-- Navbar Right -->
-            <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4" style="position: absolute; right: 0;">
-                <div class="container-navlink">
-                    <p><a href="/listPengunjung" class="navlink"><b>List Buku</b></a></p>
-                </div>
-                <div class="container-navlink">
-                    <p><a href="/login" class="navlink"><b>Login</b></a></p>
-                </div>
-                
-            </ul>
+        <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4" style="position: absolute; right: 0;">
+            <div class="container-navlink">
+                <p><a href="/" class="navlink">Beranda</a></p>
+            </div>
+            <div class="container-navlink">
+                <p><a href="/listPengunjung" class="navlink">List Buku</a></p>
+            </div>
+            <div class="container-navlink">
+                <p><a href="/login" class="navlink">Login</a></p>
+            </div>
+            
+        </ul>
         </nav>
 
         <!-- Main Content -->

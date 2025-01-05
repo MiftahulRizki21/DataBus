@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\ListBuku;
+use Illuminate\Support\Facades\Auth;
 class HomeController extends Controller
 {
     /**
@@ -21,9 +22,11 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index()
+    public function beranda(Request $request)
     {
-        return view ('');
+        $user = Auth::user();
+        $listBuku = ListBuku::inRandomOrder()->paginate(8);        
+        return view('general.user', compact('listBuku', 'user'));
     }
     public function show(string $id)
     {

@@ -14,9 +14,9 @@
         height: 40px;
         border: 0 solid;
         border-radius: 10px;
-        box-shadow: inset 0 0 20px rgba(255, 255, 255, 0);
+        box-shadow: inset 0 0 20px #002855;
         outline: 1px solid;
-        outline-color: rgba(0, 0, 0, 0.5);
+        outline-color: #002855;
         outline-offset: 0px;
         text-shadow: none;
         transition: all 1250ms cubic-bezier(0.19, 1, 0.22, 1);
@@ -25,7 +25,7 @@
         .btn-login:hover {
         border: 1px solid;
         box-shadow: inset 0 0 20px rgba(255, 255, 255, .5), 0 0 20px rgba(255, 255, 255, .2);
-        outline-color: rgba(255, 255, 255, 0);
+        outline-color: #0056b3;
         outline-offset: 15px;
         text-shadow: 1px 1px 2px #427388;
         }
@@ -61,7 +61,7 @@
     }
 
     h1.selamat {
-        color: #212529;
+        color: #002855;
         margin: 10px 0;
         margin-top: 100px;
         position: relative; /* Ensure this respects z-index */
@@ -69,7 +69,7 @@
     }
 
     .btn-login {
-        background-color: #212529;
+        background-color: #002855;
         color: #ffffff;
         padding: 10px 20px;
         font-size: 16px;
@@ -78,19 +78,20 @@
         z-index: 2; /* Place button above the overlay */
     }
     .link-regis{
-        color: #ffffff;
+        color: #002855;
         position: relative; /* Ensure this respects z-index */
         z-index: 2; /* Place button above the overlay */
+        font-size: 15px;;
     }
 
     .link-regis:hover {
-        color: #212529; /* Mengubah warna teks saat hover */
+        color: #427388; /* Mengubah warna teks saat hover */
     }
 
     .garis-horizontal {
     width: 17%;
     border: none;
-    border-top: 2px solid #212529; /* Gaya garis */
+    border-top: 2px solid #002855; /* Gaya garis */
     margin: 10px 0; /* Jarak vertikal */
     }
 
@@ -140,6 +141,7 @@
     justify-content: center; /* Pusatkan konten horizontal */
     align-items: center; /* Pusatkan konten vertikal */
     padding: 0; /* Hapus padding untuk kontrol penuh ukuran */
+    
     }
 
     .round {
@@ -158,6 +160,7 @@
     font-size: 2.5rem;
     position: relative; /* Agar elemen memiliki konteks z-index */
     z-index: 2; /* Pastikan elemen berada di atas overlay */
+    color: #002855;
     }
     .rekomendasi h2 {
         font-size: 2.5rem;
@@ -172,6 +175,7 @@
 
     a.navlink{
         padding: 20px;
+        
     }
 
     .fade-in {
@@ -205,7 +209,7 @@
 
     .sample-text {
         font-size: 0.9rem;
-        color: #666;
+        color: #427388;
         margin-bottom: 40px;
     }
 
