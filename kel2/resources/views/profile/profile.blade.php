@@ -1,6 +1,6 @@
 @extends('layouts.UserApp')
 @section('content')
-
+<title>Profile | History</title>
 <!-- CSS -->
 <style>
     body {

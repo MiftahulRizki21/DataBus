@@ -1,5 +1,7 @@
 @extends('layouts.UserApp')
 @section('content')
+
+<title>Beranda | Editor</title>
     <style>
         .table-container {
             margin: 20px auto;

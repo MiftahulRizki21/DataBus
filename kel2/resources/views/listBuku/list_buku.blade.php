@@ -1,11 +1,9 @@
     @extends('layouts.UserApp')
     @section('content')
 
-    
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>List Buku</title>
+    <link rel="shortcut icon" type="x-icon" href="..\startbootstrap-sb-admin-master\dist\assets\img\logoweb.png">
+
+        <title>List Buku | User</title>
         <style>
             body {
                 background-color: #f8f9fa;

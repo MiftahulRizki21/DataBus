@@ -82,7 +82,7 @@ class ListBukuController extends Controller
     public function beranda(Request $request)
     {
         
-        $listBuku = ListBuku::inRandomOrder()->paginate(8);        
+        $listBuku = ListBuku::inRandomOrder()->paginate(3);        
         return view('General.beranda', compact('listBuku'));
     }
     

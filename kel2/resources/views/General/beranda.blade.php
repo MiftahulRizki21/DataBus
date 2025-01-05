@@ -1,5 +1,7 @@
 @extends('layouts.app')
 @section('content')
+
+<title>Beranda | Pengunjung</title>
     <div class="container-fluid fade-in">
         <div class="objek-lp fade-in">
             <h1 class="selamat">Selamat Datang</h1>
@@ -31,7 +33,7 @@
                                     @else
                                         <td>
                                             <a href="{{ $listBuku->previousPageUrl() }}" class="previous round fade-in">
-                                                <h2>&#8249;</h2>
+                                                <h2 class="previous" style="color: aliceblue;">&#8249;</h2>
                                             </a>
                                         </td>
                                     @endif
@@ -54,7 +56,7 @@
                                     @if ($listBuku->hasMorePages())
                                         <td>
                                             <a href="{{ $listBuku->nextPageUrl() }}" class="next round fade-in">
-                                                <h2>&#8250;</h2>
+                                                <h2 class="next" style="color: aliceblue;">>&#8250;</h2>
                                             </a>
                                         </td>
                                     @else
