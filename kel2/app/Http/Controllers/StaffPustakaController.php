@@ -33,14 +33,14 @@ class StaffPustakaController extends Controller
     
         // Jika status diterima, pastikan ISBN diisi
         if ($request->status == 'Diterima') {
-            if (is_null($request->ISBN) || empty($request->ISBN)) {
+            if (is_null($request->isbn) || empty($request->isbn)) {
                 return redirect()->back()->with('error', 'ISBN tidak boleh kosong untuk pengajuan yang diterima.');
             }
     
             // Perbarui pengajuan
             $pengajuan->update([
                 'status' => 'Diterima',
-                'ISBN' => $request->ISBN,
+                'ISBN' => $request->isbn,
                 'staff_id' => Auth::id(),
             ]);
     
@@ -54,7 +54,7 @@ class StaffPustakaController extends Controller
                 'editor_id' => $pengajuan->editor_id,
                 'staff_id' => $pengajuan->staff_id,
                 'halaman' => $pengajuan->halaman,
-                'isbn' => $request->ISBN,  // Masukkan ISBN yang baru
+                'ISBN' => $request->isbn,  // Masukkan ISBN yang baru
                 'foto' => $pengajuan->foto,  // Jika ada foto, sesuaikan dengan field yang ada
             ]);
     

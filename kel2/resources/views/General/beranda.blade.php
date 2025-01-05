@@ -56,7 +56,7 @@
                                     @if ($listBuku->hasMorePages())
                                         <td>
                                             <a href="{{ $listBuku->nextPageUrl() }}" class="next round fade-in">
-                                                <h2 class="next" style="color: aliceblue;">>&#8250;</h2>
+                                                <h2 class="next" style="color: aliceblue;">&#8250;</h2>
                                             </a>
                                         </td>
                                     @else
