@@ -74,8 +74,6 @@ class ListBukuController extends Controller
 
     
 
-    
-
 
     public function indexList()
     {

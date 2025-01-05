@@ -211,7 +211,6 @@
                         <th>No</th>
                         <th>Nama</th>
                         <th>File Buku</th>
-                        <th>File Edit Buku</th>
                         <th>Detail Buku</th>
                         <th>Alasan</th> <!-- Kolom Alasan -->
                         <th>Aksi</th>
@@ -232,6 +231,7 @@
                                 </div>
                             </form>
                         </td> --}}
+                        <td><p>{{ $data->judul_buku }}</p></td>
                         <td>
                             <a href="{{ asset('storage/' . $data->file) }}" target="_blank" class="download">Download File</a>
 
@@ -239,11 +239,10 @@
                         
                         <!-- Tombol detail -->
                         <td>
-                            <a href="/detail_buku/{{ $data->id }}">
+                            <a href="/editor/buku/{{ $data->id }}">
                                 <button type="button" class="btn btn-primary">Detail Buku</button>
                             </a>
                         </td>
-                        <td>
 
                         <!-- Kolom alasan -->
                         <td>

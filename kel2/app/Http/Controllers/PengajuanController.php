@@ -119,9 +119,10 @@ public function updatePengajuanStatus(Request $request, $id)
     /**
      * Display the specified resource.
      */
-    public function show(pengajuan $pengajuan)
-    {
-        //
+    public function show($id)
+    { 
+        $pengajuan= \App\Models\pengajuan::findOrFail($id); // Ambil data buku berdasarkan ID
+        return view('listBuku.detail_buku', compact('buku'));
     }
 
     /**

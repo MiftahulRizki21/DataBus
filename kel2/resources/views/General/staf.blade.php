@@ -201,7 +201,7 @@
     </style>
 
     <!-- Judul Halaman Editor -->
-    <h1>Halaman Editor</h1>
+    <h1>Halaman Staff</h1>
     <div class="container-fluid">
         <h5>Table Pengajuan</h5>
         <div class="table-container">
@@ -211,7 +211,6 @@
                         <th>No</th>
                         <th>Nama</th>
                         <th>File Buku</th>
-                        <th>File Edit Buku</th>
                         <th>Detail Buku</th>
                         <th>Alasan</th> <!-- Kolom Alasan -->
                         <th>Aksi</th>
@@ -223,13 +222,16 @@
                     <tr>
                                 <!-- Kolom untuk unggah file -->
                                 <td>
+                                    {{ $loop->iteration }}
+                                </td>
+                                <td><p>{{ $data->judul_buku }}</p></td>
                                     {{-- <form action="{{ route('editor.pengajuan.accept', $data->id) }}" method="POST" enctype="multipart/form-data">
                                 @csrf
                                 <div class="form-group">
                                     <input type="file" name="file_edit" id="file_edit" class="form-input" required>
                                 </div>
                             </form> --}}
-                                </td>
+                                
 
                                 <td>
                                     <a href="{{ asset('storage/' . $data->file) }}" target="_blank" class="download">Download
@@ -379,7 +381,7 @@
                                         {{ $loop->iteration }}
                                     </td>
                                     <td>
-                                        {{ $data->judul }}
+                                        {{ $data->judul_buku }}
                                     </td>
                                     <td>
                                         {{ $data->status }}
