@@ -45,9 +45,6 @@
                 <p><a href="/pengajuan" class="navlink">Ajukkan</a></p>
             </div>
             <div class="container-navlink">
-                <p><a href="/user" class="navlink">Beranda</a></p>
-            </div>
-            <div class="container-navlink">
                 <p><a href="/list" class="navlink">List Buku</a></p>
             </div>
             <li class="nav-item dropdown">
@@ -84,6 +81,7 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
+    
 
 
 </body>
