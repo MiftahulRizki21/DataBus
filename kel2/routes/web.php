@@ -98,7 +98,7 @@ Route::middleware([RoleBasedAccess::class . ':user'])->group(function () {
 Route::middleware([RoleBasedAccess::class . ':staff'])->group(function () {
     Route::get('/staff/dashboard', [StaffPustakaController::class, 'index'])->name('staff.dashboard');
     // Route::get('/detail_buku/{id}', [ListBukuController::class, 'show'])->name('buku.detail');
-    Route::get('/staff/buku/{id}', [PengajuanController::class, 'show'])->name('buku.staffdetail');
+    Route::get('/staff/buku/{id}', [ListBukuController::class, 'show'])->name('buku.staffdetail');
     // Route::get('/', [ListBukuController::class, 'show'])->name('listBuku');
     Route::get('/list/staff', [ListBukuController::class, 'indexList'])->name('listBuku');
 
@@ -107,6 +107,6 @@ Route::middleware([RoleBasedAccess::class . ':staff'])->group(function () {
 // Rute Bersama (Profil untuk Staff dan Editor)
 Route::middleware([RoleBasedAccess::class . ':editor'])->group(function () {
     Route::get('/editor/dashboard', [EditorController::class, 'index'])->name('editor.dashboard');
-    Route::get('/editor/buku/{id}', [ListBukuController::class, 'detailBuku'])->name('buku.editordetail');
+    Route::get('/editor/buku/{id}', [ListBukuController::class, 'show'])->name('buku.editordetail');
     // Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
 });

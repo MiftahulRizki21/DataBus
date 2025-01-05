@@ -142,6 +142,50 @@
         color: rgb(231, 227, 227);
         transform: scale(1.05);
     }
+    .history-table-container {
+        overflow-y: scroll; /* Aktifkan scroll pada tabel */
+        width: 80%;
+        max-width: 600px;
+        margin: 40px auto;
+        padding: 20px;
+        background-color: white;
+        border-radius: 8px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        height: 400px;
+    }
+
+    .history-table {
+        width: 100%;
+        border-collapse: collapse;
+        background-color: #fff;
+    }
+
+    .history-table thead {
+        background-color: #002855;
+        color: white;
+        text-align: left;
+    }
+
+    .history-table thead th {
+        padding: 12px 15px;
+        font-size: 16px;
+        font-weight: bold;
+    }
+
+    .history-table tbody td {
+        padding: 12px 15px;
+        text-align: left;
+    }
+
+    .history-table tbody tr {
+        border-bottom: 1px solid #ddd;
+        transition: background-color 0.3s;
+    }
+
+    .history-table tbody tr:hover {
+        background-color: #f0f8ff;
+    }
+
 
 </style>
 <div class="logout-container">
@@ -172,124 +216,43 @@
     <button type="submit" class="btn-submit">Perbarui Profile</button>
 </form>
 
-<!-- Table History Pengajuan -->
-<div class="form-container">
+<div class="history-table-container">
     <h2>History Pengajuan</h2>
-    <table id="historyTable">
+    <table class="history-table">
         <thead>
             <tr>
                 <th>Judul Buku</th>
                 <th>Tanggal Pengubahan Status</th>
                 <th>Status</th>
                 <th>Alasan Editor</th>
-                <th>Alasan Staff</th>   
-                
+                <th>Alasan Staff</th>
                 @if (Auth::user()->role === 'user')
                     <th>Aksi</th>
                 @endif
             </tr>
         </thead>
         <tbody>
-            <!-- Loop untuk menampilkan history pengajuan -->
             @foreach ($history as $pengajuan)
-            <tr>
-                <td>{{ $pengajuan->judul_buku }}</td>
-                <td>{{ $pengajuan->updated_at }}</td>
-                <td>{{ $pengajuan->status }}</td>
-                <td>{{ $pengajuan->Alasan_editor }}</td>
-                <td>{{ $pengajuan->Alasan_staff }}</td>
-
-                @if (Auth::user()->role === 'user')
-                    <td>
-                        @if ($pengajuan->status === 'Revisi')
-                        <!-- Form Terima -->
-                        <button type="button" class="btn btn-success" data-bs-toggle="modal"
-                        data-bs-target="#acceptModal{{ $pengajuan->id }}">
-                        Revisi
-                        </button>
-                        <div class="modal fade" id="acceptModal{{ $pengajuan->id }}" tabindex="-1"
-                            aria-labelledby="acceptModalLabel" aria-hidden="true">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <form action="{{ route('pengajuan.user.edit', $pengajuan->id) }}" method="POST" enctype="multipart/form-data">
-                                        @csrf
-                                        @method('PUT')
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="acceptModalLabel">Masukkan File yang diedit</h5>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                aria-label="Close"></button>
-                                        </div>
-                                        <div class="modal-body">
-                                            <input type="hidden" name="status" value="Revisi">
-                                            <input type="hidden" name="Alasan_editor" value="{{ $pengajuan->Alasan_editor }}">
-                                            <div class="form-group">
-                                                <label for="file">Masukkan File Revisi</label>
-                                                <input type="file" name="file" class="form-control"
-                                                    placeholder="File buku" required>
-                                            </div>
-                                              
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary"
-                                                data-bs-dismiss="modal">Batal</button>
-                                            <button type="submit" class="btn btn-success">Terima</button>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                        @else
-                            <span class="text-muted">Tidak Ada Aksi</span>
-                        @endif
-                    </td>
-                @endif
-            </tr>
+                <tr>
+                    <td>{{ $pengajuan->judul_buku }}</td>
+                    <td>{{ $pengajuan->updated_at }}</td>
+                    <td>{{ $pengajuan->status }}</td>
+                    <td>{{ $pengajuan->Alasan_editor }}</td>
+                    <td>{{ $pengajuan->Alasan_staff }}</td>
+                    @if (Auth::user()->role === 'user')
+                        <td>
+                            @if ($pengajuan->status === 'Revisi')
+                                <a href="{{ route('pengajuan.edit', $pengajuan->id) }}" class="btn btn-warning">Update</a>
+                            @else
+                                <span class="text-muted">Tidak Ada Aksi</span>
+                            @endif
+                        </td>
+                    @endif
+                </tr>
             @endforeach
         </tbody>
     </table>
-    <div class="loading" id="loadingMore" style="display: none;">Memuat lebih banyak...</div>
 </div>
 
-<!-- JS -->
-<script>
-    let page = 2; // Mulai dari halaman ke-2, karena data pertama sudah dimuat
-    const loadingElement = document.getElementById('loadingMore');
-
-    // Fungsi untuk memuat lebih banyak data
-    function loadMoreData() {
-        // Deteksi apakah sudah mencapai bagian bawah tabel
-        if (window.innerHeight + window.scrollY >= document.body.scrollHeight) {
-            loadingElement.style.display = 'block'; // Tampilkan indikator loading
-            fetch(/history-pengajuan?page=${page})
-                .then(response => response.json())
-                .then(data => {
-                    // Jika ada data, tambahkan ke tabel
-                    if (data.length > 0) {
-                        let tableBody = document.querySelector('#historyTable tbody');
-                        data.forEach(item => {
-                            let row = document.createElement('tr');
-                            row.innerHTML = 
-                                <td>${item.judul_buku}</td>
-                                <td>${item.status}</td>
-                                <td>${item.tanggal_pengajuan}</td>
-                            ;
-                            tableBody.appendChild(row);
-                        });
-                        page++; // Naikkan nomor halaman
-                    }
-                    loadingElement.style.display = 'none'; // Sembunyikan indikator loading
-                })
-                .catch(() => {
-                    loadingElement.style.display = 'none'; // Sembunyikan indikator loading jika gagal
-                });
-        }
-    }
-
-    // Event listener untuk scroll
-    window.addEventListener('scroll', loadMoreData);
-
-    // Fungsi untuk memulai pemuatan data saat halaman pertama kali dibuka
-    loadMoreData();
-</script>
 
 @endsection

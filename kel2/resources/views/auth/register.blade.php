@@ -22,7 +22,7 @@
     <div class="flex flex-col items-center">
         <!-- Logo Section -->
         <div class="logo mb-6">
-            <img src="../startbootstrap-sb-admin-master/dist/assets/img/logoweb.png" alt="Logo" class="w-36">
+            <a href="/"><img src="../startbootstrap-sb-admin-master/dist/assets/img/logoweb.png" alt="Logo" class="w-36"></a>
         </div>
     <div class="bg-[#ffffff] w-96 rounded-lg shadow-lg p-8" style="margin-top: 120px;">
         <!-- Tampilkan pesan error jika ada -->
