@@ -41,6 +41,7 @@ Auth::routes();
 // });
 
 Route::get('/', [ListBukuController::class, 'beranda'])->name('beranda');
+Route::get('/syarat', [HomeController::class, 'syarat'])->name('syarat');
 Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
 Route::get('/register', [RegisterController::class, 'showRegistrationForm'])->name('register');
 Route::post('register', [RegisterController::class, 'register']);
@@ -104,6 +105,6 @@ Route::middleware([RoleBasedAccess::class . ':staff'])->group(function () {
 // Rute Bersama (Profil untuk Staff dan Editor)
 Route::middleware([RoleBasedAccess::class . ':editor'])->group(function () {
     Route::get('/editor/dashboard', [EditorController::class, 'index'])->name('editor.dashboard');
-    Route::get('/editor/buku/{id}', [ListBukuController::class, 'show'])->name('buku.editordetail');
+    Route::get('/editor/buku/{id}', [ListBukuController::class, 'showDetail'])->name('buku.editordetail');
     // Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
 });

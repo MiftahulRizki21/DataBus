@@ -94,6 +94,9 @@
                 <p><a href="/list" class="navlink">List Buku</a></p>
             </div>
             <div class="container-navlink">
+                <p><a href="/syarat" class="navlink">Syarat Pengajuan</a></p>
+            </div>
+            <div class="container-navlink">
                 <a href="/profile/user" class="navlink"><div class="fas fa-user fa-fw" style="margin-top:5px;"></div></a>
             </div>
 
