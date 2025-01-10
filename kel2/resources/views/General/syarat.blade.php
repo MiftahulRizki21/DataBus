@@ -142,7 +142,7 @@
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
             text-transform: uppercase;
             /* Huruf kapital semua untuk efek profesional */
-            margin-top: 100px;
+            margin-top: 130px;
             margin-bottom: 100px;
             width: 86%;
         }
@@ -161,7 +161,6 @@
             text-align: center;
             cursor: pointer;
             transition: background-color 0.3s ease;
-            z-index: 1000; /* Pastikan tombol di atas konten lainnya */
         }
 
         .btn-back:hover {
