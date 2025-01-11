@@ -92,6 +92,9 @@ class StaffPustakaController extends Controller
         return redirect()->back()->with('success', 'Akun berhasil disetujui dan dipindahkan ke tabel users.');
     }
     public function TolakEditor($id){
+        $pendaftar = pendaftar_editor::findOrFail($id);
+        $pendaftar->delete();
+        return redirect()->back()->with('success', 'Akun berhasil ditolak dan dihapus');
         
     }
 

@@ -17,6 +17,9 @@
                 <td>
                     <a href="{{ route('approve', $pendaftars->id) }}" class="btn btn-success" method="POST">Setujui</a>
                 </td>
+                <td>
+                    <a href="{{ route('reject', $pendaftars->id) }}" class="btn btn-success" method="POST">tolak</a>
+                </td>
             </tr>
         @endforeach
     </tbody>
