@@ -208,7 +208,7 @@
                 </div>
                 <div class="modal-body">
                     <!-- Status -->
-                    <input type="hidden" name="status" value="diterima">
+                    <input type="hidden" name="status" value="Diterima">
 
                     <!-- ISBN Input -->
                     <div class="form-group mt-3">
@@ -293,6 +293,7 @@
             </div>
         </center>
     </div>
+    
 @endsection
 
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">

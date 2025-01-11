@@ -13,7 +13,9 @@ return [
         'staff' => [
             'staff.dashboard',
             'listBuku',
-            'buku.staffdetail'
+            'buku.staffdetail',
+            'approve',
+            'showapprove',
 
         ],
         'editor' => [

@@ -98,6 +98,8 @@ Route::middleware([RoleBasedAccess::class . ':staff'])->group(function () {
     Route::get('/staff/buku/{id}', [PengajuanController::class, 'show'])->name('buku.staffdetail');
     // Route::get('/', [ListBukuController::class, 'show'])->name('listBuku');
     Route::get('/list/staff', [ListBukuController::class, 'indexList'])->name('listBuku');
+    Route::get('/approve', [StaffPustakaController::class, 'showapprove'])->name('showapprove');
+    Route::get('/approve/{id}', [StaffPustakaController::class, 'DaftarEditor'])->name('approve');
 
 });
 

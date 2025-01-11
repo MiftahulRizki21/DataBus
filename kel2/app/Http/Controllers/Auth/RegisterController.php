@@ -3,10 +3,12 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\pendaftar_editor;
 use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Http\Request;
 
 class RegisterController extends Controller
 {
@@ -21,14 +23,14 @@ class RegisterController extends Controller
     |
     */
 
-    use RegistersUsers;
+    // use RegistersUsers;
 
     /**
      * Where to redirect users after registration.
      *
      * @var string
      */
-    protected $redirectTo = '/login';
+    protected $redirectTo = '/';
 
     /**
      * Create a new controller instance.
@@ -46,29 +48,30 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return \Illuminate\Contracts\Validation\Validator
      */
-    protected function validator(array $data)
+    public function register(Request $request)
     {
-        return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
-            'role' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
+        // Validasi input
+        $data = $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:pendaftar_editors',
+            'role' => 'required|string|max:255',
+            'password' => 'required|string|min:8|confirmed',
         ]);
-    }
 
-    /**
-     * Create a new user instance after a valid registration.
-     *
-     * @param  array  $data
-     * @return \App\Models\User
-     */
-    protected function create(array $data)
-    {
-        return User::create([
+        // Simpan data ke tabel `pendaftarEditors`
+        pendaftar_editor::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'role' => $data['role'],
-            'password' => Hash::make($data['password']),
+            'password' => $data['password'],
         ]);
+
+        // Redirect dengan pesan sukses
+        return redirect('/')->with('message', 'Pendaftaran berhasil! Menunggu persetujuan admin.');
+    }
+
+    public function showRegistrationForm()
+    {
+        return view('auth.register'); // Sesuaikan path ke file Blade form registrasi Anda
     }
 }

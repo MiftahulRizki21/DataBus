@@ -9,6 +9,10 @@ use App\Models\pengajuan;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Models\ListBuku;
+use App\Models\pendaftar_editor;
+use App\Models\User;
+use Illuminate\Support\Facades\Hash;
+
 class StaffPustakaController extends Controller
 {
     /**
@@ -33,14 +37,14 @@ class StaffPustakaController extends Controller
     
         // Jika status diterima, pastikan ISBN diisi
         if ($request->status == 'Diterima') {
-            if (is_null($request->ISBN) || empty($request->ISBN)) {
+            if (is_null($request->isbn) || empty($request->isbn)) {
                 return redirect()->back()->with('error', 'ISBN tidak boleh kosong untuk pengajuan yang diterima.');
             }
     
             // Perbarui pengajuan
             $pengajuan->update([
                 'status' => 'Diterima',
-                'ISBN' => $request->ISBN,
+                'ISBN' => $request->isbn,
                 'staff_id' => Auth::id(),
             ]);
     
@@ -54,7 +58,7 @@ class StaffPustakaController extends Controller
                 'editor_id' => $pengajuan->editor_id,
                 'staff_id' => $pengajuan->staff_id,
                 'halaman' => $pengajuan->halaman,
-                'isbn' => $request->ISBN,  // Masukkan ISBN yang baru
+                'ISBN' => $request->isbn,  // Masukkan ISBN yang baru
                 'foto' => $pengajuan->foto,  // Jika ada foto, sesuaikan dengan field yang ada
             ]);
     
@@ -70,8 +74,28 @@ class StaffPustakaController extends Controller
         return redirect()->route('staff.dashboard');
     }
     
+    public function DaftarEditor($id){
+        
+        // Cari data di tabel pendaftarEditors
+        $pendaftar = pendaftar_editor::findOrFail($id);
+        // Pindahkan data ke tabel `users`
+        User::create([
+            'name' => $pendaftar->name,
+            'email' => $pendaftar->email,
+            'role' => $pendaftar->role,
+            'password' => Hash::make($pendaftar->password), // Atur password default
+        ]);
 
+        // Hapus data dari tabel `pendaftarEditors`
+        $pendaftar->delete();
 
+        return redirect()->back()->with('success', 'Akun berhasil disetujui dan dipindahkan ke tabel users.');
+    }
+
+    public function showapprove(){
+        $pendaftar = pendaftar_editor::latest()->paginate(10);
+        return view('general.test', compact('pendaftar'));
+    }
     /**
      * Show the form for creating a new resource.
      */
