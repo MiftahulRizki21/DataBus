@@ -91,6 +91,9 @@ class StaffPustakaController extends Controller
 
         return redirect()->back()->with('success', 'Akun berhasil disetujui dan dipindahkan ke tabel users.');
     }
+    public function TolakEditor($id){
+        
+    }
 
     public function showapprove(){
         $pendaftar = pendaftar_editor::latest()->paginate(10);
