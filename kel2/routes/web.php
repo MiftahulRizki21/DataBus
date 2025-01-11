@@ -108,5 +108,6 @@ Route::middleware([RoleBasedAccess::class . ':staff'])->group(function () {
 // Rute Bersama (Profil untuk Staff dan Editor)
 Route::middleware([RoleBasedAccess::class . ':editor'])->group(function () {
     Route::get('/editor/dashboard', [EditorController::class, 'index'])->name('editor.dashboard');
+    Route::get('/editor/buku/{id}', [PengajuanController::class, 'show'])->name('editor.detail');
     // Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
 });

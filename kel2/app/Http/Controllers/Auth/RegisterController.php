@@ -54,6 +54,12 @@ class RegisterController extends Controller
             'role' => $data['role'],
             'password' => Hash::make($data['password']),
         ]);
+
+        // Set session flash message
+        session()->flash('success', 'Registrasi berhasil diajukan, menunggu persetujuan staf.');
+
+        // Redirect to login page
+        return redirect('/login');
     }
 
     /**
@@ -72,6 +78,6 @@ class RegisterController extends Controller
         session()->flash('success', 'Registrasi berhasil diajukan, menunggu persetujuan staf.');
 
         // Redirect to login page
-        return redirect($this->redirectTo);
+        return redirect('/login');
     }
 }

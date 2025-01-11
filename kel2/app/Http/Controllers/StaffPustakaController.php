@@ -20,8 +20,10 @@ class StaffPustakaController extends Controller
      */
     public function index()
     {
-        $pengajuans = Pengajuan::where('status', 'Diterima')->get();
-        $history = Pengajuan::whereIn('status', ['Diterima', 'Ditolak'])->get();
+        $pengajuans = Pengajuan::where('status', 'Diterima') ->orderBy('created_at', 'desc')
+        ->paginate(5);
+        $history = Pengajuan::whereIn('status', ['Diterima', 'Ditolak'])->orderBy('created_at', 'desc')
+        ->paginate(5);
         return view('General.staf',compact('pengajuans', 'history'));
     }
 
@@ -99,8 +101,10 @@ class StaffPustakaController extends Controller
     }
 
     public function showapprove(){
-        $pendaftar = pendaftar_editor::latest()->paginate(10);
+        // Pastikan Anda menggunakan paginate untuk data yang terbatas per halaman
+        $pendaftar = pendaftar_editor::paginate(5); // Mengambil 10 data per halaman
         return view('general.test', compact('pendaftar'));
+
     }
     /**
      * Show the form for creating a new resource.

@@ -19,8 +19,13 @@ class EditorController extends Controller
      */
     public function index()
     {
-        $pengajuans = Pengajuan::where('status', 'Tidak Diterima')->get();
-        $history = Pengajuan::whereIn('status', ['Revisi', 'Diterima'])->get();
+        $pengajuans = Pengajuan::where('status', 'Tidak Diterima')
+            ->orderBy('created_at', 'desc')
+            ->paginate(5);
+
+        $history = Pengajuan::whereIn('status', ['Revisi', 'Diterima'])
+            ->orderBy('created_at', 'desc')
+            ->paginate(5);
 
         return view('general.editor', compact('pengajuans', 'history'));
     }

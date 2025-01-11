@@ -79,30 +79,60 @@
 
     <nav class="sb-topnav navbar navbar-expand navbar-dark" style="background-color: #002855;">
         <!-- Navbar Brand -->
-        <a class="navbar-brand ps-3" href="index.html"><img src="..\startbootstrap-sb-admin-master\dist\assets\img\logo.png" alt="" class="logo"></a>
-
+        <a class="navbar-brand ps-3" href="index.html">
+            <img src="..\startbootstrap-sb-admin-master\dist\assets\img\logo.png" alt="" class="logo">
+        </a>
+    
         <!-- Navbar Right -->
         <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4" style="position: absolute; right: 0;">
             <div class="container-navlink">
-                <p><a href="/user/dashboard" class="navlink">Beranda</a></p>
+                @php
+                    $dashboardPath = '/'; // Default path
+                    $role = null; // Default role
+                    if (auth()->check()) {
+                        $role = auth()->user()->role; // Ambil role dari user yang login
+                        if ($role === 'user') {
+                            $dashboardPath = '/user/dashboard';
+                        } elseif ($role === 'editor') {
+                            $dashboardPath = '/editor/dashboard';
+                        } elseif ($role === 'staff') {
+                            $dashboardPath = '/staff/dashboard';
+                        }
+                    }
+                @endphp
+                <p><a href="{{ $dashboardPath }}" class="navlink">Beranda</a></p>
             </div>
-            <div class="container-navlink">
-                <p><a href="/pengajuan" class="navlink">Ajukkan</a></p>
-            </div>
-            <div class="container-navlink">
-                <p><a href="/syarat" class="navlink">Syarat Pengajuan</a></p>
-            </div>
+    
+            <!-- Tampilkan hanya untuk role "user" -->
+            @if($role === 'user')
+                <div class="container-navlink">
+                    <p><a href="/pengajuan" class="navlink">Ajukan</a></p>
+                </div>
+                <div class="container-navlink">
+                    <p><a href="/syarat" class="navlink">Syarat Pengajuan</a></p>
+                </div>
+            @endif
+    
+            <!-- Tampilkan hanya untuk role "staff" -->
+            @if($role === 'staff')
+                <div class="container-navlink">
+                    <p><a href="/approve" class="navlink">Pengajuan Editor</a></p>
+                </div>
+            @endif
+    
             <div class="container-navlink">
                 <p><a href="/list" class="navlink">List Buku</a></p>
             </div>
-            
             <div class="container-navlink">
-                <a href="/profile/user" class="navlink"><div class="fas fa-user fa-fw" style="margin-top:5px;"></div></a>
+                <a href="/profile/user" class="navlink">
+                    <div class="fas fa-user fa-fw" style="margin-top:5px;"></div>
+                </a>
             </div>
-
-            
         </ul>
     </nav>
+    
+    
+    
 
     <main class="container-fluid py-4">
         {{-- Tempat konten dinamis --}}
