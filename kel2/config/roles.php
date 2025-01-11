@@ -16,6 +16,7 @@ return [
             'buku.staffdetail',
             'approve',
             'showapprove',
+            'reject',
 
         ],
         'editor' => [

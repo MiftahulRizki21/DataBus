@@ -100,7 +100,7 @@ Route::middleware([RoleBasedAccess::class . ':staff'])->group(function () {
     Route::get('/list/staff', [ListBukuController::class, 'indexList'])->name('listBuku');
     Route::get('/approve', [StaffPustakaController::class, 'showapprove'])->name('showapprove');
     Route::get('/approve/{id}', [StaffPustakaController::class, 'DaftarEditor'])->name('approve');
-    Route::get('/reject/{id}', [StaffPustakaController::class, 'DaftarEditor'])->name('approve');
+    Route::get('/reject/{id}', [StaffPustakaController::class, 'TolakEditor'])->name('reject');
 
 
 });
