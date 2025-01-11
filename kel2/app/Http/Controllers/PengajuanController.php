@@ -21,7 +21,8 @@ class PengajuanController extends Controller
         $user = Auth::user();
         
         $pengajuans = Pengajuan::latest()->paginate(10);
-        $history = Pengajuan::whereIn('status', ['Revisi', 'Diterima', 'ditolak'])->get();
+        $history = Pengajuan::whereIn('status', ['Revisi', 'Diterima', 'ditolak'])->orderBy('updated_at', 'desc')
+        ->get();
         return view('General.user', compact('pengajuans', 'history'));
     }
 

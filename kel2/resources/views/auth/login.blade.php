@@ -18,6 +18,18 @@
 </style>
 
 <body class="bg-[#f4f7fc] flex justify-center items-center h-screen">
+    @if(session('success'))
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        Swal.fire({
+            title: 'Berhasil!',
+            text: '{{ session('success') }}',
+            icon: 'success',
+            confirmButtonText: 'OK'
+        });
+    </script>
+@endif
+    
     <div class="flex flex-col items-center">
         <!-- Logo Section -->
         <div class="logo mb-6">
@@ -71,8 +83,6 @@
         <!-- Divider -->
         <div class="flex items-center my-6">
             <div class="flex-1 h-px bg-gray-300"></div>
-            <p class="text-gray-500 mx-4 whitespace-nowrap text-sm">Atau masuk dengan akun</p>
-            <div class="flex-1 h-px bg-gray-300"></div>
         </div>
 
         <!-- Sign in with credentials -->
@@ -118,8 +128,7 @@
 
         <!-- Footer links -->
         <div class="flex justify-between mt-6 text-sm text-gray-600">
-            <a href="{{ route('password.request') }}" class="hover:underline">Lupa password?</a>
-            <a href="{{ route('register') }}" class="hover:underline">Buat akun baru</a>
+            <a href="{{ route('register') }}" class="hover:underline">daftar menjadi editor?</a>
         </div>
     </div>
 </body>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\DetailBuku;
 use Illuminate\Http\Request;
 use App\Http\Requests\UpdateDetailBukuRequest;
+use Illuminate\Support\Facades\Auth;
 
 class DetailBukuController extends Controller
 {
@@ -31,10 +32,11 @@ class DetailBukuController extends Controller
      */
     public function show(DetailBuku $id)
     {
+        $user = Auth::user();
         $detailBuku = DetailBuku::findOrFail($id);
 
         // Kirim data detail buku ke view
-        return view('listBuku.detailBuku_show', compact('detailBuku'));
+        return view('listBuku.detailBuku_show', compact('detailBuku', 'user'));
     }
 
     /**

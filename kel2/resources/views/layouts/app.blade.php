@@ -85,7 +85,7 @@
                 <p><a href="/" class="navlink">Beranda</a></p>
             </div>
             <div class="container-navlink">
-                <p><a href="/listPengunjung" class="navlink">List Buku</a></p>
+                <p><a href="/list" class="navlink">List Buku</a></p>
             </div>
             <div class="container-navlink">
                 <p><a href="/syarat" class="navlink">Syarat Pengajuan</a></p>
