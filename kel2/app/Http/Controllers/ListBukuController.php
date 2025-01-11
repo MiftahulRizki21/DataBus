@@ -143,8 +143,14 @@ class ListBukuController extends Controller
      */
     public function show($id)
     { 
-        $listbuku = ListBuku::findOrFail($id); // Ambil data buku berdasarkan ID
         $user = Auth::user();
+        $listbuku = ListBuku::findOrFail($id); // Ambil data buku berdasarkan ID
+        return view('listBuku.detailBuku_show', compact('listbuku', 'user'));
+    }
+    public function showDetail($id)
+    { 
+        $user = Auth::user();
+        $listbuku = pengajuan::findOrFail($id); // Ambil data buku berdasarkan ID
         return view('listBuku.detailBuku_show', compact('listbuku', 'user'));
     }
 

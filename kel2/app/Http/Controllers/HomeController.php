@@ -34,5 +34,10 @@ class HomeController extends Controller
         return view('profile.profile', $data);    
 
     }
+
+    public function syarat()
+    {
+        return view('General.syarat');
+    }
     
 }

@@ -117,7 +117,7 @@
 
     div.rekom{
     width: 250px;
-    height: 350px;
+    height: 400px;
     border-radius: 10px;
     box-shadow:  0 0 15px rgba(0, 0, 0, 0.18);
     }
@@ -268,7 +268,7 @@
 
     .container-fluid{
         position: relative;
-        top: 300px;
+        top: 295px;
     }
 
     .footer{

@@ -129,7 +129,7 @@
         <div class="synopsis">
             <h5 class="text-success">Sinopsis:</h5>
             <p>
-                {{ $listbuku->sinopsis }}
+                {{ $listbuku->sipnosis }}
             </p>
         </div>
 
@@ -155,7 +155,7 @@
                 </tr>
                 <tr>
                     <th>Editor :</th>
-                    <td>{{ $listbuku->editor->name }}</td>
+                    <td>{{ $user->name }}</td>
                 </tr>
                 <tr>
                     <th>ISBN :</th>
