@@ -9,6 +9,10 @@ use App\Models\pengajuan;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Models\ListBuku;
+use App\Models\pendaftar_editor;
+use App\Models\User;
+use Illuminate\Support\Facades\Hash;
+
 class StaffPustakaController extends Controller
 {
     /**
@@ -70,8 +74,31 @@ class StaffPustakaController extends Controller
         return redirect()->route('staff.dashboard');
     }
     
+    public function DaftarEditor($id){
+        
+        // Cari data di tabel pendaftarEditors
+        $pendaftar = pendaftar_editor::findOrFail($id);
+        // Pindahkan data ke tabel `users`
+        User::create([
+            'name' => $pendaftar->name,
+            'email' => $pendaftar->email,
+            'role' => $pendaftar->role,
+            'password' => Hash::make($pendaftar->password), // Atur password default
+        ]);
 
+        // Hapus data dari tabel `pendaftarEditors`
+        $pendaftar->delete();
 
+        return redirect()->back()->with('success', 'Akun berhasil disetujui dan dipindahkan ke tabel users.');
+    }
+    public function TolakEditor($id){
+        
+    }
+
+    public function showapprove(){
+        $pendaftar = pendaftar_editor::latest()->paginate(10);
+        return view('general.test', compact('pendaftar'));
+    }
     /**
      * Show the form for creating a new resource.
      */

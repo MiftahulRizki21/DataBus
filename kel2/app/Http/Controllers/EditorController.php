@@ -123,15 +123,6 @@ class EditorController extends Controller
 
     return redirect()->route('editor.dashboard')->with('success', 'Pengajuan berhasil diperbarui!');
 }
-
-
-    
-    
-    
-
-
-
-
     /**
      * Remove the specified resource from storage.
      */

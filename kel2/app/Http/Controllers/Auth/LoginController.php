@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class LoginController extends Controller
 {
@@ -20,16 +21,22 @@ class LoginController extends Controller
     protected $redirectTo = '/';
     protected function authenticated($request, $user)
 {
-    // Redirect based on role after login
-    if (str_contains($user->email, '@pcr.ac.id')) {
-        return redirect()->route('staff.dashboard');
+    if ($user && Hash::check($request->password, $user->password)) {
+        // Cek berdasarkan domain email untuk menentukan peran pengguna
+        if (str_contains($user->email, '@pcr.ac.id')) {
+            return redirect()->route('staff.dashboard');
+        }
+
+        if (str_contains($user->email, '@mahasiswa.pcr.ac.id')) {
+            return redirect()->route('user.dashboard'); // Redirect ke halaman user
+        }
+
+        return redirect()->route('editor.dashboard'); // Untuk editor atau role lainnya
+    } else {
+        // Login gagal, kembali dengan pesan kesalahan
+        return back()->withErrors(['email' => 'Email atau password tidak sesuai.']);
     }
 
-    if (str_contains($user->email, '@mahasiswa.pcr.ac.id')) {
-        return redirect()->route('user.dashboard'); // Redirect to user homepage
-    }
-
-    return redirect()->route('editor.dashboard'); // For editor or other roles
 }
 
 
