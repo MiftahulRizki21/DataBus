@@ -180,7 +180,7 @@
                 </thead>
                 <tbody>
                     @foreach ($pengajuans as $data)
-                    @if ($data->status === 'Diajukan' && $data->ISBN === null)
+                    @if ($data->status === 'Diajukan' ||  $data->status === 'Selesai Revisi')
                     <tr>
                         <td>{{ $loop->iteration }}</td>
                         <td>{{ $data->judul_buku }}</td>

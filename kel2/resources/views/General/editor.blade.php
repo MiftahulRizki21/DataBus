@@ -275,7 +275,7 @@
                                                             aria-label="Close"></button>
                                                     </div>
                                                     <div class="modal-body">
-                                                        <input type="hidden" name="status" value="diterima">
+                                                        <input type="hidden" name="status" value="Selesai Revisi">
                                                         <div class="form-group">
                                                             <label for="file">{{ $data->file }}</label>
                                                             <input type="file" name="file" class="form-control"

@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::table('pengajuans', function (Blueprint $table) {
             // Mengubah kolom batas_pengeditan menjadi tipe date
-            $table->enum('status', (['Selesai Revisi', 'Diterima', 'Revisi', 'Ditolak', 'Sedang Direview', 'Diajukan']));
+            $table->enum('status', (['Selesai Revisi', 'Diterima', 'Revisi', 'Ditolak', 'Sedang Direview', 'Diajukan']))->nullable()->change();
         });
     }
 

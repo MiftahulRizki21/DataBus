@@ -21,7 +21,7 @@ class StaffPustakaController extends Controller
      */
     public function index()
     {
-        $pengajuans = Pengajuan::where('status', 'Diterima') ->orderBy('created_at', 'desc')
+        $pengajuans = Pengajuan::where('status', ['Diajukan', 'Selesai Revisi']) ->orderBy('created_at', 'desc')
         ->paginate(5);
         $history = Pengajuan::whereIn('status', ['Diterima', 'Ditolak'])->orderBy('created_at', 'desc')
         ->paginate(5);
@@ -106,7 +106,6 @@ class StaffPustakaController extends Controller
         $pengajuan = pengajuan::findOrFail($id);
         $pengajuan->update([
             'editor_id'=> $request->editor_id,
-            'status'=> 'Sedang Direview',
             'batas_pengeditan'=>$request->batas_pengeditan,
         ]);
         return redirect()->back()->with('success', 'Editor telah ditugaskan');
