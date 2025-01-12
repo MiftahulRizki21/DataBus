@@ -8,6 +8,7 @@
     body {
       font-family: Arial, sans-serif;
       margin: 20px;
+      background-color: #f0f0f0;
     }
     .accordion-item {
       border: 1px solid #ddd;
@@ -68,7 +69,6 @@
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f0f8f7;
             color: #333;
         }
 
@@ -126,6 +126,7 @@
         h2{
             color: #002855;
             margin-left: 50px;
+            margin-top: 70px;
         }
         .accordion-header{
             color: #002855;

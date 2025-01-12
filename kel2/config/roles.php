@@ -13,7 +13,7 @@ return [
         'staff' => [
             'staff.dashboard',
             'listBuku',
-            'buku.staffdetail',
+            'staff.detail',
             'approve',
             'showapprove',
             'reject',
@@ -21,7 +21,7 @@ return [
         ],
         'editor' => [
             'profile',
-            'buku.editordetail',
+            'editor.detail',
             'editor.dashboard',
         ],
     ],

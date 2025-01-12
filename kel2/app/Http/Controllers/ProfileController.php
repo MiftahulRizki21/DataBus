@@ -55,7 +55,7 @@ class ProfileController extends Controller
         ]);
             $user->save(); // Simpan perubahan file
             // Debugging: cek path file yang berhasil disimpan
-            return redirect()->route('profile.profile')->with('success', 'Pengajuan berhasil diperbarui!');
+            return redirect()->route('profile.profile')->with('success', 'Profile berhasil diperbarui!');
     }
 
     /**

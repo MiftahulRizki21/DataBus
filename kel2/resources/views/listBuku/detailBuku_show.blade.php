@@ -155,7 +155,7 @@
                 </tr>
                 <tr>
                     <th>Editor :</th>
-                    <td>{{ $user->name }}</td>
+                    <td>{{ $listbuku->editor->name }}</td>
                 </tr>
                 <tr>
                     <th>ISBN :</th>

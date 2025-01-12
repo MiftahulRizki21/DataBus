@@ -49,12 +49,13 @@ Route::post('register', [RegisterController::class, 'register']);
 
 Route::get('/logout', function () {
     Auth::logout();
+    session()->flash('success', 'Anda telah berhasil logout!');
     return redirect('/');
 });
 
 
 Route::get('/listPengunjung', [ListBukuController::class, 'indexListPengunjung'])->name('listBukuPengunjung');
-
+Route::get('/detail_buku/{id}', [ListBukuController::class, 'show'])->name('buku.detail');
 
 // /*<<<<<<< HEAD*/
 // Route::controller(SocialiteController::class)->group(function(){
@@ -86,7 +87,6 @@ Route::put('/pengajuan/{id}/tugas', [StaffPustakaController::class, 'TugasEditor
 
 Route::middleware([RoleBasedAccess::class . ':user'])->group(function () {
     Route::get('/user/dashboard', [HomeController::class, 'beranda'])->name('user.dashboard');
-    Route::get('/detail_buku/{id}', [ListBukuController::class, 'show'])->name('buku.detail');
     Route::get('/pengajuan', [PengajuanController::class, 'create'])->name('pengajuan.create');
     Route::post('/pengajuan/store', [PengajuanController::class, 'store'])->name('pengajuan.store');
 
@@ -97,7 +97,6 @@ Route::middleware([RoleBasedAccess::class . ':user'])->group(function () {
 Route::middleware([RoleBasedAccess::class . ':staff'])->group(function () {
     Route::get('/staff/dashboard', [StaffPustakaController::class, 'index'])->name('staff.dashboard');
     // Route::get('/detail_buku/{id}', [ListBukuController::class, 'show'])->name('buku.detail');
-    Route::get('/staff/buku/{id}', [ListBukuController::class, 'show'])->name('buku.staffdetail');
     // Route::get('/', [ListBukuController::class, 'show'])->name('listBuku');
     Route::get('/list/staff', [ListBukuController::class, 'indexList'])->name('listBuku');
     Route::get('/approve', [StaffPustakaController::class, 'showapprove'])->name('showapprove');
@@ -110,6 +109,6 @@ Route::middleware([RoleBasedAccess::class . ':staff'])->group(function () {
 // Rute Bersama (Profil untuk Staff dan Editor)
 Route::middleware([RoleBasedAccess::class . ':editor'])->group(function () {
     Route::get('/editor/dashboard', [EditorController::class, 'index'])->name('editor.dashboard');
-    Route::get('/editor/buku/{id}', [ListBukuController::class, 'showDetail'])->name('buku.editordetail');
+    Route::get('/editor/buku/{id}', [PengajuanController::class, 'show'])->name('editor.detail');
     // Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
 });

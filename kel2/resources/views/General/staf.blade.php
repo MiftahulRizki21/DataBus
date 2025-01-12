@@ -112,19 +112,24 @@
 
         /* Scrollable History Table Styles */
         .history-table-container {
-            margin-top: 30px;
+            margin-top: 10px;
             max-width: 90%;
-            height: 200px;
-            overflow-y: scroll;
-            border-radius: 10px;
+            height: 270px;
+            /* Lebih pendek dari tabel pengajuan */
+            /* Mengaktifkan scroll vertikal */
+            border-radius: 10px; /* Memberikan border radius pada container tabel */
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            overflow: hidden; /* Menjaga agar border-radius terlihat pada scroll */
         }
 
         .history-table {
             width: 100%;
             border-collapse: collapse;
             background-color: #fff;
+            border-radius: 10px; /* Tambahkan border-radius pada tabel */
+            overflow: hidden; /* Pastikan efek border-radius terlihat */
         }
+
 
         .history-table thead {
             background-color: #002855;
@@ -301,7 +306,7 @@
         </div>
 
 
-        <h5>Table History</h5>
+        <h5 style="margin-top: 100px;">Table History</h5>
         <center>
             <div class="history-table-container">
                 <table class="history-table">

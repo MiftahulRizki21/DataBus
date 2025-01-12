@@ -21,7 +21,8 @@ class PengajuanController extends Controller
         $user = Auth::user();
         
         $pengajuans = Pengajuan::latest()->paginate(10);
-        $history = Pengajuan::whereIn('status', ['Revisi', 'Diterima', 'ditolak'])->get();
+        $history = Pengajuan::whereIn('status', ['Revisi', 'Diterima', 'ditolak'])->orderBy('updated_at', 'desc')
+        ->get();
         return view('General.user', compact('pengajuans', 'history'));
     }
 
@@ -92,14 +93,14 @@ class PengajuanController extends Controller
         Log::info('Data pengajuan berhasil disimpan ke database:', $pengajuan->toArray());
 
         // Flash message
-        session()->flash('success', 'Buku berhasil ditambahkan!');
+        session()->flash('success', 'Buku berhasil diajukan! Silahkan tunggu notifikasi lanjut...');
     } catch (\Exception $e) {
         Log::error('Gagal menyimpan pengajuan:', ['error' => $e->getMessage()]);
         return redirect()->back()->with('error', 'Terjadi kesalahan saat menyimpan data.')->withInput();
     }
 
     // Redirect kembali ke halaman sebelumnya
-    return redirect()->route('pengajuan.create')->with('success', 'Buku berhasil ditambahkan!');
+    return redirect()->route('pengajuan.create')->with('success', 'Buku berhasil diajukan! Silahkan tunggu notifikasi lanjut...');
 }
 
 

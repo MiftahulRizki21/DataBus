@@ -55,7 +55,7 @@
                     <span class="text-danger">{{ $errors->first('halaman') }}</span>
                 </div>
                 <div class="form-group mt-1 mb-3">
-                    <label for="foto">Foto Buku</label>
+                    <label for="foto">Foto Sampul Buku</label>
                     <input type="file" class="form-control @error('foto') is-invalid @enderror" id="foto"
                         name="foto" value="{{ old('foto') }}">
                     <span class="text-danger">{{ $errors->first('foto') }}</span>

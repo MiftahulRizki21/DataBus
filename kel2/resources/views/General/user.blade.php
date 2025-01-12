@@ -43,7 +43,7 @@
                                                     <img src="{{ asset('storage/'. $listbuku->foto) }}" alt="{{ $listbuku->judul_buku }}" class="card-image">
                                                 
                                                 </a>
-                                                <b><h3><p class="card-title">{{ $listbuku->judul_buku }}</p></h3></b>
+                                                <b><h3><p class="card-title" style="color: black">{{ $listbuku->judul_buku }}</p></h3></b>
                                                 
                                             </div>
                                         </td>
