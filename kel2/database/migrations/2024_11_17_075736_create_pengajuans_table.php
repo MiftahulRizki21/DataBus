@@ -24,10 +24,11 @@ return new class extends Migration
             $table->string('halaman');
             $table->string('foto');
             $table->string('file')->nullable();
-            $table->enum('status', (['Tidak Diterima', 'Diterima', 'Revisi', 'Ditolak']));
+            $table->enum('status', (['Selesai Revisi', 'Diterima', 'Revisi', 'Ditolak', 'Sedang Direview', 'Diajukan']));
             $table->string('ISBN')->nullable();
             $table->string('Alasan_editor')->nullable();
             $table->string('Alasan_staff')->nullable();
+            $table->date('batas_pengeditan')->nullable();
             $table->timestamps();
         });
     }

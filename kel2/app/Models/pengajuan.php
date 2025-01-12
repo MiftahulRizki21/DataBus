@@ -24,7 +24,8 @@ class pengajuan extends Model
         'editor_id',
         'staff_id',
         'Alasan_editor',
-        'Alasan_staff'
+        'Alasan_staff',
+        'batas_pengeditan',
     ];
 
     // public function nextStep()

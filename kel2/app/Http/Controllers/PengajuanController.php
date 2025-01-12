@@ -152,7 +152,7 @@ public function updatePengajuanStatus(Request $request, $id)
      */
     public function show($id)
     { 
-        $pengajuan= \App\Models\pengajuan::findOrFail($id); // Ambil data buku berdasarkan ID
+        $pengajuan = \App\Models\pengajuan::findOrFail($id); // Ambil data buku berdasarkan ID
         return view('listBuku.detail_buku', compact('pengajuan'));
     }
 
@@ -170,7 +170,6 @@ public function updatePengajuanStatus(Request $request, $id)
         $request->validate([
             'status' => 'required|string',
             'file' => 'nullable|file|mimes:pdf,docx|max:2048', // Validasi file (optional)
-            'Alasan_editor' => 'nullable|string', // Validasi alasan editor
         ]);
     
         $pengajuan = Pengajuan::findOrFail($id);
