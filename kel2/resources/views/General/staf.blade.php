@@ -206,7 +206,8 @@
                 </thead>
                 <tbody>
                     @foreach ($pengajuans as $data)
-                    @if ($data->status === 'Diajukan' ||  $data->status === 'Selesai Revisi')
+                    @if ($data->status === 'Diajukan' ||  $data->status === 'Selesai Revisi' )
+                        
                     <tr>
                         <td>{{ $loop->iteration }}</td>
                         <td>{{ $data->judul_buku }}</td>
@@ -349,7 +350,7 @@
                     </thead>
                     <tbody>
                         @foreach ($pengajuans as $data)
-                        @if ($data->status === 'Diajukan' ||  $data->status === 'Selesai Revisi')
+                        @if ($data->status === 'Diajukan' &&  $data->editor_id == NULL)
                         <tr>
                             <td>{{ $loop->iteration }}</td>
                             <td>{{ $data->judul_buku }}</td>

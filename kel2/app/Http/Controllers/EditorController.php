@@ -19,15 +19,17 @@ class EditorController extends Controller
      */
     public function index()
     {
-        $pengajuans = Pengajuan::where('status', ['Diajukan', 'Sedang Direview'])
+        $pengajuans = Pengajuan::where('status', 'Sedang Direview')
+            ->orderBy('created_at', 'desc')
+            ->paginate(5);
+        $penugasan = pengajuan::where('status', 'Diajukan')
+        ->orderBy('created_at', 'desc')
+        ->paginate(5);
+        $history = Pengajuan::whereIn('status', ['Revisi', 'Diterima', 'Selesai Revisi'])
             ->orderBy('created_at', 'desc')
             ->paginate(5);
 
-        $history = Pengajuan::whereIn('status', ['Revisi', 'Diterima'])
-            ->orderBy('created_at', 'desc')
-            ->paginate(5);
-
-        return view('general.editor', compact('pengajuans', 'history'));
+        return view('general.editor', compact('pengajuans', 'history', 'penugasan'));
     }
 
     /**
@@ -85,17 +87,17 @@ class EditorController extends Controller
             // dd('File ada di request:', $request->hasFile('file'));
 
             // Jika ada file yang diupload, simpan file tersebut
-            // if ($request->hasFile('file')) {
-            //     // Hapus file lama jika ada
-            //     if ($pengajuan->file) {
-            //         Storage::disk('public')->delete($pengajuan->file);
-            //     }
-            //     // Simpan file baru di folder uploads dalam storage/public
-            //     $filePath = $request->file('file')->store('uploads', 'public'); // Menyimpan di storage/app/public/uploads
-            //     $pengajuan->file = $filePath; // Simpan path file edit
+            if ($request->hasFile('file')) {
+                // Hapus file lama jika ada
+                if ($pengajuan->file) {
+                    Storage::disk('public')->delete($pengajuan->file);
+                }
+                // Simpan file baru di folder uploads dalam storage/public
+                $filePath = $request->file('file')->store('uploads', 'public'); // Menyimpan di storage/app/public/uploads
+                $pengajuan->file = $filePath; // Simpan path file edit
 
-            //     // Debugging: cek path file yang berhasil disimpan
-            // }
+                // Debugging: cek path file yang berhasil disimpan
+            }
 
             // Update status revisi dan alasan editor
             $pengajuan->update([

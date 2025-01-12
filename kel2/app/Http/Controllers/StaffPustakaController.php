@@ -21,7 +21,7 @@ class StaffPustakaController extends Controller
      */
     public function index()
     {
-        $pengajuans = Pengajuan::where('status', ['Diajukan', 'Selesai Revisi']) ->orderBy('created_at', 'desc')
+        $pengajuans = Pengajuan::whereIn('status', ['Selesai Revisi']) ->orderBy('created_at', 'desc')
         ->paginate(5);
         $history = Pengajuan::whereIn('status', ['Diterima', 'Ditolak'])->orderBy('created_at', 'desc')
         ->paginate(5);
@@ -39,7 +39,7 @@ class StaffPustakaController extends Controller
         $pengajuan = Pengajuan::findOrFail($id);
     
         // Jika status diterima, pastikan ISBN diisi
-        if ($request->status == 'Selesai Revisi') {
+        if ($request->status === 'Diterima') {
             if (is_null($request->isbn) || empty($request->isbn)) {
                 return redirect()->back()->with('error', 'ISBN tidak boleh kosong untuk pengajuan yang diterima.');
             }

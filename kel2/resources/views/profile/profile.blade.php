@@ -244,22 +244,58 @@
             </tr>
         </thead>
         <tbody>
-            @foreach ($history as $pengajuan)
+            @foreach ($history as $data)
                 <tr>
-                    <td>{{ $pengajuan->judul_buku }}</td>
-                    <td>{{ $pengajuan->updated_at }}</td>
-                    <td>{{ $pengajuan->status }}</td>
-                    <td>{{ $pengajuan->Alasan_editor }}</td>
-                    <td>{{ $pengajuan->Alasan_staff }}</td>
+                    <td>{{ $data->judul_buku }}</td>
+                    <td>{{ $data->updated_at }}</td>
+                    <td>{{ $data->status }}</td>
+                    <td>{{ $data->Alasan_editor }}</td>
+                    <td>{{ $data->Alasan_staff }}</td>
                     @if (Auth::user()->role === 'user')
-                        <td>
-                            @if ($pengajuan->status === 'Revisi')
-                                <a href="{{ route('pengajuan.edit', $pengajuan->id) }}" class="btn btn-warning">Update</a>
-                            @else
-                                <span class="text-muted">Tidak Ada Aksi</span>
-                            @endif
-                        </td>
-                    @endif
+                    <td>
+                        @if ($data->status === 'Revisi')
+                                <button type="button" class="btn btn-danger" data-bs-toggle="modal"
+                                data-bs-target="#rejectModal{{ $data->id }}">
+                                Update
+                            </button>                                
+                            <div class="modal fade" id="rejectModal{{ $data->id }}" tabindex="-1"
+                                    aria-labelledby="rejectModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <form action="{{ route('pengajuan.user.edit', $data->id) }}"
+                                                enctype="multipart/form-data" method="POST">
+                                                @csrf
+                                                @method('PUT')
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="rejectModalLabel">Masukkan File Revisi
+                                                    </h5>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                        aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <input type="hidden" name="status" value="Diajukan">
+                                                    <div class="form-group">
+                                                        <label for="file">{{ $data->file }}</label>
+                                                        <input type="file" name="file" class="form-control"
+                                                            placeholder="File buku" required>
+                                                    </div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary"
+                                                        data-bs-dismiss="modal">Batal</button>
+                                                    <button type="submit" class="btn btn-danger">Kirim Revisi</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        @else
+                            <span class="text-muted">Tidak Ada Aksi</span>
+                        @endif
+                    </td>
+                @endif
+                
                 </tr>
             @endforeach
         </tbody>

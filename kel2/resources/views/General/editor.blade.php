@@ -230,15 +230,6 @@
                                 <td>
                                     {{ $loop->iteration }}
                                 </td>
-                                <!-- Kolom untuk unggah file -->
-                                {{-- <td>
-                            <form action="{{ route('editor.pengajuan.accept', $data->id) }}" method="POST" enctype="multipart/form-data">
-                                @csrf
-                                <div class="form-group">
-                                    <input type="file" name="file_edit" id="file_edit" class="form-input" required>
-                                </div>
-                            </form>
-                        </td> --}}
                                 <td>
                                     <p>{{ $data->judul_buku }}</p>
                                 </td>
@@ -355,7 +346,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($pengajuans as $data)
+                        @foreach ($penugasan as $data)
                             @if ($data->editor_id == Auth::user()->id)
                                 <tr>
                                     <td>
@@ -403,8 +394,6 @@
                                                         
                                                         <div class="modal-body">
                                                             <input type="hidden" name="status" value="Sedang Direview">
-                                                            
-    
                                                         </div>
                                                         <div class="modal-footer">
                                                             <button type="button" class="btn btn-secondary"

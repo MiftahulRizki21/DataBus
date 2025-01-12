@@ -171,11 +171,12 @@ public function updatePengajuanStatus(Request $request, $id)
             'status' => 'required|string',
             'file' => 'nullable|file|mimes:pdf,docx|max:2048', // Validasi file (optional)
         ]);
-    
+        // dd($request->all());
+
         $pengajuan = Pengajuan::findOrFail($id);
     
         // Jika status adalah 'Revisi', lakukan update status menjadi 'Tidak Diterima', hapus alasan editor, dan update file
-        if ($request->status == 'Revisi') {
+        if ($request->status === 'Diajukan') {
             // Jika ada file yang diupload, simpan file tersebut
             if ($request->hasFile('file')) {
                 // Hapus file lama jika ada
@@ -189,8 +190,14 @@ public function updatePengajuanStatus(Request $request, $id)
     
             // Update status menjadi 'Tidak Diterima' dan hapus alasan editor
             $pengajuan->update([
-                'status' => 'Tidak Diterima', // Mengubah status menjadi 'Tidak Diterima'
+                'status' => 'Diajukan', // Mengubah status menjadi 'Tidak Diterima'
                 'Alasan_editor' => null, // Menghapus alasan editor
+                'batas_pengeditan' => null, // Menghapus alasan editor
+                'editor_id' => null, // Menghapus alasan editor
+            ]);
+        }else{
+            $pengajuan->update([
+                'status' => 'Ditolak',
             ]);
         }
     
