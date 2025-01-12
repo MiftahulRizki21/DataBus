@@ -100,7 +100,7 @@
             border-radius: 8px;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
             text-transform: uppercase;
-            margin-top: 550px;
+            margin-top: 850px;
             width: 86%;
         }
 
@@ -285,10 +285,6 @@
                                 </div>
                             </div>
                         </td>
-                            <!-- Form Tolak dengan Modal -->
-                            <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#editorModal{{ $data->id }}">
-                                Tugaskan Editor
-                            </button>
                         
                             <!-- Modal Tolak -->
                             <div class="modal fade" id="editorModal{{ $data->id }}" tabindex="-1" aria-labelledby="editorModalLabel" aria-hidden="true">
@@ -337,6 +333,56 @@
         <div class="pagination">
             {{ $pengajuans->links('pagination::bootstrap-5') }}
         </div> 
+
+        <div class="container-fluid">
+            <h5>Table Pemilihan Tugas | Editor</h5>
+            <div class="table-container">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>Nama</th>
+                            <th>File Buku</th>
+                            <th>Detail Buku</th>
+                            <th>Pilih</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($pengajuans as $data)
+                        @if ($data->status === 'Diajukan' ||  $data->status === 'Selesai Revisi')
+                        <tr>
+                            <td>{{ $loop->iteration }}</td>
+                            <td>{{ $data->judul_buku }}</td>
+                            <td>
+                                <a href="{{ asset('storage/' . $data->file) }}" target="_blank" class="download">Download File</a>
+                            </td>
+                            <td>
+                                <a href="/staff/buku/{{ $data->id }}">
+                                    <button type="button" class="btn btn-primary">Detail Buku</button>
+                                </a>
+                            </td>
+                            <!-- Tombol aksi -->
+                            <td>
+                                <!-- Form Tolak dengan Modal -->
+                                <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#editorModal{{ $data->id }}">
+                                    Tugaskan Editor
+                                </button>
+                            </td>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        @endif
+                        @endforeach
+                    </tbody>
+                </table>
+                
+            </div>
+            <div class="pagination">
+                {{ $pengajuans->links('pagination::bootstrap-5') }}
+            </div> 
 
 
         <h5 style="margin-top: 100px;">Table History</h5>

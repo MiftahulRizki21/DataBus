@@ -123,7 +123,6 @@
                 <th>Nama</th>
                 <th>Email</th>
                 <th>Role</th>
-                <th>Password</th>
                 <th>Aksi</th>
             </tr>
         </thead>
@@ -134,7 +133,6 @@
                     <td>{{ $pendaftars->name }}</td>
                     <td>{{ $pendaftars->email }}</td>
                     <td>{{ $pendaftars->role }}</td>
-                    <td>{{ $pendaftars->password }}</td>
                     <td>
                         <a href="{{ route('approve', $pendaftars->id) }}" class="btn btn-success">Setujui</a>
                         <a href="{{ route('reject', $pendaftars->id) }}" class="btn btn-danger">Tolak</a>
