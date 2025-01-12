@@ -19,9 +19,8 @@ class EditorController extends Controller
      */
     public function index()
     {
-        $pengajuans = Pengajuan::where('status', 'Tidak Diterima')->get();
+        $pengajuans = Pengajuan::where('status','Sedang Direview ')->get();
         $history = Pengajuan::whereIn('status', ['Revisi', 'Diterima'])->get();
-
         return view('general.editor', compact('pengajuans', 'history'));
     }
 
@@ -69,29 +68,28 @@ class EditorController extends Controller
 
     $pengajuan = Pengajuan::findOrFail($id);
 
-
     // Jika status ditolak atau perlu revisi
-    if ($request->status == 'Tidak Diterima') {
+    if ($request->status == 'Revisi') {
         // Pastikan alasan editor ada
         if (!$request->has('Alasan_editor')) {
             return redirect()->back()->with('error', 'Alasan editor diperlukan.');
         }
 
         // Debugging: cek apakah file ada di request
-        dd('File ada di request:', $request->hasFile('file'));
+        // dd('File ada di request:', $request->hasFile('file'));
 
         // Jika ada file yang diupload, simpan file tersebut
-        if ($request->hasFile('file')) {
-            // Hapus file lama jika ada
-            if ($pengajuan->file) {
-                Storage::disk('public')->delete($pengajuan->file);
-            }
-            // Simpan file baru di folder uploads dalam storage/public
-            $filePath = $request->file('file')->store('uploads', 'public'); // Menyimpan di storage/app/public/uploads
-            $pengajuan->file = $filePath; // Simpan path file edit
+        // if ($request->hasFile('file')) {
+        //     // Hapus file lama jika ada
+        //     if ($pengajuan->file) {
+        //         Storage::disk('public')->delete($pengajuan->file);
+        //     }
+        //     // Simpan file baru di folder uploads dalam storage/public
+        //     $filePath = $request->file('file')->store('uploads', 'public'); // Menyimpan di storage/app/public/uploads
+        //     $pengajuan->file = $filePath; // Simpan path file edit
 
-            // Debugging: cek path file yang berhasil disimpan
-        }
+        //     // Debugging: cek path file yang berhasil disimpan
+        // }
 
         // Update status revisi dan alasan editor
         $pengajuan->update([
@@ -102,7 +100,7 @@ class EditorController extends Controller
     } else {
         // Jika diterima, update status menjadi diterima
         $pengajuan->update([
-            'status' => 'diterima',
+            'status' => 'Selesai Revisi',
             'editor_id' => Auth::id(),
         ]);
 

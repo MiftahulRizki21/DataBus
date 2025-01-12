@@ -1,7 +1,6 @@
 @extends('layouts.UserApp')
 @section('content')
-
-<title>Beranda | Editor</title>
+    <title>Beranda | Editor</title>
     <style>
         .table-container {
             margin: 20px auto;
@@ -10,8 +9,10 @@
             overflow: hidden;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
             animation: fadeIn 1s ease-in-out;
-            height: 400px; /* Tentukan tinggi maksimum untuk scroll */
-            overflow-y: scroll; /* Aktifkan scroll vertikal */
+            height: 400px;
+            /* Tentukan tinggi maksimum untuk scroll */
+            overflow-y: scroll;
+            /* Aktifkan scroll vertikal */
         }
 
         .table {
@@ -205,7 +206,9 @@
     </style>
 
     <!-- Judul Halaman Editor -->
-    <center><h1>Halaman Editor</h1></center>
+    <center>
+        <h1>Halaman Editor</h1>
+    </center>
     <div class="container-fluid">
         <h5>Table Pengajuan</h5>
         <div class="table-container">
@@ -221,12 +224,13 @@
                 </thead>
                 <tbody>
                     @foreach ($pengajuans as $data)
-                    <tr>
-                        <td>
-                            {{ $loop->iteration }}
-                        </td>
-                        <!-- Kolom untuk unggah file -->
-                        {{-- <td>
+                        @if ($data->editor_id == Auth::user()->id)
+                            <tr>
+                                <td>
+                                    {{ $loop->iteration }}
+                                </td>
+                                <!-- Kolom untuk unggah file -->
+                                {{-- <td>
                             <form action="{{ route('editor.pengajuan.accept', $data->id) }}" method="POST" enctype="multipart/form-data">
                                 @csrf
                                 <div class="form-group">
@@ -234,88 +238,100 @@
                                 </div>
                             </form>
                         </td> --}}
-                        <td><p>{{ $data->judul_buku }}</p></td>
-                        <td>
-                            <a href="{{ asset('storage/' . $data->file) }}" target="_blank" class="download">Download File</a>
-                        </td>
-                        
-                        <!-- Tombol detail -->
-                        <td>
-                            <a href="/editor/buku/{{ $data->id }}">
-                                <button type="button" class="btn btn-primary">Detail Buku</button>
-                            </a>
-                        </td>
-                        
-                        <!-- Tombol aksi -->
-                        <td>
-                            <!-- Form Terima -->
-                            <button type="button" class="btn btn-success" data-bs-toggle="modal"
-                            data-bs-target="#acceptModal{{ $data->id }}">
-                            Terima
-                            </button>
-                            <div class="modal fade" id="acceptModal{{ $data->id }}" tabindex="-1"
-                                aria-labelledby="acceptModalLabel" aria-hidden="true">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <form action="{{ route('pengajuan.update', $data->id) }}" method="POST" enctype="multipart/form-data">
-                                            @csrf
-                                            @method('PUT')
-                                            <div class="modal-header">
-                                                <h5 class="modal-title" id="acceptModalLabel">Masukkan File yang diedit</h5>
-                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                    aria-label="Close"></button>
-                                            </div>
-                                            <div class="modal-body">
-                                                <input type="hidden" name="status" value="diterima">
-                                                <div class="form-group">
-                                                    <label for="file">{{ $data->file }}</label>
-                                                    <input type="file" name="file" class="form-control"
-                                                        placeholder="File buku" required>
-                                                </div>
-                                                  
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary"
-                                                    data-bs-dismiss="modal">Batal</button>
-                                                <button type="submit" class="btn btn-success">Terima</button>
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
+                                <td>
+                                    <p>{{ $data->judul_buku }}</p>
+                                </td>
+                                <td>
+                                    <a href="{{ asset('storage/' . $data->file) }}" target="_blank" class="download">Download
+                                        File</a>
+                                </td>
 
-                            <!-- Form Tolak dengan Modal -->
-                            <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#rejectModal{{ $data->id }}">
-                                Revisi
-                            </button>
-                        
-                            <!-- Modal Revisi -->
-                            <div class="modal fade" id="rejectModal{{ $data->id }}" tabindex="-1" aria-labelledby="rejectModalLabel" aria-hidden="true">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <form action="{{ route('pengajuan.update', $data->id) }}" enctype="multipart/form-data" method="POST">
-                                            @csrf
-                                            @method('PUT')
-                                            <div class="modal-header">
-                                                <h5 class="modal-title" id="rejectModalLabel">Masukkan Alasan Revisi</h5>
-                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                <!-- Tombol detail -->
+                                <td>
+                                    <a href="/editor/buku/{{ $data->id }}">
+                                        <button type="button" class="btn btn-primary">Detail Buku</button>
+                                    </a>
+                                </td>
+
+                                <!-- Tombol aksi -->
+                                <td>
+                                    <!-- Form Terima -->
+                                    <button type="button" class="btn btn-success" data-bs-toggle="modal"
+                                        data-bs-target="#acceptModal{{ $data->id }}">
+                                        Terima
+                                    </button>
+                                    <div class="modal fade" id="acceptModal{{ $data->id }}" tabindex="-1"
+                                        aria-labelledby="acceptModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <form action="{{ route('pengajuan.update', $data->id) }}" method="POST"
+                                                    enctype="multipart/form-data">
+                                                    @csrf
+                                                    @method('PUT')
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="acceptModalLabel">Masukkan File yang
+                                                            diedit</h5>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                            aria-label="Close"></button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <input type="hidden" name="status" value="diterima">
+                                                        <div class="form-group">
+                                                            <label for="file">{{ $data->file }}</label>
+                                                            <input type="file" name="file" class="form-control"
+                                                                placeholder="File buku" required>
+                                                        </div>
+
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary"
+                                                            data-bs-dismiss="modal">Batal</button>
+                                                        <button type="submit" class="btn btn-success">Terima</button>
+                                                    </div>
+                                                </form>
                                             </div>
-                                            <div class="modal-body">
-                                                <input type="hidden" name="status" value="Revisi">
-                                                <div class="form-group">
-                                                    <textarea name="Alasan_editor" class="form-control" placeholder="Masukkan alasan..." required></textarea>
-                                                </div>
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-                                                <button type="submit" class="btn btn-danger">Kirim Revisi</button>
-                                            </div>
-                                        </form>
+                                        </div>
                                     </div>
-                                </div>
-                            </div>
-                        </td>
-                    </tr>
+
+                                    <!-- Form Tolak dengan Modal -->
+                                    <button type="button" class="btn btn-danger" data-bs-toggle="modal"
+                                        data-bs-target="#rejectModal{{ $data->id }}">
+                                        Revisi
+                                    </button>
+
+                                    <!-- Modal Revisi -->
+                                    <div class="modal fade" id="rejectModal{{ $data->id }}" tabindex="-1"
+                                        aria-labelledby="rejectModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <form action="{{ route('pengajuan.update', $data->id) }}"
+                                                    enctype="multipart/form-data" method="POST">
+                                                    @csrf
+                                                    @method('PUT')
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="rejectModalLabel">Masukkan Alasan Revisi
+                                                        </h5>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                            aria-label="Close"></button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <input type="hidden" name="status" value="Revisi">
+                                                        <div class="form-group">
+                                                            <textarea name="Alasan_editor" class="form-control" placeholder="Masukkan alasan..." required></textarea>
+                                                        </div>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary"
+                                                            data-bs-dismiss="modal">Batal</button>
+                                                        <button type="submit" class="btn btn-danger">Kirim Revisi</button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        @endif
                     @endforeach
                 </tbody>
             </table>
@@ -334,7 +350,7 @@
                             <th>Tanggal</th>
                         </tr>
                     </thead>
-                    @foreach ($history as $data )
+                    @foreach ($history as $data)
                         <tr>
                             <td>
                                 {{ $loop->iteration }}

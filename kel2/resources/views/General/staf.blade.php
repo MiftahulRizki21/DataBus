@@ -175,7 +175,7 @@
                 </thead>
                 <tbody>
                     @foreach ($pengajuans as $data)
-                    @if ($data->status === 'Diterima' && $data->ISBN === null)
+                    @if ($data->status === 'Diajukan' && $data->ISBN === null)
                     <tr>
                         <td>{{ $loop->iteration }}</td>
                         <td>{{ $data->judul_buku }}</td>
@@ -190,40 +190,37 @@
                         <!-- Tombol aksi -->
                         <td>
                             <!-- Form Terima -->
-                            <button type="button" class="btn btn-success" data-bs-toggle="modal"
-    data-bs-target="#acceptModal{{ $data->id }}">
-    Terima
-</button>
-<div class="modal fade" id="acceptModal{{ $data->id }}" tabindex="-1"
-    aria-labelledby="acceptModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <form action="{{ route('pengajuan.approve', $data->id) }}" method="POST" enctype="multipart/form-data">
-                @csrf
-                @method('PUT')
-                <div class="modal-header">
-                    <h5 class="modal-title" id="acceptModalLabel">Masukkan Data Diperlukan</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"
-                        aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <!-- Status -->
-                    <input type="hidden" name="status" value="Diterima">
+                            <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#acceptModal{{ $data->id }}">Terima</button>
+                            <div class="modal fade" id="acceptModal{{ $data->id }}" tabindex="-1"
+                                aria-labelledby="acceptModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <form action="{{ route('pengajuan.approve', $data->id) }}" method="POST" enctype="multipart/form-data">
+                                            @csrf
+                                            @method('PUT')
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="acceptModalLabel">Masukkan Data Diperlukan</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                    aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <!-- Status -->
+                                                <input type="hidden" name="status" value="Diterima">
 
-                    <!-- ISBN Input -->
-                    <div class="form-group mt-3">
-                        <label for="isbn">Masukkan ISBN</label>
-                        <input type="text" name="isbn" class="form-control" placeholder="Masukkan ISBN" required>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-                    <button type="submit" class="btn btn-success">Terima</button>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
+                                                <!-- ISBN Input -->
+                                                <div class="form-group mt-3">
+                                                    <label for="isbn">Masukkan ISBN</label>
+                                                    <input type="text" name="isbn" class="form-control" placeholder="Masukkan ISBN" required>
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                                                <button type="submit" class="btn btn-success">Terima</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
 
 
                             <!-- Form Tolak dengan Modal -->
@@ -251,6 +248,45 @@
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
                                                 <button type="submit" class="btn btn-danger">Kirim Penolakan</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                            <!-- Form Tolak dengan Modal -->
+                            <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#editorModal{{ $data->id }}">
+                                Tugaskan Editor
+                            </button>
+                        
+                            <!-- Modal Tolak -->
+                            <div class="modal fade" id="editorModal{{ $data->id }}" tabindex="-1" aria-labelledby="editorModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <form action="{{ route('pengajuan.tugasEditor', $data->id) }}" enctype="multipart/form-data" method="POST">
+                                            @csrf
+                                            @method('PUT')
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="editorModalLabel">Masukkan Data</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <input type="hidden" name="status" value="Sedang Direview">
+                                                <div class="form-group mt-3">
+                                                    <label for="editor_id">Pilih Editor</label>
+                                                    <select name="editor_id" id="editor_id" class="form-control" required>
+                                                        <option value="" disabled selected>Pilih Editor</option>
+                                                        <?php 
+                                                            $editors = \App\Models\User::where('role', 'editor')->get();
+                                                        ?>
+                                                        <?php foreach ($editors as $editor): ?>
+                                                            <option value="<?= $editor->id; ?>"><?= htmlspecialchars($editor->name); ?></option>
+                                                        <?php endforeach; ?>
+                                                    </select>                                    
+                                                </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                                                <button type="submit" class="btn btn-danger">Kirim</button>
                                             </div>
                                         </form>
                                     </div>

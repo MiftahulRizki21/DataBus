@@ -148,7 +148,7 @@
         </div>
     </div>
 
-    <input type="hidden" name="status" value="Tidak Diterima">
+    <input type="hidden" name="status" value="Diajukan">
     <input type="hidden" name="ISBN" value=''>
 
     <button type="submit" class="btn-submit">Submit</button>

@@ -13,6 +13,7 @@ use App\Models\pendaftar_editor;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 
+use update;
 class StaffPustakaController extends Controller
 {
     /**
@@ -20,7 +21,7 @@ class StaffPustakaController extends Controller
      */
     public function index()
     {
-        $pengajuans = Pengajuan::where('status', 'Diterima')->get();
+        $pengajuans = Pengajuan::where('status', 'Diajukan')->get();
         $history = Pengajuan::whereIn('status', ['Diterima', 'Ditolak'])->get();
         return view('General.staf',compact('pengajuans', 'history'));
     }
@@ -36,7 +37,7 @@ class StaffPustakaController extends Controller
         $pengajuan = Pengajuan::findOrFail($id);
     
         // Jika status diterima, pastikan ISBN diisi
-        if ($request->status == 'Diterima') {
+        if ($request->status == 'Selesai Revisi') {
             if (is_null($request->isbn) || empty($request->isbn)) {
                 return redirect()->back()->with('error', 'ISBN tidak boleh kosong untuk pengajuan yang diterima.');
             }
@@ -91,11 +92,23 @@ class StaffPustakaController extends Controller
 
         return redirect()->back()->with('success', 'Akun berhasil disetujui dan dipindahkan ke tabel users.');
     }
+
     public function TolakEditor($id){
         $pendaftar = pendaftar_editor::findOrFail($id);
         $pendaftar->delete();
         return redirect()->back()->with('success', 'Akun berhasil ditolak dan dihapus');
         
+    }
+
+    public function TugasEditor($id, Request $request){
+        $pengajuan = pengajuan::findOrFail($id);
+        $pengajuan->update([
+            'editor_id'=> $request->editor_id,
+            'status'=> 'Sedang Direview',
+            'batas_pengeditan'=>$request->batas_pengeditan,
+        ]);
+        return redirect()->back()->with('success', 'Editor telah ditugaskan');
+
     }
 
     public function showapprove(){
