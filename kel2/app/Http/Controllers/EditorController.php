@@ -19,7 +19,7 @@ class EditorController extends Controller
      */
     public function index()
     {
-        $pengajuans = Pengajuan::where('status', 'Diajukan')
+        $pengajuans = Pengajuan::where('status', ['Diajukan', 'Sedang Direview'])
             ->orderBy('created_at', 'desc')
             ->paginate(5);
 

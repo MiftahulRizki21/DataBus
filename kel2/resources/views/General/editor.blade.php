@@ -225,7 +225,7 @@
                 </thead>
                 <tbody>
                     @foreach ($pengajuans as $data)
-                        @if ($data->editor_id == Auth::user()->id)
+                    @if ($data->editor_id == Auth::user()->id && $data->status === 'Sedang Direview')
                             <tr>
                                 <td>
                                     {{ $loop->iteration }}
@@ -340,6 +340,97 @@
         </div>
         
         </div>
+
+        <div class="container-fluid" style="margin-top: 100px;">
+            <h5>Table Penerimaan Tugas</h5>
+            <div class="table-container">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>Nama</th>
+                            <th>File Buku</th>
+                            <th>Detail Buku</th>
+                            <th>Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($pengajuans as $data)
+                            @if ($data->editor_id == Auth::user()->id)
+                                <tr>
+                                    <td>
+                                        {{ $loop->iteration }}
+                                    </td>
+                                    <!-- Kolom untuk unggah file -->
+                                    {{-- <td>
+                                <form action="{{ route('editor.pengajuan.accept', $data->id) }}" method="POST" enctype="multipart/form-data">
+                                    @csrf
+                                    <div class="form-group">
+                                        <input type="file" name="file_edit" id="file_edit" class="form-input" required>
+                                    </div>
+                                </form>
+                            </td> --}}
+                                    <td>
+                                        <p>{{ $data->judul_buku }}</p>
+                                    </td>
+                                    <td>
+                                        <a href="{{ asset('storage/' . $data->file) }}" target="_blank" class="download">Download
+                                            File</a>
+                                    </td>
+    
+                                    <!-- Tombol detail -->
+                                    <td>
+                                        <a href="/editor/buku/{{ $data->id }}">
+                                            <button type="button" class="btn btn-primary">Detail Buku</button>
+                                        </a>
+                                    </td>
+    
+                                    <!-- Tombol aksi -->
+                                    <td>
+                                        <!-- Form Terima -->
+                                        <button type="button" class="btn btn-success" data-bs-toggle="modal"
+                                            data-bs-target="#acceptModal{{ $data->id }}">
+                                            Terima
+                                        </button>
+                                        <div class="modal fade" id="acceptModal{{ $data->id }}" tabindex="-1"
+                                            aria-labelledby="acceptModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <form action="{{ route('editor.TerimaTugas', $data->id) }}" method="POST"
+                                                        enctype="multipart/form-data">
+                                                        @csrf
+                                                        @method('PUT')
+                                                        
+                                                        <div class="modal-body">
+                                                            <input type="hidden" name="status" value="Sedang Direview">
+                                                            
+    
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary"
+                                                                data-bs-dismiss="modal">Batal</button>
+                                                            <button type="submit" class="btn btn-success">Terima</button>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+    
+                                    
+    
+                                       
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            @endif
+                        @endforeach
+                    </tbody>
+                </table>
+                
+            </div>
+            
+            </div>
         <div class="pagination" style="top : 200px;">
             {{ $pengajuans->links('pagination::bootstrap-5') }}
         </div>

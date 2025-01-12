@@ -111,4 +111,6 @@ Route::middleware([RoleBasedAccess::class . ':editor'])->group(function () {
     Route::get('/editor/dashboard', [EditorController::class, 'index'])->name('editor.dashboard');
     Route::get('/editor/buku/{id}', [PengajuanController::class, 'show'])->name('editor.detail');
     // Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
+    Route::put('/editor/terima_tugas/{id}', [EditorController::class, 'TerimaTugas'])->name('editor.TerimaTugas');
+    Route::put('/editor/tolak_tugas/{id}', [EditorController::class, 'TolakTugas'])->name('editor.TolakTugas');
 });
