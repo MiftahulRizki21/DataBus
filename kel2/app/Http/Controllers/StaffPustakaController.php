@@ -107,7 +107,7 @@ class StaffPustakaController extends Controller
         $pengajuan->update([
             'editor_id'=> $request->editor_id,
             'batas_pengeditan'=>$request->batas_pengeditan,
-            'status'=>'Sedang Direview',
+            // 'status'=>'Sedang Direview',
         ]);
         return redirect()->back()->with('success', 'Editor telah ditugaskan');
 

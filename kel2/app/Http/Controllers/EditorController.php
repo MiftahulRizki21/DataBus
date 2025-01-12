@@ -133,10 +133,12 @@ class EditorController extends Controller
             'status' => 'Sedang Direview'
         ]);
     }
+    
     public function TolakTugas($id, Request $request) {
         $pengajuan = pengajuan::findOrFail($id);
         $pengajuan->update([
-            'editor_id' => Null
+            'editor_id' => Null,
+            'batas_pengeditan' => Null
         ]);
     }
     public function destroy(editor $editor)
