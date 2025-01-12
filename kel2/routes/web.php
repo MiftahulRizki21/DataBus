@@ -113,4 +113,6 @@ Route::middleware([RoleBasedAccess::class . ':editor'])->group(function () {
     Route::get('/editor/terima_tugas/{id}', [EditorController::class, 'TerimaTugas'])->name('editor.TerimaTugas');
     Route::get('/editor/tolak_tugas/{id}', [EditorController::class, 'TolakTugas'])->name('editor.TolakTugas');
     // Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
+    Route::put('/editor/terima_tugas/{id}', [EditorController::class, 'TerimaTugas'])->name('editor.TerimaTugas');
+    Route::put('/editor/tolak_tugas/{id}', [EditorController::class, 'TolakTugas'])->name('editor.TolakTugas');
 });

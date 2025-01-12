@@ -11,6 +11,70 @@
         background-color: white;
         border-radius: 8px;
         box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        height: auto;
+        position: relative;
+    }
+
+    #form-pengajuan h2 {
+        text-align: center;
+        margin-bottom: 30px;
+        color: #6b7280;
+    }
+
+    .form-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-bottom: 20px;
+    }
+
+    .form-group {
+        flex: 1;
+    }
+
+    .form-group label {
+        font-size: 14px;
+        margin-bottom: 8px;
+        display: block;
+    }
+
+    .form-input {
+        width: 100%;
+        padding: 12px;
+        font-size: 16px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        background-color: #f9f9f9;
+    }
+
+    .form-input:focus {
+        outline: none;
+        border-color: #0056b3;
+        background-color: white;
+    }
+
+    .btn-submit {
+        width: 100%;
+        padding: 14px;
+        font-size: 16px;
+        background-color: #002855;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+    .btn-submit:hover {
+        background-color: #004c99;
+    }
+    <style>
+    #form-pengajuan {
+        max-width: 800px;
+        margin: 40px auto;
+        padding: 20px;
+        background-color: white;
+        border-radius: 8px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     }
 
     #form-pengajuan h2 {
@@ -67,7 +131,7 @@
     }
 </style>
 
-<div id="form-pengajuan">
+<div id="form-pengajuan" style="top: 200px;">
     @if(session()->has('success'))
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <script>

@@ -88,6 +88,7 @@
             display: flex;
             justify-content: center;
             padding: 20px 0;
+            position: relative;
         }
 
         .pagination .page-item.active .page-link {
@@ -140,7 +141,7 @@
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
             text-transform: uppercase;
             /* Huruf kapital semua untuk efek profesional */
-            margin-top: 290px;
+            margin-top: 550px;
             width: 86%;
         }
 
@@ -224,7 +225,7 @@
                 </thead>
                 <tbody>
                     @foreach ($pengajuans as $data)
-                        @if ($data->editor_id == Auth::user()->id && $data->status === 'Sedang Direview')
+                    @if ($data->editor_id == Auth::user()->id && $data->status === 'Sedang Direview')
                             <tr>
                                 <td>
                                     {{ $loop->iteration }}
@@ -335,16 +336,112 @@
                     @endforeach
                 </tbody>
             </table>
+            
+        </div>
+        
+        </div>
+
+        <div class="container-fluid" style="margin-top: 100px;">
+            <h5>Table Penerimaan Tugas</h5>
+            <div class="table-container">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>Nama</th>
+                            <th>File Buku</th>
+                            <th>Detail Buku</th>
+                            <th>Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($pengajuans as $data)
+                            @if ($data->editor_id == Auth::user()->id)
+                                <tr>
+                                    <td>
+                                        {{ $loop->iteration }}
+                                    </td>
+                                    <!-- Kolom untuk unggah file -->
+                                    {{-- <td>
+                                <form action="{{ route('editor.pengajuan.accept', $data->id) }}" method="POST" enctype="multipart/form-data">
+                                    @csrf
+                                    <div class="form-group">
+                                        <input type="file" name="file_edit" id="file_edit" class="form-input" required>
+                                    </div>
+                                </form>
+                            </td> --}}
+                                    <td>
+                                        <p>{{ $data->judul_buku }}</p>
+                                    </td>
+                                    <td>
+                                        <a href="{{ asset('storage/' . $data->file) }}" target="_blank" class="download">Download
+                                            File</a>
+                                    </td>
+    
+                                    <!-- Tombol detail -->
+                                    <td>
+                                        <a href="/editor/buku/{{ $data->id }}">
+                                            <button type="button" class="btn btn-primary">Detail Buku</button>
+                                        </a>
+                                    </td>
+    
+                                    <!-- Tombol aksi -->
+                                    <td>
+                                        <!-- Form Terima -->
+                                        <button type="button" class="btn btn-success" data-bs-toggle="modal"
+                                            data-bs-target="#acceptModal{{ $data->id }}">
+                                            Terima
+                                        </button>
+                                        <div class="modal fade" id="acceptModal{{ $data->id }}" tabindex="-1"
+                                            aria-labelledby="acceptModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <form action="{{ route('editor.TerimaTugas', $data->id) }}" method="POST"
+                                                        enctype="multipart/form-data">
+                                                        @csrf
+                                                        @method('PUT')
+                                                        
+                                                        <div class="modal-body">
+                                                            <input type="hidden" name="status" value="Sedang Direview">
+                                                            
+    
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary"
+                                                                data-bs-dismiss="modal">Batal</button>
+                                                            <button type="submit" class="btn btn-success">Terima</button>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+    
+                                    
+    
+                                       
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            @endif
+                        @endforeach
+                    </tbody>
+                </table>
+                
+            </div>
+            
+            </div>
+        <div class="pagination" style="top : 200px;">
+            {{ $pengajuans->links('pagination::bootstrap-5') }}
         </div>
 
         <!-- Tabel History -->
-        <h5 style="margin-top: 100px;">Table History</h5>
+        <h5 style="margin-top: 200px;">Table History</h5>
         <center>
             <div class="history-table-container " >
                 <table class="history-table">
                     <thead>
                         <tr>
-                            <th>No</th>
                             <th>Nama</th>
                             <th>Status</th>
                             <th>Tanggal</th>
@@ -352,9 +449,6 @@
                     </thead>
                     @foreach ($history as $data)
                         <tr>
-                            <td>
-                                {{ $loop->iteration }}
-                            </td>
                             <td>
                                 {{ $data->judul_buku }}
                             </td>
@@ -369,7 +463,11 @@
                 </table>
             </div>
         </center>
+        <div class="pagination">
+            {{ $history->links('pagination::bootstrap-5') }}
+        </div>
     </div>
+    
 @endsection
 
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
