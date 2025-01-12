@@ -21,7 +21,7 @@ class StaffPustakaController extends Controller
      */
     public function index()
     {
-        $pengajuans = Pengajuan::whereIn('status', ['Selesai Revisi']) ->orderBy('created_at', 'desc')
+        $pengajuans = Pengajuan::whereIn('status', ['Selesai Revisi', 'Diajukan' ]) ->orderBy('created_at', 'desc')
         ->paginate(5);
         $history = Pengajuan::whereIn('status', ['Diterima', 'Ditolak'])->orderBy('created_at', 'desc')
         ->paginate(5);
@@ -92,13 +92,13 @@ class StaffPustakaController extends Controller
         // Hapus data dari tabel `pendaftarEditors`
         $pendaftar->delete();
 
-        return redirect()->back()->with('success', 'Akun berhasil disetujui dan dipindahkan ke tabel users.');
+        return redirect()->back()->with('setuju', 'Akun berhasil disetujui dan dipindahkan ke tabel users.');
     }
 
     public function TolakEditor($id){
         $pendaftar = pendaftar_editor::findOrFail($id);
         $pendaftar->delete();
-        return redirect()->back()->with('success', 'Akun berhasil ditolak dan dihapus');
+        return redirect()->back()->with('tolak', 'Akun berhasil ditolak dan dihapus');
         
     }
 

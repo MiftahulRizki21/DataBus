@@ -206,7 +206,7 @@
                 </thead>
                 <tbody>
                     @foreach ($pengajuans as $data)
-                    @if ($data->status === 'Diajukan' ||  $data->status === 'Selesai Revisi' )
+                    @if (  $data->status === 'Selesai Revisi' )
                         
                     <tr>
                         <td>{{ $loop->iteration }}</td>
@@ -287,42 +287,7 @@
                             </div>
                         </td>
                         
-                            <!-- Modal Tolak -->
-                            <div class="modal fade" id="editorModal{{ $data->id }}" tabindex="-1" aria-labelledby="editorModalLabel" aria-hidden="true">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <form action="{{ route('pengajuan.tugasEditor', $data->id) }}" enctype="multipart/form-data" method="POST">
-                                            @csrf
-                                            @method('PUT')
-                                            <div class="modal-header">
-                                                <h5 class="modal-title" id="editorModalLabel">Masukkan Data</h5>
-                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                            </div>
-                                            <div class="modal-body">
-                                                <input type="hidden" name="status" value="Sedang Direview">
-                                                <div class="form-group mt-3">
-                                                    <label for="editor_id">Pilih Editor</label>
-                                                    <select name="editor_id" id="editor_id" class="form-control" required>
-                                                        <option value="" disabled selected>Pilih Editor</option>
-                                                        <?php 
-                                                            $editors = \App\Models\User::where('role', 'editor')->get();
-                                                        ?>
-                                                        <?php foreach ($editors as $editor): ?>
-                                                            <option value="<?= $editor->id; ?>"><?= htmlspecialchars($editor->name); ?></option>
-                                                        <?php endforeach; ?>
-                                                    </select>
-                                                    <label for="batas_pengeditan">Pilih Batas Pengeditan</label>
-                                                    <input type="date" name="batas_pengeditan" class="form-control" placeholder="Masukkan batas pengeditan" required>
-                                    
-                                                </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-                                                <button type="submit" class="btn btn-danger">Kirim</button>
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
+                            
                         </td>
                     </tr>
                     @endif
@@ -368,6 +333,42 @@
                                 <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#editorModal{{ $data->id }}">
                                     Tugaskan Editor
                                 </button>
+                                <!-- Modal Tolak -->
+                            <div class="modal fade" id="editorModal{{ $data->id }}" tabindex="-1" aria-labelledby="editorModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <form action="{{ route('pengajuan.tugasEditor', $data->id) }}" enctype="multipart/form-data" method="POST">
+                                            @csrf
+                                            @method('PUT')
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="editorModalLabel">Masukkan Data</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <input type="hidden" name="status" value="Sedang Direview">
+                                                <div class="form-group mt-3">
+                                                    <label for="editor_id">Pilih Editor</label>
+                                                    <select name="editor_id" id="editor_id" class="form-control" required>
+                                                        <option value="" disabled selected>Pilih Editor</option>
+                                                        <?php 
+                                                            $editors = \App\Models\User::where('role', 'editor')->get();
+                                                        ?>
+                                                        <?php foreach ($editors as $editor): ?>
+                                                            <option value="<?= $editor->id; ?>"><?= htmlspecialchars($editor->name); ?></option>
+                                                        <?php endforeach; ?>
+                                                    </select>
+                                                    <label for="batas_pengeditan">Pilih Batas Pengeditan</label>
+                                                    <input type="date" name="batas_pengeditan" class="form-control" placeholder="Masukkan batas pengeditan" required>
+                                    
+                                                </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                                                <button type="submit" class="btn btn-danger">Kirim</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
                             </td>
                                             </form>
                                         </div>

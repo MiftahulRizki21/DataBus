@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <link rel="shortcut icon" type="x-icon" href="..\startbootstrap-sb-admin-master\dist\assets\img\logoweb.png">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>FAQ Accordion</title>
   <style>

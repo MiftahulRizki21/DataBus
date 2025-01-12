@@ -141,7 +141,7 @@
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
             text-transform: uppercase;
             /* Huruf kapital semua untuk efek profesional */
-            margin-top: 550px;
+            margin-top: 1100px;
             width: 86%;
         }
 
@@ -269,7 +269,7 @@
                                                     <div class="modal-body">
                                                         <input type="hidden" name="status" value="Selesai Revisi">
                                                         <div class="form-group">
-                                                            <label for="file">{{ $data->file }}</label>
+                                                            <label for="file">Masukkan File Revisi "Pdf"</label>
                                                             <input type="file" name="file" class="form-control"
                                                                 placeholder="File buku" required>
                                                         </div>
@@ -410,6 +410,39 @@
                                        
                                             </div>
                                         </div>
+                                        <!-- Form Tolak dengan Modal -->
+                                    <button type="button" class="btn btn-danger" data-bs-toggle="modal"
+                                    data-bs-target="#rejectModal{{ $data->id }}">
+                                    Tolak
+                                </button>
+
+                                <!-- Modal Revisi -->
+                                <div class="modal fade" id="rejectModal{{ $data->id }}" tabindex="-1"
+                                    aria-labelledby="rejectModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <form action="{{ route('editor.TolakTugas', $data->id) }}"
+                                                enctype="multipart/form-data" method="POST">
+                                                @csrf
+                                                @method('PUT')
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="rejectModalLabel">
+                                                    </h5>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                        aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <input type="hidden" name="status" value="Diajukan">
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary"
+                                                        data-bs-dismiss="modal">Batal</button>
+                                                    <button type="submit" class="btn btn-danger">Tolak</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
                                     </td>
                                 </tr>
                             @endif

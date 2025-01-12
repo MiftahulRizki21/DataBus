@@ -1,5 +1,6 @@
 @extends('layouts.UserApp')
 @section('content')
+<link rel="shortcut icon" type="x-icon" href="..\startbootstrap-sb-admin-master\dist\assets\img\logoweb.png">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
 <title>Pendaftar Editor</title>
     <style>
@@ -112,10 +113,13 @@
     
             
     </style>
-
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
 <h1>Table Pendaftar Editor</h1>
+
 <div class="table-container">
+    
+
     <table class="table">
         <thead>
             <tr>

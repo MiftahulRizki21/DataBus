@@ -135,6 +135,7 @@ class EditorController extends Controller
         $pengajuan->update([
             'status' => 'Sedang Direview'
         ]);
+        return redirect()->route('editor.dashboard')->with('success', 'Pengajuan berhasil diperbarui!');
     }
 
     public function TolakTugas($id, Request $request) {
@@ -143,6 +144,8 @@ class EditorController extends Controller
             'editor_id' => Null,
             'batas_pengeditan' => Null
         ]);
+        return redirect()->route('editor.dashboard')->with('success', 'Pengajuan berhasil diperbarui!');
+
     }
 
     public function destroy(editor $editor)
