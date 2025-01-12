@@ -110,5 +110,7 @@ Route::middleware([RoleBasedAccess::class . ':staff'])->group(function () {
 Route::middleware([RoleBasedAccess::class . ':editor'])->group(function () {
     Route::get('/editor/dashboard', [EditorController::class, 'index'])->name('editor.dashboard');
     Route::get('/editor/buku/{id}', [PengajuanController::class, 'show'])->name('editor.detail');
+    Route::get('/editor/terima_tugas/{id}', [EditorController::class, 'TerimaTugas'])->name('editor.TerimaTugas');
+    Route::get('/editor/tolak_tugas/{id}', [EditorController::class, 'TolakTugas'])->name('editor.TolakTugas');
     // Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
 });
