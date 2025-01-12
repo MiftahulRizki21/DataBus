@@ -23,6 +23,8 @@ return [
             'profile',
             'editor.detail',
             'editor.dashboard',
+            'editor.TerimaTugas',
+            'editor.TolakTugas',
         ],
     ],
 ];

@@ -19,7 +19,7 @@ class EditorController extends Controller
      */
     public function index()
     {
-        $pengajuans = Pengajuan::where('status', 'Diajukan')
+        $pengajuans = Pengajuan::where('status', ['Diajukan', 'Sedang Direview'])
             ->orderBy('created_at', 'desc')
             ->paginate(5);
 
@@ -127,7 +127,7 @@ class EditorController extends Controller
 
         return redirect()->route('editor.dashboard')->with('success', 'Pengajuan berhasil diperbarui!');
     }
-    
+
     public function TerimaTugas($id, Request $request) {
         $pengajuan = pengajuan::findOrFail($id);
         $pengajuan->update([

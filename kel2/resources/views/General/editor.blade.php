@@ -224,7 +224,7 @@
                 </thead>
                 <tbody>
                     @foreach ($pengajuans as $data)
-                        @if ($data->editor_id == Auth::user()->id)
+                        @if ($data->editor_id == Auth::user()->id && $data->status === 'Sedang Direview')
                             <tr>
                                 <td>
                                     {{ $loop->iteration }}
