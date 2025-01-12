@@ -161,9 +161,53 @@
                     <th>ISBN :</th>
                     <td>{{ $listbuku->ISBN }}</td>
                 </tr>
+                <tr>
+                    <th>Link Detail Buku :</th>
+                    <td>
+                        <p id="current-page-link" style="display: inline;"></p>
+                        <button id="copy-link-btn" style="margin-left: 10px; padding: 5px 10px; font-size: 14px; cursor: pointer; background-color: #007bff; color: white; border: none; border-radius: 4px;">Copy Link</button>
+                    </td>
+                </tr>
             </table>
         </div>
     </div>
 </body>
 
+<script>
+    // Mendapatkan URL halaman saat ini
+    const currentUrl = window.location.href;
+
+    // Elemen tempat link akan ditampilkan
+    const linkElement = document.getElementById('current-page-link');
+
+    // Menambahkan link ke elemen
+    linkElement.innerHTML = `<a href="${currentUrl}" target="_blank">${currentUrl}</a>`;
+
+    // Tombol Copy Link
+    const copyButton = document.getElementById('copy-link-btn');
+
+    // Fungsi untuk menyalin URL ke clipboard
+    copyButton.addEventListener('click', function () {
+        // Buat elemen textarea sementara untuk salin teks
+        const tempInput = document.createElement('textarea');
+        tempInput.value = currentUrl;
+        document.body.appendChild(tempInput);
+
+        // Pilih teks dalam textarea dan salin ke clipboard
+        tempInput.select();
+        document.execCommand('copy');
+
+        // Hapus elemen textarea sementara
+        document.body.removeChild(tempInput);
+
+        // Ubah teks tombol untuk menunjukkan bahwa link telah disalin
+        copyButton.textContent = 'Copied!';
+        setTimeout(() => {
+            copyButton.textContent = 'Copy Link';
+        }, 2000); // Kembalikan teks tombol setelah 2 detik
+    });
+</script>
+
+
 </html>
+

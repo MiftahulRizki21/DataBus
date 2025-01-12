@@ -20,7 +20,7 @@ class EditorController extends Controller
     public function index()
     {
         $pengajuans = Pengajuan::where('status', 'Tidak Diterima')
-            ->orderBy('created_at', 'desc')
+            ->orderBy('created_at')
             ->paginate(5);
 
         $history = Pengajuan::whereIn('status', ['Revisi', 'Diterima'])

@@ -204,6 +204,31 @@
         .download:hover {
             background-color: RoyalBlue;
         }
+        .pagination {
+                display: flex;
+                justify-content: center;
+                padding: 20px 0;
+            }
+
+            .pagination .page-item.active .page-link {
+                background-color: #002855;
+                border-color: #002855;
+                color: white;
+            }
+
+            .pagination .page-link {
+                color: #002855;
+                background-color: white;
+                border: 1px solid #ddd;
+                padding: 8px 12px;
+                margin: 0 5px;
+                border-radius: 4px;
+            }
+
+            .pagination .page-link:hover {
+                background-color: #f0f8ff;
+                border-color: #ddd;
+            }
     </style>
 
     <!-- Judul Halaman Editor -->
@@ -224,9 +249,8 @@
                 <tbody>
                     @foreach ($pengajuans as $data)
                     <tr>
-                        <td>
-                            {{ $loop->iteration }}
-                        </td>
+                            <td>{{ $loop->iteration }}</td>
+                      
                         <!-- Kolom untuk unggah file -->
                         {{-- <td>
                             <form action="{{ route('editor.pengajuan.accept', $data->id) }}" method="POST" enctype="multipart/form-data">
@@ -322,6 +346,9 @@
                 </tbody>
             </table>
         </div>
+        <div class="pagination">
+            {{ $pengajuans->links('pagination::bootstrap-5') }}
+        </div>
 
         <!-- Tabel History -->
         <h5 style="margin-top: 100px;">Table History</h5>
@@ -330,7 +357,6 @@
                 <table class="history-table">
                     <thead>
                         <tr>
-                            <th>No</th>
                             <th>Nama</th>
                             <th>Status</th>
                             <th>Tanggal</th>
@@ -338,9 +364,6 @@
                     </thead>
                     @foreach ($history as $data )
                         <tr>
-                            <td>
-                                {{ $loop->iteration }}
-                            </td>
                             <td>
                                 {{ $data->judul_buku }}
                             </td>
@@ -355,7 +378,11 @@
                 </table>
             </div>
         </center>
+        <div class="pagination">
+            {{ $history->links('pagination::bootstrap-5') }}
+        </div>
     </div>
+    
 @endsection
 
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">

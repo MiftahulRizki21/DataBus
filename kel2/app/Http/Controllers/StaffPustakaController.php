@@ -20,10 +20,13 @@ class StaffPustakaController extends Controller
      */
     public function index()
     {
-        $pengajuans = Pengajuan::where('status', 'Diterima') ->orderBy('created_at', 'desc')
-        ->paginate(5);
-        $history = Pengajuan::whereIn('status', ['Diterima', 'Ditolak'])->orderBy('created_at', 'desc')
-        ->paginate(5);
+        $pengajuans = Pengajuan::where('status', 'Tidak Diterima')
+            ->orderBy('created_at')
+            ->paginate(5);
+
+        $history = Pengajuan::whereIn('status', ['Revisi', 'Diterima'])
+            ->orderBy('created_at', 'desc')
+            ->paginate(5);
         return view('General.staf',compact('pengajuans', 'history'));
     }
 
