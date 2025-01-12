@@ -287,7 +287,10 @@
                                                         <?php foreach ($editors as $editor): ?>
                                                             <option value="<?= $editor->id; ?>"><?= htmlspecialchars($editor->name); ?></option>
                                                         <?php endforeach; ?>
-                                                    </select>                                    
+                                                    </select>
+                                                    <label for="batas_pengeditan">Pilih Batas Pengeditan</label>
+                                                    <input type="date" name="batas_pengeditan" class="form-control" placeholder="Masukkan batas pengeditan" required>
+                                    
                                                 </div>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>

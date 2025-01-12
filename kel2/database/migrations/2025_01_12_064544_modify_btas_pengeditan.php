@@ -11,8 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('table_name', function (Blueprint $table) {
-            //
+        Schema::table('pengajuans', function (Blueprint $table) {
+            $table->date('batas_pengeditan')->nullable();
         });
     }
 
@@ -23,7 +23,7 @@ return new class extends Migration
     {
         Schema::table('pengajuans', function (Blueprint $table) {
             // Mengubah kolom batas_pengeditan menjadi tipe date
-            $table->date('batas_pengeditan')->nullable()->change();
+            $table->date('batas_pengeditan')->nullable();
         });
     }
 };

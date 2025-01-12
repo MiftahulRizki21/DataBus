@@ -28,7 +28,7 @@ return new class extends Migration
             $table->string('ISBN')->nullable();
             $table->string('Alasan_editor')->nullable();
             $table->string('Alasan_staff')->nullable();
-            $table->string('batas_pengeditan')->nullable();
+            $table->date('batas_pengeditan')->nullable();
             $table->timestamps();
         });
     }
