@@ -100,7 +100,7 @@
             border-radius: 8px;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
             text-transform: uppercase;
-            margin-top: 290px;
+            margin-top: 550px;
             width: 86%;
         }
 

@@ -88,6 +88,7 @@
             display: flex;
             justify-content: center;
             padding: 20px 0;
+            position: relative;
         }
 
         .pagination .page-item.active .page-link {
@@ -140,7 +141,7 @@
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
             text-transform: uppercase;
             /* Huruf kapital semua untuk efek profesional */
-            margin-top: 290px;
+            margin-top: 550px;
             width: 86%;
         }
 
@@ -335,13 +336,16 @@
                     @endforeach
                 </tbody>
             </table>
+            
         </div>
-        <div class="pagination">
+        
+        </div>
+        <div class="pagination" style="top : 200px;">
             {{ $pengajuans->links('pagination::bootstrap-5') }}
         </div>
 
         <!-- Tabel History -->
-        <h5 style="margin-top: 100px;">Table History</h5>
+        <h5 style="margin-top: 200px;">Table History</h5>
         <center>
             <div class="history-table-container " >
                 <table class="history-table">

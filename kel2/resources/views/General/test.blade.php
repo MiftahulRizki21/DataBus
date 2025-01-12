@@ -3,6 +3,20 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
 <title>Pendaftar Editor</title>
     <style>
+        h1 {
+            text-align: center;
+            font-size: 36px;
+            font-weight: bold;
+            color: #002855;
+            background-color: #f0f8ff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            text-transform: uppercase;
+            position: relative;
+            top: 200px;
+            width: 86%;
+        }
         .table-container {
             margin: 20px auto;
             max-width: 90%;
@@ -11,7 +25,7 @@
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
             animation: fadeIn 1s ease-in-out;
             position: relative;
-            top: 200px;
+            top: 300px;
             width: 1200px;
             min-height: 355px;
         
@@ -131,7 +145,7 @@
     </table>
 
 </div>
-<center><div class="pagination" style="top: 200px;">
+<center><div class="pagination" style="top: 300px;">
     {{ $pendaftar->links('pagination::bootstrap-5') }}
 </div> </center>
 
